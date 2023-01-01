@@ -2,5 +2,47 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.movie.mapper.MemberMapper">
+    <select id="selectLogin" parameterType="com.example.movie.dto.MemberDTO" resultType="com.example.movie.dto.MemberDTO">
+        SELECT
+            email,
+            password
+        FROM
+            member
+        WHERE
+            email = #{email}
+        AND
+            password = #{password}
 
+    </select>
+
+    <select id="selectMemberDetail" parameterType="String" resultType="com.example.movie.dto.MemberDTO">
+        SELECT
+            name
+            ,password
+            ,email
+            ,phone
+            ,indate
+        FROM
+            member
+        WHERE
+            email = #{email}
+    </select>
+
+    <update id="updateMemberName" parameterType="com.example.movie.dto.MemberDTO">
+        UPDATE
+            member
+        SET
+            name = #{name}
+        WHERE
+            email = #{email}
+    </update>
+
+    <update id="updateMemberPassword" parameterType="com.example.movie.dto.MemberDTO">
+        UPDATE
+            member
+        SET
+            password = #{password}
+        WHERE
+            email = #{email}
+    </update>
 </mapper>

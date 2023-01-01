@@ -11,5 +11,8 @@ public class PageController {
         return "index";
     }
 
-
+    @GetMapping("/mypage/login")
+    public String myLogin() {
+        return "mypage/login";
+    }
 }

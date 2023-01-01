@@ -3,6 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+  <script>
+    function name_check() {
+      var url = "/mypage/user-edit/name";
+      var name = "updateName";
+      var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+      window.open(url, name, option);
+    }
+
+    function password_check() {
+      var url = "/mypage/user-edit/password";
+      var name = "updatePassword";
+      var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+      window.open(url, name, option);
+    }
+
+  </script>
 </head>
 <body>
 <div class="col-detail" id="mycgv_contents">
@@ -22,9 +38,9 @@
     </div>
 
     <div>
-
       <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="5FA425E8">
     </div>
+
     <div class="tbl-form">
       <table summary="나의프로필정보 이름,아이디, 닉네임,프로필이미지 표기">
         <caption>나의프로필정보</caption>
@@ -36,38 +52,37 @@
 
         <tr>
           <th scope="row">이름</th>
-          <td><strong>이름</strong></td>
-        </tr>
-
-        <tr>
-          <th scope="row">아이디</th>
-          <td><span>아이디</span></td>
+          <td><strong th:text="${memberDTO.getName()}">이름</strong></td>
+          <td type="text" id="nameUpdate">&nbsp;<a href="javascript:name_check()">[변경하기]</a></td>
         </tr>
 
         <tr>
           <th scope="row">비밀번호</th>
-          <td><span>비밀번호</span></td>
+          <td><span t th:hidden="${memberDTO.getPassword()}">비밀번호</span></td>
+          <td type="text" id="passwordUpdate">&nbsp;<a href="javascript:password_check()">[변경하기]</a></td>
         </tr>
 
         <tr>
           <th scope="row">이메일</th>
-          <td><span>이메일</span></td>
+          <td><span th:text="${memberDTO.getEmail()}">이메일</span></td>
+          <td></td>
         </tr>
 
         <tr>
           <th scope="row">전화번호</th>
-          <td><span>전화번호</span></td>
+          <td><span th:text="${memberDTO.getPhone()}">전화번호</span></td>
+          <td></td>
         </tr>
 
         <tr>
           <th scope="row">가입일시</th>
-          <td><span>가입일시</span></td>
+          <td><span th:text="${memberDTO.getIndate()}">가입일시</span></td>
+          <td></td>
         </tr>
 
         </tbody>
       </table>
     </div>
-    <div class="set-btn aright"><button type="submit" id="set_profile" class="round inred on"><span>등록하기</span></button></div>
   </form>
 
 

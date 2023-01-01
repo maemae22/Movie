@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:th="http://www.thymeleaf.org" xml:lang="ko" lang="ko">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
 
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -115,7 +115,7 @@
 
 
       <!-- Contents Start -->
-      <div class="sect-common">
+      <div class="sect-common" style="height: 300px; margin-top: 25px;">
         <input type="hidden" id="isTown" name="isTown" value="Y" />
         <input type="hidden" id="userTownMemberInfo" name="userTownMemberInfo" value="" />
         <div class="mycgv-info-wrap">
@@ -132,8 +132,8 @@
             </div>
             <div class="box-contents newtype">
               <div class="person-info">
-                <strong>권동현님</strong>
-                <em>dong8706</em>
+                <strong th:text="${memberDTO.getName()}">이름</strong>
+                <em th:text="${memberDTO.getEmail()}">아이디</em>
                 <span>닉네임 : <i>닉네임을 설정해주세요.</i> </span>
                 <button id="go_edit_page" type="button" title="새창열림">나의 정보 변경</button>
               </div>
@@ -150,49 +150,6 @@
               </div>
             </div>
           </div>
-          <div class="cols-benefit-info">
-            <div class="col-my-coupon">
-              <h3>MY COUPON</h3>
-              <ul>
-
-                <li>
-                  <strong>CGV VIP에 도전하세요!</strong>
-                  <span><a href="/user/vip-lounge/" class="round black1"><i>CGV VIP 혜택보기</i></a></span>
-                </li>
-
-                <li>
-                  <strong>CGV 할인쿠폰</strong>
-                  <span><em><a href="/user/mycgv/coupon/discount/list.aspx?g=1#contaniner">0</a></em> 개</span>
-                </li>
-                <li>
-                  <strong>영화관람권</strong>
-                  <span><em><a href="/user/mycgv/coupon/movie-ticket/list.aspx?g=1#contaniner">0</a></em> 개</span>
-                </li>
-              </ul>
-            </div>
-
-
-            <div class="col-one-point">
-              <h3>CJ ONE POINT</h3>
-              <a href="/user/mycgv/cjone-point/pointlist.aspx">CJ ONE POINT 더보기</a>
-              <ul>
-                <li>
-                  <strong>CJ ONE 사용가능 포인트</strong>
-                  <span><em class="txt-maroon"><a href="/user/mycgv/cjone-point/pointlist.aspx">0</a></a></em> 점</span>
-                </li>
-                <li class="tooltip_list cf">
-                  <strong>VIP선정 포인트</strong><a href="/user/mycgv/cjone-point/pointlist.aspx" class="mycgv_tooltip"><img src="https://img.cgv.co.kr/R2014/images/common/mycgv_tooltip/ico_tooltip.png" alt="i" /></a>
-
-                  <div class="tooltip_con tc2"><span><img src="https://img.cgv.co.kr/R2014/images/common/mycgv_tooltip/tooltip_con2.png" alt="CGV에서 구매를 통해 적립된 매표 구매 포인트/매점&amp;씨네샵 구매 포인트/VIP 선정에 포함되는 이벤트 포인트가 누적으로 합산된 포인트 입니다" /></span></div>
-                  <span><em>0</em> 점</span>
-                </li>
-              </ul>
-
-            </div>
-            <div class="cols-point-wrap">
-            </div>
-
-          </div>
         </div>
       </div>
 
@@ -202,19 +159,19 @@
           <div class="snb">
             <ul>
               <li >
-                <a href="/myPage" >MY HOME <i></i></a>
+                <a href="/mypage" >MY HOME <i></i></a>
               </li>
 
               <li >
-                <a href="/myPage/user-detail" >개인정보 조회 <i></i></a>
+                <a href="/mypage/user-detail" >개인정보 조회 <i></i></a>
               </li>
 
               <li >
-                <a href="/myPage/user-comment" >내가 쓴 댓글 조회 <i></i></a>
+                <a href="/mypage/user-comment" >내가 쓴 댓글 조회 <i></i></a>
               </li>
 
               <li >
-                <a href="/myPage/user-order" >예매 내역 조회 <i></i></a>
+                <a href="/mypage/user-order" >예매 내역 조회 <i></i></a>
               </li>
               <li >
                 <a href="/user/mycgv/event/" title="현재선택">회원 탈퇴(미구현) <i></i></a>

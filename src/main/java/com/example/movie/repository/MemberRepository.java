@@ -1,5 +1,6 @@
 package com.example.movie.repository;
 
+import com.example.movie.dto.MemberDTO;
 import com.example.movie.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,5 +11,17 @@ public class MemberRepository {
     @Autowired
     MemberMapper mm;
 
+    public MemberDTO selectLogin(MemberDTO memberDTO) {
+        return mm.selectLogin(memberDTO);
+    }
 
+    public MemberDTO selectMemberDetail(String email) {
+        return mm.selectMemberDetail(email);
+    }
+    public int updateMemberName(MemberDTO memberDTO) {
+        return mm.updateMemberName(memberDTO);
+    }
+    public int updateMemberPassword(MemberDTO memberDTO) {
+        return mm.updateMemberPassword(memberDTO);
+    }
 }

@@ -22,13 +22,13 @@ public class LoginController {
     @GetMapping("/login")
     public String goLogin() {
         return "login";
-    }
 
+    }
 
     @PostMapping("/login")
     public String login( MemberDTO memberDTO) {
-        log.info("memberDTO = {}", memberDTO.toString());
                 loginService.loginUserIdPassword(memberDTO);
-        return "redirect:/";
+        log.info("memberDTO = {}", memberDTO.toString());
     }
+        return "redirect:/";
 }

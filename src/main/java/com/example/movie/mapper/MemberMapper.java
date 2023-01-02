@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MemberMapper {
     MemberDTO selectLogin(MemberDTO memberDTO);
-    MemberDTO selectMemberDetail(String email);
+    MemberDTO selectMemberDetail(MemberDTO memberDTO);
     int updateMemberName(MemberDTO memberDTO);
     int updateMemberPassword(MemberDTO memberDTO);
 }

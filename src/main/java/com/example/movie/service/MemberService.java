@@ -15,8 +15,8 @@ public class MemberService {
         return mr.selectLogin(memberDTO);
     }
 
-    public MemberDTO selectMemberDetail(String email) {
-        return mr.selectMemberDetail(email);
+    public MemberDTO selectMemberDetail(MemberDTO memberDTO) {
+        return mr.selectMemberDetail(memberDTO);
     }
 
     public String updateMemberName(MemberDTO memberDTO) {

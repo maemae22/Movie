@@ -15,8 +15,8 @@ public class MemberRepository {
         return mm.selectLogin(memberDTO);
     }
 
-    public MemberDTO selectMemberDetail(String email) {
-        return mm.selectMemberDetail(email);
+    public MemberDTO selectMemberDetail(MemberDTO memberDTO) {
+        return mm.selectMemberDetail(memberDTO);
     }
     public int updateMemberName(MemberDTO memberDTO) {
         return mm.updateMemberName(memberDTO);

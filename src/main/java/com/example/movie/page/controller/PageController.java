@@ -11,7 +11,7 @@ public class PageController {
         return "index";
     }
 
-    @GetMapping("/mypage/login")
+    @GetMapping("/member/login")
     public String myLogin() {
         return "mypage/login";
     }

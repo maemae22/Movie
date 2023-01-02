@@ -17,7 +17,7 @@ public class LoginController {
     @PostMapping("/login")
     public String login(MemberDTO memberDTO, HttpSession session) {
         MemberDTO member = ms.selectLogin(memberDTO);
-        session.setAttribute("email", member.getEmail());
-        return "redirect:/mypage";
+        session.setAttribute("member", member);
+        return "redirect:/member";
     }
 }

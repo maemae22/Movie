@@ -12,6 +12,9 @@ import lombok.Setter;
 public class OrderDTO {
 
     private Long id;
+    private Long member_id;
+    private Long theater_id;
+    private Long movie_id;
     private String movieName;
     private Long movieCode;
     private String theaterName;

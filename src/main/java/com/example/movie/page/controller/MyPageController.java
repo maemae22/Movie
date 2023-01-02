@@ -40,13 +40,12 @@ public class MyPageController {
         model.addAttribute("memberDTO", memberDTO);
         return "/mypage/user-edit-name";
     }
-
+    @ResponseBody
     @PostMapping("/user-edit/name")
     public String updateName(MemberDTO memberDTO, HttpSession session) {
         String email = (String) session.getAttribute("email");
         memberDTO.setEmail(email);
-        ms.updateMemberName(memberDTO);
-        return "/mypage/user-detail";
+        return ms.updateMemberName(memberDTO);
     }
 
     @GetMapping("/user-edit/password")
@@ -56,12 +55,12 @@ public class MyPageController {
         return "/mypage/user-edit-password";
     }
 
+    @ResponseBody
     @PostMapping("/user-edit/password")
     public String updatePassword(MemberDTO memberDTO, HttpSession session) {
         String email = (String) session.getAttribute("email");
         memberDTO.setEmail(email);
-        ms.updateMemberPassword(memberDTO);
-        return "/mypage/user-detail";
+        return ms.updateMemberPassword(memberDTO);
     }
 
     @GetMapping("/user-comment")

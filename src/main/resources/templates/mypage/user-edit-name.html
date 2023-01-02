@@ -8,7 +8,7 @@
 <div id="find_id" class="find_idpw">
   <h1 class="tit">이름변경하기</h1>
   <div class="find-info">
-    <form method="post" action="/mypage/user-edit/name" id="updateNameForm">
+    <form id="updateNameForm" method="POST">
     <table>
       <colgroup>
         <col width="135"><col width="*">
@@ -32,21 +32,31 @@
       </tr>
       </tbody>
     </table>
-        <input type="submit" id="submitButton" class="submit" value="수정하기">
+        <input type="button" id="submitButton" value="수정하기" onclick="submitName();">
     </form>
   </div>
-  <script>
-    $(function() {
-      $("#submitButton").click( function() {
-        $('#updateNameForm').submit();
-        setTimeout(function() {
-          window.open('', '_self', '');
-          window.close();
-          return false;
-        }, 100);
-      });
-    });
-  </script>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script>
+  function submitName(){
+    var name = $("#newName").val();
+
+      $.ajax({
+        type:"POST",
+        url:"/mypage/user-edit/name",
+        data : {
+          'name' : name
+        },
+        success: function (data) {
+          alert("success");
+          opener.parent.location.reload();
+          window.open('', '_self').close();
+        },
+        error: function (e) {
+          alert("failed");
+        },
+      })
+  }
+</script>
 </body>
 </html>

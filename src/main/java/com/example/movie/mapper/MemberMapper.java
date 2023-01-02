@@ -9,7 +9,7 @@ public interface MemberMapper {
     int signupMember(MemberDTO memberDTO);
 
     MemberDTO loginUserIdPassword(MemberDTO memberDTO);
-    MemberDTO selectMemberDetail(String email);
+    MemberDTO selectMemberDetail(MemberDTO memberDTO);
     int updateMemberPassword(MemberDTO memberDTO);
     int updateMemberName(MemberDTO memberDTO);
 

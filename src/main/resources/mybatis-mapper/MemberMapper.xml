@@ -3,4 +3,29 @@
 
 <mapper namespace="com.example.movie.mapper.MemberMapper">
 
+    <insert id="signupMember" parameterType="com.example.movie.login.entity.Member">
+        insert into member
+                (
+                userId
+                , password
+                , name
+                , email
+                , phone
+                , indate
+                , isMember
+                , role
+                )
+            values
+                (#{userId}
+                , #{password}
+                , #{name}
+                , #{email}
+                , #{phone}
+                , #{indate}
+                , #{isMember}
+                , #{role}
+                )
+    </insert>
+
+
 </mapper>

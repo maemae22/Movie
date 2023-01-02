@@ -4,12 +4,13 @@
 <mapper namespace="com.example.movie.mapper.MemberMapper">
     <select id="selectLogin" parameterType="com.example.movie.dto.MemberDTO" resultType="com.example.movie.dto.MemberDTO">
         SELECT
-            email,
-            password
+            userId,
+            password,
+            id
         FROM
             member
         WHERE
-            email = #{email}
+            userId = #{userId}
         AND
             password = #{password}
 
@@ -53,9 +54,11 @@
         and password = #{password}
         and isMember = 'Y'
     </select>
-    <select id="selectMemberDetail" parameterType="String" resultType="com.example.movie.dto.MemberDTO">
+    <select id="selectMemberDetail" parameterType="com.example.movie.dto.MemberDTO" resultType="com.example.movie.dto.MemberDTO">
         SELECT
-            name
+            id
+            ,name
+            ,userId
             ,password
             ,email
             ,phone
@@ -63,7 +66,7 @@
         FROM
             member
         WHERE
-            email = #{email}
+            userId = #{userId}
     </select>
 
     <update id="updateMemberName" parameterType="com.example.movie.dto.MemberDTO">
@@ -72,7 +75,7 @@
         SET
             name = #{name}
         WHERE
-            email = #{email}
+            userId = #{userId}
     </update>
 
     <update id="updateMemberPassword" parameterType="com.example.movie.dto.MemberDTO">
@@ -81,6 +84,6 @@
         SET
             password = #{password}
         WHERE
-            email = #{email}
+            userId = #{userId}
     </update>
 </mapper>

@@ -8,10 +8,15 @@ CREATE TABLE member
     , password VARCHAR(50) DEFAULT NULL -- 비밀번호
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     , nickname VARCHAR(50) DEFAULT NULL -- 닉네임
 
 =======
 >>>>>>> #16-signup
+=======
+    , nickname VARCHAR(50) DEFAULT NULL -- 닉네임
+
+>>>>>>> origin/feature/#19-login
     , name VARCHAR(50) DEFAULT NULL -- 이름
 
     , email VARCHAR(50) DEFAULT NULL -- 이메일

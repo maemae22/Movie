@@ -15,9 +15,13 @@ public class MemberDTO {
     private String userId;
     private String password;
 <<<<<<< HEAD
+<<<<<<< HEAD
     private String nickname;
 =======
 >>>>>>> #16-signup
+=======
+    private String nickname;
+>>>>>>> origin/feature/#19-login
     private String name;
     private String email;
     private String phone;
@@ -31,9 +35,13 @@ public class MemberDTO {
                 .userId(userId)
                 .password(password)
 <<<<<<< HEAD
+<<<<<<< HEAD
                 .nickname(nickname)
 =======
 >>>>>>> #16-signup
+=======
+                .nickname(nickname)
+>>>>>>> origin/feature/#19-login
                 .name(name)
                 .email(email)
                 .phone(phone)

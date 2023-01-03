@@ -10,10 +10,12 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class MemberDTO {
     private long id;
     private String userId;
     private String password;
+    private String nickname;
     private String name;
     private String email;
     private String phone;
@@ -26,6 +28,7 @@ public class MemberDTO {
                 .id(id)
                 .userId(userId)
                 .password(password)
+                .nickname(nickname)
                 .name(name)
                 .email(email)
                 .phone(phone)

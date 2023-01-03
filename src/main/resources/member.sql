@@ -7,6 +7,8 @@ CREATE TABLE member
 
     , password VARCHAR(50) DEFAULT NULL -- 비밀번호
 
+    , nickname VARCHAR(50) DEFAULT NULL -- 닉네임
+
     , name VARCHAR(50) DEFAULT NULL -- 이름
 
     , email VARCHAR(50) DEFAULT NULL -- 이메일
@@ -17,7 +19,7 @@ CREATE TABLE member
 
     , isMember VARCHAR(25) DEFAULT 'Y' -- 회원 여부
 
-    , role VARCHAR(20) DEFAULT 'ROLE_USER' -- 권한 (일반유저 or Admin)
+    , role VARCHAR(20) DEFAULT 'ROLE_USER' -- 권한 (일반유저 or Admin or Manager)
 
     , PRIMARY KEY (id)
 

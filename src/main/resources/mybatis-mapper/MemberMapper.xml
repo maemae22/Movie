@@ -27,5 +27,13 @@
                 )
     </insert>
 
-
+    <select id="loginUserIdPassword" parameterType="com.example.movie.login.dto.MemberDTO" resultType="com.example.movie.login.dto.MemberDTO" >
+        select
+            nickname
+        from
+            member
+        where userId = #{userId}
+        and password = #{password}
+        and isMember = 'Y'
+    </select>
 </mapper>

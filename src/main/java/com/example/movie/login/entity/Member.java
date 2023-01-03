@@ -16,6 +16,7 @@ public class Member {
     private long id;
     private String userId;
     private String password;
+    private String nickname;
     private String name;
     private String email;
     private String phone;

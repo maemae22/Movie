@@ -1,23 +1,42 @@
 package com.example.movie.login.controller;
 
-import com.example.movie.dto.MemberDTO;
-import com.example.movie.service.MemberService;
+import com.example.movie.login.dto.MemberDTO;
+import com.example.movie.login.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import javax.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.*;
 @Slf4j
 @Controller
+@RequestMapping("/member")
 public class LoginController {
-    @Autowired
-    MemberService ms;
 
-    @PostMapping("/login")
-    public String login(MemberDTO memberDTO, HttpSession session) {
-        MemberDTO member = ms.selectLogin(memberDTO);
-        session.setAttribute("member", member);
-        return "redirect:/member";
     }
+        return "redirect:/";
+        log.info("memberDTO = {}", memberDTO.toString());
+
+    public String login( MemberDTO memberDTO) {
+    @PostMapping("/login")
+                loginService.loginUserIdPassword(memberDTO);
+    }
+    public String goLogin3() {
+    @GetMapping("/login3")
+        return "login3";
+
+    }
+
+    }
+    @GetMapping("/login2")
+    public String goLogin2() {
+        return "login";
+    private final LoginService loginService;
+
+
+    public LoginController(LoginService loginService) {
+    }
+
+
+        this.loginService = loginService;
+    @GetMapping("/login")
+    public String goLogin() {
+        return "login";
 }

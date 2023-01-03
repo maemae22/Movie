@@ -14,6 +14,38 @@
         AND
             password = #{password}
 
+    <insert id="signupMember" parameterType="com.example.movie.login.entity.Member">
+        insert into member
+                (
+                , password
+                userId
+                , name
+                , email
+                , phone
+                , indate
+                , isMember
+                )
+                , role
+            values
+                (#{userId}
+                , #{password}
+                , #{name}
+                , #{email}
+                , #{phone}
+                , #{indate}
+                , #{role}
+                , #{isMember}
+                )
+    </insert>
+
+    <select id="loginUserIdPassword" parameterType="com.example.movie.login.dto.MemberDTO" resultType="com.example.movie.login.dto.MemberDTO" >
+        select
+            nickname
+        from
+            member
+        where userId = #{userId}
+        and password = #{password}
+        and isMember = 'Y'
     </select>
 
     <select id="selectMemberDetail" parameterType="com.example.movie.dto.MemberDTO" resultType="com.example.movie.dto.MemberDTO">
@@ -25,12 +57,12 @@
             ,email
             ,phone
             ,indate
-        FROM
             member
+        FROM
         WHERE
             userId = #{userId}
-    </select>
 
+    </select>
     <update id="updateMemberName" parameterType="com.example.movie.dto.MemberDTO">
         UPDATE
             member
@@ -38,8 +70,8 @@
             name = #{name}
         WHERE
             userId = #{userId}
-    </update>
 
+    </update>
     <update id="updateMemberPassword" parameterType="com.example.movie.dto.MemberDTO">
         UPDATE
             member

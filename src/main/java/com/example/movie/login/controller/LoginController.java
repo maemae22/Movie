@@ -24,15 +24,6 @@ public class LoginController {
         return "login";
     }
 
-    @GetMapping("/login2")
-    public String goLogin2() {
-        return "login";
-    }
-
-    @GetMapping("/login3")
-    public String goLogin3() {
-        return "login3";
-    }
 
     @PostMapping("/login")
     public String login( MemberDTO memberDTO) {

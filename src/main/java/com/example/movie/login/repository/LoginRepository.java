@@ -1,5 +1,6 @@
 package com.example.movie.login.repository;
 
+import com.example.movie.login.dto.MemberDTO;
 import com.example.movie.mapper.MemberMapper;
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +13,7 @@ public class LoginRepository {
         this.memberMapper = memberMapper;
     }
 
-    public loginUserIdPassword
+    public MemberDTO loginUserIdPassword(MemberDTO memberDTO) {
+        return memberMapper.loginUserIdPassword(memberDTO);
+    }
 }

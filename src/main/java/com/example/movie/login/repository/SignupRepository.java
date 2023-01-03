@@ -1,7 +1,6 @@
 package com.example.movie.login.repository;
 
 import com.example.movie.login.dto.MemberDTO;
-import com.example.movie.login.entity.Member;
 import com.example.movie.mapper.MemberMapper;
 import org.springframework.stereotype.Repository;
 
@@ -13,8 +12,8 @@ public class SignupRepository {
         this.memberMapper = memberMapper;
     }
 
-    public int signupMember(Member member) {
-        return memberMapper.signupMember(member);
+    public int signupMember(MemberDTO memberDTO) {
+        return memberMapper.signupMember(memberDTO);
     }
 
 }

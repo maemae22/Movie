@@ -3,4 +3,15 @@
 
 <mapper namespace="com.example.movie.mapper.MovieMapper">
 
+    <select id="selectAllMovie" resultType="MovieDTO">
+        select id, movieName, movieCode, director, description, openDate, image
+        from movie
+    </select>
+
+    <select id="selectMovieById" parameterType="long" resultType="MovieDTO">
+        select movieName, movieCode, director, description, openDate, image
+        from movie
+        where id=#{id}
+    </select>
+
 </mapper>

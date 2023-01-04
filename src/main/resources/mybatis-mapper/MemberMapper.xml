@@ -6,24 +6,31 @@
     <insert id="signupMember" parameterType="com.example.movie.login.dto.MemberDTO">
         insert into member
                 (
-                userId
-                , password
-                , name
-                , email
-                , phone
-                , indate
-                , isMember
-                , role
+                    userId
+                    ,password
+                    ,name
+                    ,nickname
+                    ,phone
+                    ,address
+                    ,addressDetail
+                    ,email
+                    ,gender
+                    ,sns
+                    ,birth
                 )
             values
-                (#{userId}
+                (
+                 #{userId}
                 , #{password}
                 , #{name}
-                , #{email}
+                , #{nickname}
                 , #{phone}
-                , #{indate}
-                , #{isMember}
-                , #{role}
+                , #{address}
+                , #{addressDetail}
+                , #{email}
+                , #{gender}
+                , #{sns}
+                , #{birth}
                 )
     </insert>
 

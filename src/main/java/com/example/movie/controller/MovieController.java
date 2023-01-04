@@ -1,14 +1,23 @@
 package com.example.movie.controller;
 
+import com.example.movie.dto.MovieDTO;
 import com.example.movie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.util.List;
+
+@RestController
 public class MovieController {
 
     @Autowired
     MovieService ms;
 
-
+    @GetMapping("/movies")
+    public List<MovieDTO> selectAllMovie() {
+        return ms.selectAllMovie();
+    }
 }
+
+

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.example.movie.mapper.MemberMapper">
 
-    <insert id="signupMember" parameterType="com.example.movie.login.entity.Member">
+    <insert id="signupMember" parameterType="com.example.movie.login.dto.MemberDTO">
         insert into member
                 (
                 userId
@@ -27,5 +27,13 @@
                 )
     </insert>
 
-
+    <select id="loginUserIdPassword" parameterType="com.example.movie.login.dto.MemberDTO" resultType="com.example.movie.login.dto.MemberDTO" >
+        select
+            nickname
+        from
+            member
+        where userId = #{userId}
+        and password = #{password}
+        and isMember = 'Y'
+    </select>
 </mapper>

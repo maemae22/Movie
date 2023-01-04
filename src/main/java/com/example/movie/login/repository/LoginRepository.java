@@ -5,15 +5,15 @@ import com.example.movie.mapper.MemberMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class SignupRepository {
+public class LoginRepository {
+
     private final MemberMapper memberMapper;
 
-    public SignupRepository(MemberMapper memberMapper) {
+    public LoginRepository(MemberMapper memberMapper) {
         this.memberMapper = memberMapper;
     }
 
-    public int signupMember(MemberDTO memberDTO) {
-        return memberMapper.signupMember(memberDTO);
+    public MemberDTO loginUserIdPassword(MemberDTO memberDTO) {
+        return memberMapper.loginUserIdPassword(memberDTO);
     }
-
 }

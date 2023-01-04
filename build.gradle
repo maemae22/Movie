@@ -35,6 +35,9 @@ dependencies {
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	implementation files('libs/kobis-opcl-rest-v1.0.jar')	//영화진흥위원회 open api
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'	// json 데이터 처리
 }
 
 tasks.named('test') {

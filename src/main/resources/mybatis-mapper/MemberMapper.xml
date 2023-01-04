@@ -3,7 +3,7 @@
 
 <mapper namespace="com.example.movie.mapper.MemberMapper">
 
-    <insert id="signupMember" parameterType="com.example.movie.login.entity.Member">
+    <insert id="signupMember" parameterType="com.example.movie.login.dto.MemberDTO">
         insert into member
                 (
                 userId

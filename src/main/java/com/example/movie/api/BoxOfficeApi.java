@@ -72,7 +72,7 @@ public class BoxOfficeApi {
 
                 // DTO 로 맞춰주기. (추후 Map -> DTO 로 변환 가능하도록 DTO 내에서 작업 필요할 것으로 보임.)
                 DailyMovieDTO dailyMovieDTO = new DailyMovieDTO();
-                dailyMovieDTO.setMovieCd(String.valueOf(dailyResult.get("movieCd")));
+                dailyMovieDTO.setMovieCd(Integer.parseInt(String.valueOf(dailyResult.get("movieCd"))));
                 dailyMovieDTO.setMovieNm(String.valueOf(dailyResult.get("movieNm")));
                 dailyMovieDTO.setOpenDt(LocalDate.parse(dailyResult.get("openDt").toString()));
                 dailyMovieDTO.setMovieRank(Integer.parseInt(String.valueOf(dailyResult.get("rank"))));
@@ -112,7 +112,7 @@ public class BoxOfficeApi {
                 HashMap<String, Object> detailResult = objectMapper.readValue(parse_movieInfoResultList.toString(), HashMap.class);
 
                 MovieDTO movieDTO = new MovieDTO();
-                movieDTO.setMovieCd(String.valueOf(detailResult.get("movieCd")));
+                movieDTO.setMovieCd(Integer.parseInt(String.valueOf(detailResult.get("movieCd"))));
                 movieDTO.setMovieNm(String.valueOf(detailResult.get("movieNm")));
                 movieDTO.setMovieNmEn(String.valueOf(detailResult.get("movieNmEn")));
                 movieDTO.setShowtime(Integer.parseInt(String.valueOf(detailResult.get("showTm"))));
@@ -131,8 +131,15 @@ public class BoxOfficeApi {
 
                 ArrayList<HashMap<String, Object>> directors = (ArrayList<HashMap<String, Object>>) detailResult.get("directors");
 
-                movieDTO.setDirectorNm(String.valueOf(directors.get(0).get("peopleNm")));
-                movieDTO.setDirectorNmEn(String.valueOf(directors.get(0).get("peopleNmEn")));
+                // 감독 정보가 null 인 경우도 있어서 추가함.
+                if(directors.size() == 0){
+                    movieDTO.setDirectorNm("");
+                    movieDTO.setDirectorNmEn("");
+                } else {
+                    movieDTO.setDirectorNm(String.valueOf(directors.get(0).get("peopleNm")));
+                    movieDTO.setDirectorNmEn(String.valueOf(directors.get(0).get("peopleNmEn")));
+                }
+
 
                 ArrayList<HashMap<String, Object>> company = (ArrayList<HashMap<String, Object>>) detailResult.get("companys");
                 movieDTO.setCompanyNm(String.valueOf(company.get(0).get("companyNm")));

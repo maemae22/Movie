@@ -1,6 +1,6 @@
 package com.example.movie.login.controller;
 
-import com.example.movie.login.dto.MemberDTO;
+import com.example.movie.dto.MemberDTO;
 import com.example.movie.login.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -9,34 +9,32 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/member")
 public class LoginController {
-
-    }
-        return "redirect:/";
-        log.info("memberDTO = {}", memberDTO.toString());
-
-    public String login( MemberDTO memberDTO) {
-    @PostMapping("/login")
-                loginService.loginUserIdPassword(memberDTO);
-    }
-    public String goLogin3() {
-    @GetMapping("/login3")
-        return "login3";
-
-    }
-
-    }
-    @GetMapping("/login2")
-    public String goLogin2() {
-        return "login";
     private final LoginService loginService;
 
-
     public LoginController(LoginService loginService) {
+        this.loginService = loginService;
     }
 
-
-        this.loginService = loginService;
     @GetMapping("/login")
     public String goLogin() {
         return "login";
+    }
+
+    @GetMapping("/login2")
+    public String goLogin2() {
+        return "login";
+    }
+
+    @GetMapping("/login3")
+    public String goLogin3() {
+        return "login3";
+    }
+
+    @PostMapping("/login")
+    public String login(MemberDTO memberDTO) {
+        log.info("memberDTO = {}", memberDTO.toString());
+        loginService.loginUserIdPassword(memberDTO);
+        log.info("login {}", loginService.loginUserIdPassword(memberDTO));
+        return "redirect:/member";
+    }
 }

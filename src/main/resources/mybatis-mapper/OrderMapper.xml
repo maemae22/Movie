@@ -5,12 +5,10 @@
     <select id="selectOrderByMember" parameterType="Long" resultType="com.example.movie.dto.OrderDTO">
         SELECT
             id
-            ,movieName
-            ,theaterName
-            ,ticketCount
-            ,indate
-            ,seat
-            ,totalPrice
+             ,ticketCount
+             ,screenDate
+             ,seat
+             ,totalPrice
         FROM
             ticket
         WHERE
@@ -22,15 +20,111 @@
         DESC
     </select>
 
+    <select id="selectMovieIds" parameterType="Long" resultType="com.example.movie.dto.OrderDTO">
+        SELECT
+            movie_id
+        FROM
+            ticket
+        WHERE
+            member_id = #{member_id}
+        AND
+            orderStatus = 'Y'
+        ORDER BY
+            id
+        DESC
+    </select>
+
+    <select id="selectTheaterIds" parameterType="Long" resultType="com.example.movie.dto.OrderDTO">
+        SELECT
+            theater_id
+        FROM
+            ticket
+        WHERE
+            member_id = #{member_id}
+        AND
+            orderStatus = 'Y'
+        ORDER BY
+            id
+        DESC
+    </select>
+
+<!--    <select id="selectOrderByMember" parameterType="Long" resultType="com.example.movie.dto.OrderDTO">-->
+<!--        SELECT-->
+<!--            id-->
+<!--             ,(select movieName from movie where movie.id = ticket.movie_id) as movie_id-->
+<!--             ,(select theaterName from theater where theater.id = ticket.theater_id) as theater_id-->
+<!--             ,ticketCount-->
+<!--             ,screenDate-->
+<!--             ,seat-->
+<!--             ,totalPrice-->
+<!--        FROM-->
+<!--            ticket-->
+<!--        WHERE-->
+<!--            member_id = #{member_id}-->
+<!--          AND-->
+<!--            orderStatus = 'Y'-->
+<!--        ORDER BY-->
+<!--            id-->
+<!--                DESC-->
+<!--    </select>-->
+
+<!--    <select id="selectOrderByMember" parameterType="Long" resultType="com.example.movie.dto.OrderDTO">-->
+<!--        SELECT-->
+<!--            B.id-->
+<!--            ,A.movieName-->
+<!--            ,C.theaterName-->
+<!--            ,B.ticketCount-->
+<!--            ,B.screenDate-->
+<!--            ,B.seat-->
+<!--            ,B.totalPrice-->
+<!--        FROM-->
+<!--            movie A JOIN ticket B-->
+<!--            ON A.id = B.movie_id-->
+<!--            JOIN theater C-->
+<!--            ON C.id = B.theater_id-->
+<!--        WHERE-->
+<!--            member_id = #{member_id}-->
+<!--        AND-->
+<!--            orderStatus = 'Y'-->
+<!--        ORDER BY-->
+<!--            B.id-->
+<!--        DESC-->
+<!--    </select>-->
+
     <select id="selectCancelOrder" parameterType="Long" resultType="com.example.movie.dto.OrderDTO">
         SELECT
             id
-             ,movieName
-             ,theaterName
-             ,ticketCount
-             ,indate
-             ,seat
-             ,totalPrice
+            ,screenDate
+            ,indate
+            ,totalPrice
+        FROM
+            ticket
+        WHERE
+            member_id = #{member_id}
+        AND
+            orderStatus = 'N'
+        ORDER BY
+            id
+        DESC
+    </select>
+
+    <select id="selectCancelMovieIds" parameterType="Long" resultType="com.example.movie.dto.OrderDTO">
+        SELECT
+            movie_id
+        FROM
+            ticket
+        WHERE
+            member_id = #{member_id}
+        AND
+            orderStatus = 'N'
+        ORDER BY
+            id
+        DESC
+    </select>
+
+    <select id="selectCancelTheaterIds" parameterType="Long" resultType="com.example.movie.dto.OrderDTO">
+        SELECT
+            theater_id
         FROM
             ticket
         WHERE
@@ -45,12 +139,27 @@
     <select id="selectOrderById" parameterType="Long" resultType="com.example.movie.dto.OrderDTO">
         SELECT
             id
-             ,movieName
-             ,theaterName
+             ,screenDate
              ,ticketCount
              ,indate
              ,seat
              ,totalPrice
+        FROM
+            ticket
+        WHERE
+            member_id = #{member_id}
+        AND
+            orderStatus = 'Y'
+        ORDER BY
+            id
+        DESC
+        LIMIT 1
+    </select>
+
+    <select id="selectIdOne" parameterType="Long" resultType="com.example.movie.dto.OrderDTO">
+        SELECT
+            movie_id
+            ,theater_id
         FROM
             ticket
         WHERE

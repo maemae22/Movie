@@ -2,65 +2,57 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.movie.mapper.MemberMapper">
-    <select id="selectLogin" parameterType="com.example.movie.dto.MemberDTO" resultType="com.example.movie.dto.MemberDTO">
-        SELECT
-            userId,
-            password,
-            id
-        FROM
-            member
-        WHERE
-            userId = #{userId}
-        AND
-            password = #{password}
+<!--    <insert id="signupMember" parameterType="com.example.movie.login.entity.Member">-->
+<!--        insert into member-->
+<!--                (-->
+<!--                , password-->
+<!--                userId-->
+<!--                , name-->
+<!--                , email-->
+<!--                , phone-->
+<!--                , indate-->
+<!--                , isMember-->
+<!--                , role-->
+<!--                )-->
+<!--            values-->
+<!--                (#{userId}-->
+<!--                , #{password}-->
+<!--                , #{name}-->
+<!--                , #{email}-->
+<!--                , #{phone}-->
+<!--                , #{indate}-->
+<!--                , #{role}-->
+<!--                , #{isMember}-->
+<!--                )-->
+<!--    </insert>-->
 
-    <insert id="signupMember" parameterType="com.example.movie.login.entity.Member">
-        insert into member
-                (
-                , password
-                userId
-                , name
-                , email
-                , phone
-                , indate
-                , isMember
-                )
-                , role
-            values
-                (#{userId}
-                , #{password}
-                , #{name}
-                , #{email}
-                , #{phone}
-                , #{indate}
-                , #{role}
-                , #{isMember}
-                )
-    </insert>
-
-    <select id="loginUserIdPassword" parameterType="com.example.movie.login.dto.MemberDTO" resultType="com.example.movie.login.dto.MemberDTO" >
+    <select id="loginUserIdPassword" parameterType="com.example.movie.dto.MemberDTO" resultType="com.example.movie.dto.MemberDTO" >
         select
             nickname
         from
             member
-        where userId = #{userId}
-        and password = #{password}
-        and isMember = 'Y'
+        where
+            userId = #{userId}
+        and
+            password = #{password}
+        and
+            isMember = 'Y'
     </select>
 
-    <select id="selectMemberDetail" parameterType="com.example.movie.dto.MemberDTO" resultType="com.example.movie.dto.MemberDTO">
+    <select id="selectMemberDetail" parameterType="String" resultType="com.example.movie.dto.MemberDTO">
         SELECT
             id
+            ,nickname
             ,name
             ,userId
             ,password
             ,email
             ,phone
             ,indate
-            member
         FROM
+            member
         WHERE
-            userId = #{userId}
+            nickname = #{nickname}
 
     </select>
     <update id="updateMemberName" parameterType="com.example.movie.dto.MemberDTO">
@@ -72,6 +64,7 @@
             userId = #{userId}
 
     </update>
+
     <update id="updateMemberPassword" parameterType="com.example.movie.dto.MemberDTO">
         UPDATE
             member
@@ -79,5 +72,16 @@
             password = #{password}
         WHERE
             userId = #{userId}
+    </update>
+
+    <update id="updateIsMemberStatus" parameterType="com.example.movie.dto.MemberDTO">
+        UPDATE
+            member
+        SET
+            isMember = 'N'
+        WHERE
+            userId = #{userId}
+        AND
+            password = #{password}
     </update>
 </mapper>

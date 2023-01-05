@@ -8,7 +8,7 @@
 <div class="col-detail" id="mycgv_contents">
   <div class="tit-mycgv type2">
     <h3>나의 예매내역</h3>
-    <p>지난 <em>1개월</em>까지의 예매내역을 확인하실 수 있으며, 영수증은 <em>신용카드 결제 내역</em>만 출력 가능합니다.</p>
+    <p>영수증은 <em>신용카드 결제 내역</em>만 출력 가능합니다.</p>
   </div>
   <!-- 팝업시작 -->
   <!-- 팝업 노출 시 .layer-wrap 에 클래스 .off는 없애고 .on 추가해주세요.-->
@@ -23,11 +23,11 @@
       </p>
     </div>
 
-    <div class="lst-item" th:each="orderDTO: ${orderList}">
+    <div class="lst-item" th:each="orderDTO, i: ${orderList}">
       <div class="box-set-info">
-        <div class="box-number">
+        <div class="box-number" >
           <em>예매번호</em>
-          <strong th:text="${orderDTO.getId()}">예매번호</strong>
+          <strong th:text="${orderDTO.id}">예매번호</strong>
         </div>
         <div class="box-info">
           <div class="box-image">
@@ -43,34 +43,34 @@
           <div class="detail-area">
             <div class="reservation-info-wrap">
               <h2 class="box-contents artHouse">
-                <strong th:text="${orderDTO.getMovieName()}">영화 이름</strong>
-                <span class="res-price" th:text="${orderDTO.getTotalPrice()} + '원'">가 격</span>
+                <strong th:text="${movieList[i.index].getMovieName}">영화 이름</strong>
+                <span class="res-price" th:text="${orderDTO.totalPrice} + '원'">가 격</span>
               </h2>
               <ul class="reservation-mv-info">
                 <li>
                   <dl>
                     <dt>관람극장</dt>
-                    <dd th:text="${orderDTO.getTheaterName()}">극장 이름
-                      <a href="javascript:theaterMove('0056');">[극장정보]</a>
+                    <dd th:text="${theaterList[i.index].getTheaterName}">극장 이름
                     </dd>
+                      <a href="javascript:theaterData();">[극장정보]</a>
                   </dl>
                 </li>
                 <li>
                   <dl>
                     <dt>관람인원</dt>
-                    <dd th:text="${orderDTO.getTicketCount()} + '명'"></dd>
+                    <dd th:text="${orderDTO.ticketCount} + '명'"></dd>
                   </dl>
                 </li>
                 <li>
                   <dl>
                     <dt>관람일시</dt>
-                    <dd class="txt-red" th:text="${orderDTO.getIndate()}">기간</dd>
+                    <dd class="txt-red" th:text="${orderDTO.screenDate}">기간</dd>
                   </dl>
                 </li>
                 <li>
                   <dl>
                     <dt>관람좌석</dt>
-                    <dd th:text="${orderDTO.getSeat()}">좌석</dd>
+                    <dd th:text="${orderDTO.seat}">좌석</dd>
                   </dl>
                 </li>
                 <li>
@@ -82,13 +82,11 @@
                 <li>
                   <dl>
                     <dt>매수</dt>
-                    <dd th:text="${orderDTO.getTicketCount()}">1매</dd>
+                    <dd th:text="${orderDTO.ticketCount} + '매'">1매</dd>
                   </dl>
                 </li>
               </ul>
             </div>
-
-          </div>
         </div>
 <!--        <div class="set-btn">-->
 <!--          <input type="hidden" class="reserve-no" name="reserve-no" value="Bj2L6yI8Pj08Hr9n6+k4EEF/MJKQmTcD2CKQGs+A4WI=">-->
@@ -98,6 +96,7 @@
             e:나의예매내역 출력 수정
         -->
       </div>
+      </div>
     </div>
   </div>
   <!-- TODAY BEST 무비차트 -->
@@ -105,7 +104,7 @@
   <div class="sect-mycgv-cancle">
     <div class="tit-mycgv">
       <h4>MY 취소내역</h4>
-      <p>상영일 기준 지난 7일 동안의 취소내역입니다.</p>
+      <p>취소내역입니다.</p>
     </div>
     <div class="tbl-data">
       <table summary="상영일 기준 지난 7일 동안의 취소내역">
@@ -121,12 +120,12 @@
         </thead>
         <tbody>
 
-        <tr th:each="cancel:${cancelList}">
-          <td th:text="${cancel.getMovieName()}">아바타-물의 길(3D)</td>
-          <td th:text="${cancel.getTheaterName()}">CGV 강남</td>
-          <td>2023.01.08(일) 20:00</td>
-          <td th:text="${cancel.getIndate()}">2023.01.02(월)</td>
-          <td th:text="${cancel.getTotalPrice()} + '원'"></td>
+        <tr th:each="cancel, i:${cancelList}">
+          <td th:text="${movieCancelList[i.index].getMovieName()}">아바타-물의 길(3D)</td>
+          <td th:text="${theaterCancelList[i.index].getTheaterName()}">CGV 강남</td>
+          <td th:text="${cancel.screenDate}">2023.01.08(일) 20:00</td>
+          <td th:text="${cancel.indate}">2023.01.02(월)</td>
+          <td th:text="${cancel.totalPrice} + '원'"></td>
         </tr>
 
 

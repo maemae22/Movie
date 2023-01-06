@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @ToString
 public class MovieDTO {
 
-    private String movieCd;          // 영화코드
+    private int movieCd;          // 영화코드
     private String movieNm;          // 영화제목(국문)
     private String movieNmEn;        // 영화제목(영문)
     private int showtime;            // 상영시간(러닝타임)

@@ -15,6 +15,10 @@ public class LoginService {
 
     private final LoginRepository loginRepository;
 
+    public LoginService(LoginRepository loginRepository) {
+        this.loginRepository = loginRepository;
+    }
+
     public String loginUserIdPassword(MemberDTO memberDTO, HttpSession session) {
         MemberDTO member = loginRepository.loginUserIdPassword(memberDTO);
 

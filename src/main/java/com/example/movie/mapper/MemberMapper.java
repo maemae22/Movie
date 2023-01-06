@@ -8,5 +8,6 @@ public interface MemberMapper {
     int signupMember(MemberDTO memberDTO);
 
     MemberDTO loginUserIdPassword(MemberDTO memberDTO);
+    Long selectMemberIdByNickname(String email);
 
 }

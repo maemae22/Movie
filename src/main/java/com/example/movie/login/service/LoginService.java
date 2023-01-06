@@ -30,4 +30,6 @@ public class LoginService {
         }
         return "error";
     }
+
+    public Long selectMemberIdByEmail(String email) { return loginRepository.selectMemberIdByNickname(email); }
 }

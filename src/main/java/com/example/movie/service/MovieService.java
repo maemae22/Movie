@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class MovieService {
 
-    private MovieRepository mr;
+    private final MovieRepository mr;
     @Autowired
     public MovieService(MovieRepository mr) {
         this.mr = mr;
@@ -31,4 +31,6 @@ public class MovieService {
     public Integer selectDateInsertChk(){
         return mr.selectDateInsertChk();
     }
+    public List<MovieDTO> selectAllMovies() { return mr.selectAllMovies(); }
+    public MovieDTO selectMovieDetailByMovieCode(int movieCd) { return mr.selectMovieDetailByMovieCode(movieCd); }
 }

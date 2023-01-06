@@ -9,11 +9,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Repository
 public class MovieRepository {
 
-    private MovieMapper mm;
+    private final MovieMapper mm;
     @Autowired
     public MovieRepository(MovieMapper mm) {
         this.mm = mm;
@@ -30,4 +31,6 @@ public class MovieRepository {
     public Integer selectDateInsertChk(){
         return mm.selectDateInsertChk();
     }
+    public List<MovieDTO> selectAllMovies() { return mm.selectAllMovies(); }
+    public MovieDTO selectMovieDetailByMovieCode(int movieCd) { return mm.selectMovieDetailByMovieCode(movieCd); }
 }

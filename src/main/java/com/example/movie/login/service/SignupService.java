@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class SignupService {
     private final SignupRepository signupRepository;
-    private HttpSession session;
 
 
     public String signup(MemberDTO memberDTO) {

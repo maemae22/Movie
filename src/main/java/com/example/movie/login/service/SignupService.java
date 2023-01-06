@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 @Service
 public class SignupService {
     private final SignupRepository signupRepository;
-    private HttpSession session;
 
     public SignupService(SignupRepository signupRepository,@Autowired HttpSession session) {
         this.signupRepository = signupRepository;

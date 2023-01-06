@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko"><head>
+<html xmlns:th="http://www.thymeleaf.org" xml:lang="ko" lang="ko"><head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -144,36 +144,72 @@
                 <div class="cols-content" id="menu">
                     <div class="col-detail">
 
-                            <div class="real-rating">
-                                <input>
-                                <div class="wrap_btn">
-                                    <a class="link-gradewrite" href="javascript:void(0);"><span>평점작성</span></a>
-                                    <a class="link-reviewwrite" href="/movies/point/my-list.aspx"><span>내 평점</span></a>
-                                </div>
-                            </div>
+<!--                            <div class="real-rating">-->
+<!--                                <input>-->
+<!--                                <div class="wrap_btn">-->
+<!--                                    <a class="link-gradewrite" href="javascript:void(0);"><span>평점작성</span></a>-->
+<!--                                    <a class="link-reviewwrite" href="/movies/point/my-list.aspx"><span>내 평점</span></a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+                            <form method="post" action="/api/comment/add" style="margin: 0">
+                                <fieldset class="fld_reply">
+                                    <legend class="screen_out">한줄평 쓰기 폼</legend>
+
+                                    <input type="hidden" th:name="movieId" th:value="${movieCode}">
+
+                                    <div class="real-rating">
+                                        <div class="reply_write ">
+                                            <label for="content" class="lab_write screen_out">한줄평</label>
+                                            <textarea id="content" name="content" class="tf_reply" placeholder="이 영화의 한줄평을 입력해주세요" style="width: 70%; margin-left:10px"></textarea>
+                                        </div>
+
+                                        <div class="wrap_btn">
+                                            <button type="submit" class="link-gradewrite"><span>한줄평 작성</span></button>
+                                            <a class="link-reviewwrite" href="/movies/point/my-list.aspx"><span>내 평점</span></a>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
 
                             <div class="wrap-persongrade">
                                 <!-- 평점 목록 -->
                                 <ul class="point_col2" id="movie_point_list_container">
+                                    <div id="initAllComment"></div>
                                     <!-- 여기를 반복 -->
-                                    <li class="" data-reportcnt="0" data-spoilercnt="0" id="liCommentFirst33689979"><a
-                                            class="screen_spoiler" href="javascript:return false;">&nbsp;</a>
-                                        <div class="box-contents">
-                                            <ul class="writerinfo">
-                                                <li class="writer-name"><span class=" egg-icon good "></span>za**841018
-                                                </li>
-                                                <li class="writer-etc"><span class="day">2023.01.04</span> <span
-                                                        class="like point_like" data-commentidx="33689979" data-ismygood="false"
-                                                        id="33689979">      <a
-                                                        class="btn_point_like"
-                                                        href="javascript:return false;"><span><img
-                                                        alt="like"
-                                                        class="like_red" src="http://img.cgv.co.kr/R2014/images/point/ico_point_default.png"></span><span
-                                                        id="idLikeValue">0</span></a>     </span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-comment"><p>못봄! ㅠ 예매를 잘못해서 못봄! ㅠㅅㅠ</p></div>
-                                    </li>
+<!--                                    <li class="" data-reportcnt="0" data-spoilercnt="0" ><a-->
+<!--                                            class="screen_spoiler" >&nbsp;</a>-->
+<!--                                        <div class="box-contents">-->
+<!--                                            <ul class="writerinfo">-->
+<!--                                                <li class="writer-name"><span class=" egg-icon good "></span>za**841018-->
+<!--                                                </li>-->
+<!--                                                <li class="writer-etc">-->
+<!--                                                    <span class="day">2023.01.04</span>-->
+<!--                                                    <div>-->
+<!--                                                        <span class="like point_like" data-commentidx="33689979" data-ismygood="false">-->
+<!--                                                            <a class="btn_point_like">-->
+<!--                                                                <span>-->
+<!--                                                                    <img alt="like" class="like_red" src="http://img.cgv.co.kr/R2014/images/point/ico_point_default.png">-->
+<!--                                                                </span>-->
+<!--                                                                <span>0</span>-->
+<!--                                                            </a>-->
+<!--                                                        </span>-->
+<!--                                                    </div>-->
+<!--                                                    <div>-->
+<!--                                                        <span class="like point_like" data-commentidx="33689979" data-ismygood="false">-->
+<!--                                                            <a class="btn_point_like">-->
+<!--                                                                <span>-->
+<!--                                                                    | 신고-->
+<!--                                                                </span>-->
+<!--                                                                <span>0</span>-->
+<!--                                                            </a>-->
+<!--                                                        </span>-->
+<!--                                                    </div>-->
+<!--                                                </li>-->
+<!--                                            </ul>-->
+<!--                                        </div>-->
+<!--                                        <div class="box-comment"><p>못봄! ㅠ 예매를 잘못해서 못봄! ㅠㅅㅠ</p></div>-->
+<!--                                    </li>-->
                                     <!-- 반복 여기까지 -->
                                 </ul>
                             </div>
@@ -192,13 +228,16 @@
 
 <script>
 
-    let movieCode = [[ ${movieCode} ]]
+    let movieCode = [[ ${movieCode} ]];
+    // let nickname = [[ ${session.nickname} ]];
 
     $(document).ready(function() {
-        init();
+        initMovieDetail();
+        initAllComment();
+
     });
 
-    function init(){
+    function initMovieDetail(){
         $.ajax({
             // type: "GET",
             url: "/api/movie/" + movieCode,
@@ -237,6 +276,60 @@
             },
             error: function(xhr) {
                 console.log("실패다ㅠ");
+                console.log("에러메세지 = " + textStatus);
+                console.log("에러코드 = "+xhr.status);
+            }
+        });
+    }
+
+    function initAllComment(){
+        console.log("initAllComment 실행됨");
+        $.ajax({
+            type: "GET",
+            url: "/api/comments/" + movieCode,
+            // data: JSON.stringify({ "movieCode" : movieCode}),
+            // contentType : "application/json",
+            dataType: "json",
+            success: function (data) {
+                let con='';
+                for(let i=0;i<data.length;i++){
+
+                    con+='<li class="" data-reportcnt="0" data-spoilercnt="0">';
+                    con+='<a class="screen_spoiler">&nbsp;</a>';
+                    con+='<div class="box-contents">';
+                    con+='<ul class="writerinfo">';
+                    con+='<li class="writer-name"><span class=" egg-icon good "></span>'+data[i].memberId+'</li>';
+                    con+='<li class="writer-etc">';
+                    con+='<span class="day">'+data[i].indate+'</span>';
+                    con+='<div>';
+                    con+='<span class="like point_like" data-commentidx="33689979" data-ismygood="false">';
+                    con+='<a class="btn_point_like">';
+                    con+='<span>';
+                    con+='<img alt="like" class="like_red" src="http://img.cgv.co.kr/R2014/images/point/ico_point_default.png">';
+                    con+='</span>';
+                    con+='<span>'+data[i].good+'</span>';
+                    con+='</a>';
+                    con+='</span>';
+                    con+='</div>';
+                    con+='<div>';
+                    con+='<span class="like point_like" data-commentidx="33689979" data-ismygood="false">';
+                    con+='<a class="btn_point_like">';
+                    con+='<span>| 신고</span>';
+                    con+='<span>'+data[i].bad+'</span>';
+                    con+='</a>';
+                    con+='</span>';
+                    con+='</div>';
+                    con+='</li>';
+                    con+='</ul>';
+                    con+='</div>';
+                    con+='<div class="box-comment"><p>'+data[i].content+'</p></div>';
+                    con+='</li>';
+
+                }
+                $('#initAllComment').html(con);
+            },
+            error: function(xhr) {
+                console.log("initAllComment 실패다ㅠ");
                 console.log("에러메세지 = " + textStatus);
                 console.log("에러코드 = "+xhr.status);
             }

@@ -14,10 +14,6 @@ public class MovieController {
     @Autowired
     MovieService ms;
 
-    @GetMapping("/movies")
-    public List<MovieDTO> selectAllMovie() {
-        return ms.selectAllMovie();
-    }
 }
 
 

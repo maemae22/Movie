@@ -6,13 +6,9 @@ import com.example.movie.dto.MemberDTO;
 import com.example.movie.dto.TheaterDTO;
 import com.example.movie.service.MemberService;
 import com.example.movie.service.TheaterService;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 

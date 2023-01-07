@@ -2,19 +2,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.movie.mapper.MemberMapper">
-    <select id="selectLogin" parameterType="com.example.movie.dto.MemberDTO" resultType="com.example.movie.dto.MemberDTO">
-        SELECT
-            userId,
-            password,
-            id
-        FROM
-            member
-        WHERE
-            userId = #{userId}
-        AND
-            password = #{password}
-    </select>
-
     <insert id="signupMember" parameterType="com.example.movie.dto.MemberDTO">
         insert into member
                 (
@@ -81,7 +68,6 @@
             nickname = #{nickname}
     </select>
 
-    </select>
     <update id="updateMemberName" parameterType="com.example.movie.dto.MemberDTO">
         UPDATE
             member

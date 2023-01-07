@@ -11,6 +11,6 @@ public class TheaterController {
 
     @GetMapping("/theater/detail/{id}")
     public String theaterDetail(@PathVariable Long id) {
-        return "map";
+        return "mypage/map";
     }
 }

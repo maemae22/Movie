@@ -41,9 +41,6 @@ public class MapController {
     @ResponseBody
     @GetMapping("/send")
     public void send(OrderDTO orderDTO, String movieNm, String theaterName) {
-        log.info("orderDTO = {}", orderDTO);
-        log.info("movieNm = {}", movieNm);
-        log.info("theaterName = {}", theaterName);
         RestTemplate restTemplate = new RestTemplate();
 
         Map<String, Object> request = new HashMap<>();
@@ -61,7 +58,7 @@ public class MapController {
 
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(request);
 
-        String url = "https://hooks.slack.com/services/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"; //복사한 Webhook URL 입력
+        String url = "https://hooks.slack.com/services/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"; //복사한 Webhook URL 입력
 
         restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
     }

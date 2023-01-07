@@ -15,19 +15,6 @@ public class CommentService {
     @Autowired
     CommentRepository cr;
 
-    public ArrayList<CommentDTO> selectComment(Long member_id) {
-        return cr.selectComment(member_id);
-    }
-
-    public String deleteComment(Long id) {
-        int result = cr.deleteComment(id);
-        if (result == 1) {
-            return "success";
-        } else {
-            return "failed";
-        }
-    }
-
     public String deleteComment(Long id) {
         int result = cr.deleteComment(id);
         if (result == 1) {

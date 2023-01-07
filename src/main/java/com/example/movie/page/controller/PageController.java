@@ -21,9 +21,4 @@ public class PageController {
     public String movieList() {
         return "movie";
     }
-
-    @GetMapping("/theater/detail")
-    public String theaterDetail() {
-        return "map";
-    }
 }

@@ -17,7 +17,7 @@
             member_id = #{member_id}
     </select>
 
-    <select id="selectMovieId" parameterType="Long" resultType="com.example.movie.dto.CommentDTO">
+    <select id="selectMovieId" parameterType="Long" resultType="Long">
         SELECT
             movie_id
         FROM
@@ -35,30 +35,4 @@
         where id=#{id}
     </select>
 
-    <select id="selectComment" parameterType="Long" resultType="com.example.movie.dto.CommentDTO">
-        SELECT
-            id
-             ,member_id
-             ,movie_id
-             ,content
-             ,indate
-             ,good
-             ,bad
-        FROM
-            comment
-        WHERE
-            member_id = #{member_id}
-    </select>
-
-    <select id="selectMovieId" parameterType="Long" resultType="Long">
-        SELECT
-            movie_id
-        FROM
-            comment
-        WHERE
-            member_id = #{member_id}
-        ORDER BY
-            indate
-        DESC
-    </select>
 </mapper>

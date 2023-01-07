@@ -22,13 +22,13 @@ public class OrderService {
         return or.selectCancelOrder(member_id);
     }
 
-    public ArrayList<OrderDTO> selectCancelMovieIds(Long member_id) {
-        return or.selectCancelMovieIds(member_id);
-    }
-
-    public ArrayList<OrderDTO> selectCancelTheaterIds(Long member_id) {
-        return or.selectCancelTheaterIds(member_id);
-    }
+//    public ArrayList<OrderDTO> selectCancelMovieIds(Long member_id) {
+//        return or.selectCancelMovieIds(member_id);
+//    }
+//
+//    public ArrayList<OrderDTO> selectCancelTheaterIds(Long member_id) {
+//        return or.selectCancelTheaterIds(member_id);
+//    }
 
     public OrderDTO selectOrderById(Long member_id) {
         return or.selectOrderById(member_id);

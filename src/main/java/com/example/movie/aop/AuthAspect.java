@@ -22,7 +22,7 @@
 //
 //        HttpSession session = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest().getSession();
 //
-//        if (session.getAttribute("admin") == null) { //로그인을 안 했을때
+//        if (session.getAttribute("nickname") == null) { //로그인을 안 했을때
 //            return null;
 //        } else {// 로그인을 했을때
 //            return joinPoint.proceed();

@@ -5,13 +5,15 @@ import com.example.movie.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class MemberRepository {
 
     @Autowired
     MemberMapper mm;
 
-//    public MemberDTO loginUserIdPassword(MemberDTO memberDTO) {
+//    public MemberDTO selectLogin(MemberDTO memberDTO) {
 //        return mm.loginUserIdPassword(memberDTO);
 //    }
 
@@ -27,5 +29,13 @@ public class MemberRepository {
 
     public int updateIsMemberStatus(MemberDTO memberDTO) {
         return mm.updateIsMemberStatus(memberDTO);
+    }
+
+    public List<MemberDTO> selectAllCustomers() {
+        return mm.selectAllCustomers();
+    }
+
+    public int memberStatus(MemberDTO memberDTO) {
+        return mm.memberStatus(memberDTO);
     }
 }

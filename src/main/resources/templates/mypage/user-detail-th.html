@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
   <script>
     function name_check() {
       var url = "/member/user-edit/name";
@@ -52,40 +52,75 @@
 
         <tr>
           <th scope="row">이름</th>
-          <td><strong th:text="${memberDTO.getName()}">이름</strong></td>
+          <td><strong th:if="${memberDTO != null}" th:text="${memberDTO.getName()}">이름</strong></td>
           <td type="text" id="nameUpdate">&nbsp;<a href="javascript:name_check()">[변경하기]</a></td>
         </tr>
 
         <tr>
           <th scope="row">아이디</th>
-          <td><span th:text="${memberDTO.getUserId()}">아이디</span></td>
+          <td><span th:if="${memberDTO != null}" th:text="${memberDTO.getUserId()}">아이디</span></td>
           <td></td>
         </tr>
 
         <tr>
           <th scope="row">비밀번호</th>
-          <td><span t th:hidden="${memberDTO.getPassword()}">비밀번호</span></td>
+          <td><span th:if="${memberDTO != null}" th:hidden="${memberDTO.getPassword()}">비밀번호</span></td>
           <td type="text" id="passwordUpdate">&nbsp;<a href="javascript:password_check()">[변경하기]</a></td>
         </tr>
 
         <tr>
+          <th scope="row">닉네임</th>
+          <td><span th:if="${memberDTO != null}" th:text="${memberDTO.getNickname()}">닉네임</span></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <th scope="row">주소</th>
+          <td><span th:if="${memberDTO != null}" th:text="${memberDTO.getAddress()}">주소</span></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <th scope="row">상세주소</th>
+          <td><span th:if="${memberDTO != null}" th:text="${memberDTO.getAddressDetail ()}">상세주소</span></td>
+          <td></td>
+        </tr>
+
+        <tr>
           <th scope="row">이메일</th>
-          <td><span th:text="${memberDTO.getEmail()}">이메일</span></td>
+          <td><span th:if="${memberDTO != null}" th:text="${memberDTO.getEmail()}">이메일</span></td>
           <td></td>
         </tr>
 
         <tr>
           <th scope="row">전화번호</th>
-          <td><span th:text="${memberDTO.getPhone()}">전화번호</span></td>
+          <td><span th:if="${memberDTO != null}" th:text="${memberDTO.getPhone()}">전화번호</span></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <th scope="row">성별</th>
+          <td><span th:if="${memberDTO != null}" th:text="${memberDTO.getGender()}">성별</span></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <th scope="row">소셜네트워크</th>
+          <td><span th:if="${memberDTO != null}" th:text="${memberDTO.getSns()}">소셜네트워크</span></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <th scope="row">생일</th>
+          <td><span th:if="${memberDTO != null}" th:text="${memberDTO.getBirth()}">생일</span></td>
           <td></td>
         </tr>
 
         <tr>
           <th scope="row">가입일시</th>
-          <td><span th:text="${memberDTO.getIndate()}">가입일시</span></td>
+          <td><span th:if="${memberDTO != null}" th:text="${memberDTO.getIndate()}">가입일시</span></td>
           <td></td>
         </tr>
-
         </tbody>
       </table>
     </div>

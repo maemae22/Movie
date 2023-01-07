@@ -1,6 +1,8 @@
 package com.example.movie.repository;
 
 import com.example.movie.dto.CommentDTO;
+import com.example.movie.dto.DailyMovieDTO;
+
 import com.example.movie.dto.MovieDTO;
 import com.example.movie.dto.OrderDTO;
 import com.example.movie.mapper.MovieMapper;
@@ -20,5 +22,20 @@ public class MovieRepository {
     public MovieDTO selectMovieNameComment(CommentDTO commentDTO) {
         return mm.selectMovieNameComment(commentDTO);
     }
+    public int insertMovieDetail(MovieDTO movieDTO){
+        return mm.insertMovieDetail(movieDTO);
+    }
+    public ArrayList<HashMap<String, Object>> selectDailyMovieCode(){
+        return mm.selectDailyMovieCode();
+    }
+    public Integer selectDateInsertChk(){
+        return mm.selectDateInsertChk();
+    }
 
+    public DailyMovieDTO selectMovieName(Long movie_id) {
+        return mm.selectMovieName(movie_id);
+    }
+    public DailyMovieDTO selectMovieNameComment(Long movie_id) {
+        return mm.selectMovieNameComment(movie_id);
+    }
 }

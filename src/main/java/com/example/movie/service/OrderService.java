@@ -17,13 +17,6 @@ public class OrderService {
         return or.selectOrderByMember(member_id);
     }
 
-    public ArrayList<OrderDTO> selectMovieIds(Long member_id) {
-        return or.selectMovieIds(member_id);
-    }
-
-    public ArrayList<OrderDTO> selectTheaterIds(Long member_id) {
-        return or.selectTheaterIds(member_id);
-    }
 
     public ArrayList<OrderDTO> selectCancelOrder(Long member_id) {
         return or.selectCancelOrder(member_id);
@@ -41,7 +34,14 @@ public class OrderService {
         return or.selectOrderById(member_id);
     }
 
-    public OrderDTO selectIdOne(Long member_id) {
-        return or.selectIdOne(member_id);
+    public String updateOrderStatus(Long id) {
+        int result = or.updateOrderStatus(id);
+
+        if (result == 1) {
+            return "success";
+        } else {
+            return "failed";
+        }
     }
+
 }

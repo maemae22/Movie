@@ -20,21 +20,14 @@ public class LoginController {
         return "login";
     }
 
-    @GetMapping("/login2")
-    public String goLogin2() {
-        return "login";
-    }
-
     @GetMapping("/login3")
     public String goLogin3() {
         return "login3";
     }
 
     @PostMapping("/login")
-    public String login(MemberDTO memberDTO) {
-        log.info("memberDTO = {}", memberDTO.toString());
+    public String login( MemberDTO memberDTO) {
         loginService.loginUserIdPassword(memberDTO);
-        log.info("login {}", loginService.loginUserIdPassword(memberDTO));
         return "redirect:/member";
     }
 }

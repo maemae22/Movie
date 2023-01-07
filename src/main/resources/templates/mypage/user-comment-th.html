@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
   <style>
-  .btn_area {
-    font-family: '나눔고딕',NanumGothic,'돋움',Dotum,Helvetica,AppleSDGothicNeo-Medium,AppleGothic,sans-serif;
-    font-size: 12px;
-    list-style: none;
-    text-align: right;
-    clear: both;
-  }
+    .btn_area {
+      font-family: '나눔고딕',NanumGothic,'돋움',Dotum,Helvetica,AppleSDGothicNeo-Medium,AppleGothic,sans-serif;
+      font-size: 12px;
+      list-style: none;
+      text-align: right;
+      clear: both;
+    }
 
-  ._sympathyButton {
-    font-family: '나눔고딕',NanumGothic,'돋움',Dotum,Helvetica,AppleSDGothicNeo-Medium,AppleGothic,sans-serif;
-    font-size: 12px;
-    list-style: none;
-    text-align: right;
-    margin: 0;
-    text-decoration: none;
-    color: #000000;
-    display: inline-block;
-    overflow: hidden;
-    padding: 0 8px;
-    height: 21px;
-    line-height: 21px;
-    border-radius: 2px;
-    border: solid 1px #e5e5e5;
-    background-color: #fff;
-  }
+    ._sympathyButton {
+      font-family: '나눔고딕',NanumGothic,'돋움',Dotum,Helvetica,AppleSDGothicNeo-Medium,AppleGothic,sans-serif;
+      font-size: 12px;
+      list-style: none;
+      text-align: right;
+      margin: 0;
+      text-decoration: none;
+      color: #000000;
+      display: inline-block;
+      overflow: hidden;
+      padding: 0 8px;
+      height: 21px;
+      line-height: 21px;
+      border-radius: 2px;
+      border: solid 1px #e5e5e5;
+      background-color: #fff;
+    }
 
-  ._notSympathyButton {
-    font-family: '나눔고딕',NanumGothic,'돋움',Dotum,Helvetica,AppleSDGothicNeo-Medium,AppleGothic,sans-serif;
-    font-size: 12px;
-    list-style: none;
-    text-align: right;
-    margin: 0;
-    text-decoration: none;
-    color: #000000;
-    display: inline-block;
-    overflow: hidden;
-    padding: 0 8px;
-    height: 21px;
-    line-height: 21px;
-    border-radius: 2px;
-    border: solid 1px #e5e5e5;
-    background-color: #fff;
-    margin-left: 2px;
-  }
+    ._notSympathyButton {
+      font-family: '나눔고딕',NanumGothic,'돋움',Dotum,Helvetica,AppleSDGothicNeo-Medium,AppleGothic,sans-serif;
+      font-size: 12px;
+      list-style: none;
+      text-align: right;
+      margin: 0;
+      text-decoration: none;
+      color: #000000;
+      display: inline-block;
+      overflow: hidden;
+      padding: 0 8px;
+      height: 21px;
+      line-height: 21px;
+      border-radius: 2px;
+      border: solid 1px #e5e5e5;
+      background-color: #fff;
+      margin-left: 2px;
+    }
   </style>
 </head>
 <body>
@@ -69,7 +69,7 @@
       //]]>
     </script>
   </div>
-  <div class="warp-my-reviewlist" th:each="comment, i:${commentList}">
+  <div class="warp-my-reviewlist" th:if="${commentList != null}" th:each="comment, i:${commentList}">
     <ul class="point_col1">
       <li>
         <div class="sect-viw-rated">
@@ -78,10 +78,10 @@
           </div>
           <div class="box-contents">
             <div class="title">
-              <strong th:text="${movieList[i.index].movieName}">너의 결혼식</strong>
+              <strong th:if="${movieList != null}" th:text="${movieList[i.index].movieNm}">너의 결혼식</strong>
             </div>
             <ul class="writerinfo">
-              <li class="mylist_user_id" id="eggArea_80894" th:text="${memberDTO.userId}">
+              <li class="mylist_user_id" id="eggArea_80894" th:if="${memberDTO != null}" th:text="${memberDTO.userId}">
                 <span id="eggSpan_80894" class="egg-icon good"></span>ki**e021</li>
               <li id="liRegistDate80894" th:text="${comment.indate}">2018.08.23</li>
               <li><button type="button" th:myName="${comment.id}" class="btn-delete btn-del" midx="80894" id="deleteComment" th:onclick="deleteComment(this.getAttribute('myName'))">삭제</button></li>
@@ -114,17 +114,17 @@
 
   function deleteComment(id) {
     // var id = $("#deleteComment").val();
-if(confirm("삭제 콜?"))
-    $.ajax({
-      url: '/member/user-comment/'+id,
-      type: 'DELETE',
-      success: function(resp) {
-        console.log(id);
-        if (resp == 'success') {
-          location.reload();
+    if(confirm("삭제 콜?"))
+      $.ajax({
+        url: '/member/user-comment/'+id,
+        type: 'DELETE',
+        success: function(resp) {
+          console.log(id);
+          if (resp == 'success') {
+            location.reload();
+          }
         }
-      }
-    });
+      });
   }
 </script>
 </body>

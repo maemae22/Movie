@@ -23,7 +23,7 @@ public class LoginService {
     public String loginUserIdPassword(MemberDTO memberDTO) {
        MemberDTO member = loginRepository.loginUserIdPassword(memberDTO);
         if (member != null) {
-            session.setAttribute("nickname", member.getNickname());
+            session.setAttribute("nickname",member.getNickname());
             return memberDTO.getNickname();
         }
         return "error";

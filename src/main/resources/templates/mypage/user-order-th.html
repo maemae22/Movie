@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
 </head>
 <body>
 <div class="col-detail" id="mycgv_contents">
@@ -23,7 +23,7 @@
       </p>
     </div>
 
-    <div class="lst-item" th:each="orderDTO, i: ${orderList}">
+    <div class="lst-item" th:if="${orderList != null}" th:each="orderDTO, i: ${orderList}">
       <div class="box-set-info">
         <div class="box-number" >
           <em>예매번호</em>
@@ -43,16 +43,14 @@
           <div class="detail-area">
             <div class="reservation-info-wrap">
               <h2 class="box-contents artHouse">
-                <strong th:text="${movieList[i.index].getMovieName}">영화 이름</strong>
+                <strong th:if="${movieList != null}" th:text="${movieList[i.index].movieNm}">영화 이름</strong>
                 <span class="res-price" th:text="${orderDTO.totalPrice} + '원'">가 격</span>
               </h2>
               <ul class="reservation-mv-info">
                 <li>
                   <dl>
                     <dt>관람극장</dt>
-                    <dd th:text="${theaterList[i.index].getTheaterName}">극장 이름
-                    </dd>
-                      <a href="javascript:theaterData();">[극장정보]</a>
+                    <dd th:if="${theaterList != null}" th:text="${theaterList[i.index].getTheaterName}">극장 이름</dd>
                   </dl>
                 </li>
                 <li>
@@ -75,8 +73,8 @@
                 </li>
                 <li>
                   <dl>
-                    <dt>상영관</dt>
-                    <dd>3관 8층</dd>
+                    <dt>극장정보</dt>
+                    <dd><button th:if="${theaterList != null}" th:myName="${theaterList[i.index].id}" th:onclick="theaterData(this.getAttribute('myName'))">[극장정보]</button></dd>
                   </dl>
                 </li>
                 <li>
@@ -87,14 +85,15 @@
                 </li>
               </ul>
             </div>
+          </div>
+          <!--        <div class="set-btn">-->
+          <!--          <input type="hidden" class="reserve-no" name="reserve-no" value="Bj2L6yI8Pj08Hr9n6+k4EEF/MJKQmTcD2CKQGs+A4WI=">-->
+          <!--          <div class="col-edit"></div><div class="col-print"> <button type="button" title="새창" data="Bj2L6yI8Pj08Hr9n6%2bk4EEF%2fMJKQmTcD2CKQGs%2bA4WI%3d" class="round inblack hometicket"><span>예매정보 출력</span></button> <button type="button" title="새창" class="round black sendsmspopup"><span>문자보내기</span></button> <button type="button" data-status="94" onclick="noshowYN('N', '20230108', '00', '01', '8956.98654766333', '', '' )" class="round black cancel"><span>예매취소</span></button></div>-->
+          <!--        </div>-->
+          <!--
+              e:나의예매내역 출력 수정
+          -->
         </div>
-<!--        <div class="set-btn">-->
-<!--          <input type="hidden" class="reserve-no" name="reserve-no" value="Bj2L6yI8Pj08Hr9n6+k4EEF/MJKQmTcD2CKQGs+A4WI=">-->
-<!--          <div class="col-edit"></div><div class="col-print"> <button type="button" title="새창" data="Bj2L6yI8Pj08Hr9n6%2bk4EEF%2fMJKQmTcD2CKQGs%2bA4WI%3d" class="round inblack hometicket"><span>예매정보 출력</span></button> <button type="button" title="새창" class="round black sendsmspopup"><span>문자보내기</span></button> <button type="button" data-status="94" onclick="noshowYN('N', '20230108', '00', '01', '8956.98654766333', '', '' )" class="round black cancel"><span>예매취소</span></button></div>-->
-<!--        </div>-->
-        <!--
-            e:나의예매내역 출력 수정
-        -->
       </div>
       </div>
     </div>
@@ -120,9 +119,9 @@
         </thead>
         <tbody>
 
-        <tr th:each="cancel, i:${cancelList}">
-          <td th:text="${movieCancelList[i.index].getMovieName()}">아바타-물의 길(3D)</td>
-          <td th:text="${theaterCancelList[i.index].getTheaterName()}">CGV 강남</td>
+        <tr th:if="${cancelList != null}" th:each="cancel, i:${cancelList}">
+          <td th:if="${movieCancelList != null}" th:text="${movieCancelList[i.index].movieNm}">아바타-물의 길(3D)</td>
+          <td th:if="${theaterCancelList != null}" th:text="${theaterCancelList[i.index].getTheaterName()}">CGV 강남</td>
           <td th:text="${cancel.screenDate}">2023.01.08(일) 20:00</td>
           <td th:text="${cancel.indate}">2023.01.02(월)</td>
           <td th:text="${cancel.totalPrice} + '원'"></td>
@@ -137,6 +136,14 @@
 
   <script type="text/javascript" src="https://img.cgv.co.kr/R2014//js/system/crypto.js"></script>
 
+  <script>
+    function theaterData(id) {
+      var url = "/theater/detail/"+id;
+      var name = "theaterInformation"
+      var option = "width = 600, height = 500, top = 100, left = 200, location = no"
+      window.open(url, name, option);
+    }
+  </script>
 </div>
 </body>
 </html>

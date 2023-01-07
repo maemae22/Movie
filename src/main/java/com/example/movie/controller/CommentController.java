@@ -4,7 +4,9 @@ import com.example.movie.dto.CommentDTO;
 import com.example.movie.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,4 +22,10 @@ public class CommentController {
         log.info("delete id = {}", id);
         return cs.deleteComment(id);
     }
+
+    @DeleteMapping("/member/user-comment/{id}")
+    public String deleteComment(@PathVariable Long id) {
+        return cs.deleteComment(id);
+    }
+
 }

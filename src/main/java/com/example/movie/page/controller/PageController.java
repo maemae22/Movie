@@ -12,9 +12,14 @@ public class PageController {
         return "mypage";
     }
 
-    @GetMapping("/member/withdrawal")
-    public String withdraw() {
-        return "mypage/withdrawal";
+//    @GetMapping("/member/login")
+//    public String myLogin() {
+//        return "mypage/login";
+//    }
+
+    @GetMapping("/movie")
+    public String movieList() {
+        return "movie";
     }
 
     @GetMapping("/theater/detail")

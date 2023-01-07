@@ -19,7 +19,6 @@ import java.util.ArrayList;
 @RequestMapping("/member")
 @Controller
 public class MyPageController {
-
     private final MemberService ms;
     private final OrderService os;
     private final MovieService movieService;
@@ -33,7 +32,7 @@ public class MyPageController {
         ArrayList<OrderDTO> orderList = os.selectOrderByMember(memberDTO.getId());
         OrderDTO order = os.selectOrderById(memberDTO.getId());
 
-        MovieDTO movieDTO = movieService.selectMovieName(memberDTO.getId());
+        DailyMovieDTO movieDTO = movieService.selectMovieName(memberDTO.getId());
 
         TheaterDTO theaterDTO = ts.selectTheaterName(memberDTO.getId());
 
@@ -42,10 +41,10 @@ public class MyPageController {
         model.addAttribute("memberDTO", memberDTO);
         model.addAttribute("orderList", orderList);
         model.addAttribute("recentOrder", order);
-        model.addAttribute("recentMovie", movieDTO.getMovieName());
+        model.addAttribute("recentMovie", movieDTO.getMovieNm());
         model.addAttribute("recentTheater", theaterDTO.getTheaterName());
         model.addAttribute("commentList", commentList);
-        return "mypage/myPage";
+        return "mypage/mypage";
     }
 
     @GetMapping("/user-detail")
@@ -88,10 +87,7 @@ public class MyPageController {
     public String userComment(HttpSession session, Model model) {
         MemberDTO memberDTO = ms.selectMemberDetail((String)session.getAttribute("nickname"));
         ArrayList<CommentDTO> commentList = cs.selectComment(memberDTO.getId());
-        ArrayList<MovieDTO> movieList = movieService.selectMovieIdByComment(memberDTO.getId());
-
-        log.info("commentList = {}", commentList);
-        log.info("movieList = {}", movieList);
+        ArrayList<DailyMovieDTO> movieList = movieService.selectMovieIdByComment(memberDTO.getId());
 
         model.addAttribute("memberDTO", memberDTO);
         model.addAttribute("commentList", commentList);
@@ -106,17 +102,11 @@ public class MyPageController {
         ArrayList<OrderDTO> orderList = os.selectOrderByMember(memberDTO.getId());
         ArrayList<OrderDTO> cancelList = os.selectCancelOrder(memberDTO.getId());
 
-        ArrayList<MovieDTO> movieList = movieService.selectMovieNames(memberDTO.getId());
+        ArrayList<DailyMovieDTO> movieList = movieService.selectMovieNames(memberDTO.getId());
         ArrayList<TheaterDTO> theaterList = ts.selectTheaterNames(memberDTO.getId());
 
-        ArrayList<MovieDTO> movieCancelList = movieService.selectCancelMovieNames(memberDTO.getId());
+        ArrayList<DailyMovieDTO> movieCancelList = movieService.selectCancelMovieNames(memberDTO.getId());
         ArrayList<TheaterDTO> theaterCancelList = ts.selectCancelTheaterName(memberDTO.getId());
-
-//        log.info("memberDTO = {}", memberDTO);
-//        log.info("orderList = {}", orderList);
-//        log.info("cancelList = {}", cancelList);
-//        log.info("movieList = {}", movieList);
-//        log.info("theaterList = {}", theaterList);
 
         model.addAttribute("memberDTO", memberDTO);
         model.addAttribute("orderList", orderList);
@@ -129,4 +119,10 @@ public class MyPageController {
         model.addAttribute("theaterCancelList", theaterCancelList);
         return "/mypage/user-order";
     }
+
+    @GetMapping("/withdrawal")
+    public String withdraw() {
+        return "mypage/withdrawal";
+    }
+
 }

@@ -4,7 +4,14 @@ import com.example.movie.dto.OrderDTO;
 import com.example.movie.dto.TheaterDTO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface TheaterMapper {
-    TheaterDTO selectTheaterName(OrderDTO orderDTO);
+    TheaterDTO selectTheaterName(Long theater_id);
+    List<TheaterDTO> selectTheaters();
+
+    int deleteTheater(TheaterDTO theaterDTO);
+
+    int insertTheater(TheaterDTO theaterDTO);
 }

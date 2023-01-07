@@ -20,4 +20,21 @@
             id = #{movie_id}
     </select>
 
+    <select id="selectMovieName" resultType="com.example.movie.dto.DailyMovieDTO" parameterType="Long">
+        SELECT
+            movie_nm
+        FROM
+            DAILY_BOXOFFICE
+        WHERE
+            id = #{movie_id}
+    </select>
+
+    <select id="selectMovieNameComment" resultType="com.example.movie.dto.DailyMovieDTO" parameterType="Long">
+        SELECT
+            movie_nm
+        FROM
+            DAILY_BOXOFFICE
+        WHERE
+            id = #{movie_id}
+    </select>
 </mapper>

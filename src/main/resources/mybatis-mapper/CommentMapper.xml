@@ -29,8 +29,36 @@
         DESC
     </select>
 
-    <delete id="deleteComment" parameterType="Long">
-        DELETE FROM comment
-        WHERE id = #{id}
-    </delete>
+    <select id="selectCommentByCommentId" parameterType="long" resultType="com.example.movie.dto.CommentDTO">
+        select id, member_id, movie_id, content, indate, good, bad
+        from comment
+        where id=#{id}
+    </select>
+
+    <select id="selectComment" parameterType="Long" resultType="com.example.movie.dto.CommentDTO">
+        SELECT
+            id
+             ,member_id
+             ,movie_id
+             ,content
+             ,indate
+             ,good
+             ,bad
+        FROM
+            comment
+        WHERE
+            member_id = #{member_id}
+    </select>
+
+    <select id="selectMovieId" parameterType="Long" resultType="Long">
+        SELECT
+            movie_id
+        FROM
+            comment
+        WHERE
+            member_id = #{member_id}
+        ORDER BY
+            indate
+        DESC
+    </select>
 </mapper>

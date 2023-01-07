@@ -2,13 +2,39 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.movie.mapper.TheaterMapper">
-    <select id="selectTheaterName" resultType="com.example.movie.dto.TheaterDTO" parameterType="com.example.movie.dto.OrderDTO">
+    <select id="selectTheaterName" resultType="com.example.movie.dto.TheaterDTO" parameterType="Long">
         SELECT
-            theaterName
+            id
+            ,theaterName
         FROM
             theater
         WHERE
             id = #{theater_id}
     </select>
 
+    <select id="selectTheaters" resultType="com.example.movie.dto.TheaterDTO">
+        SELECT
+            id
+             ,theaterName
+             ,movieList
+             ,movieTimeList
+             ,theaterDetail
+        FROM
+            theater
+    </select>
+
+    <delete id="deleteTheater" parameterType="com.example.movie.dto.TheaterDTO">
+        DELETE
+        FROM
+            theater
+        WHERE
+            id=#{id}
+    </delete>
+
+    <insert id="insertTheater" parameterType="com.example.movie.dto.TheaterDTO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO theater
+        (theaterName, movieList, movieTimeList, theaterDetail)
+        VALUES
+        (#{theaterName}, #{movieList}, #{movieTimeList}, #{theaterDetail})
+    </insert>
 </mapper>

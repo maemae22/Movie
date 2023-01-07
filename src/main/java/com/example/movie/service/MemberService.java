@@ -5,14 +5,16 @@ import com.example.movie.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MemberService {
 
     @Autowired
     MemberRepository mr;
 
-//    public MemberDTO loginUserIdPassword(MemberDTO memberDTO) {
-//        return mr.loginUserIdPassword(memberDTO);
+//    public MemberDTO selectLogin(MemberDTO memberDTO) {
+//        return mr.selectLogin(memberDTO);
 //    }
 
     public MemberDTO selectMemberDetail(String nickname) {
@@ -35,5 +37,12 @@ public class MemberService {
         } else {
             return "failed";
         }
+    }
+    public List<MemberDTO> selectAllCustomers() {
+        return mr.selectAllCustomers();
+    }
+
+    public String memberStatus(MemberDTO memberDTO) {
+        return String.valueOf(mr.memberStatus(memberDTO));
     }
 }

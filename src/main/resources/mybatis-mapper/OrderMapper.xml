@@ -13,7 +13,35 @@
             ticket
         WHERE
             member_id = #{member_id}
-        AND
+          AND
+            orderStatus = 'Y'
+        ORDER BY
+            id
+                DESC
+    </select>
+
+    <select id="selectMovieIds" parameterType="Long" resultType="Long">
+        SELECT
+            movie_id
+        FROM
+            ticket
+        WHERE
+            member_id = #{member_id}
+          AND
+            orderStatus = 'Y'
+        ORDER BY
+            id
+                DESC
+    </select>
+
+    <select id="selectTheaterIds" parameterType="Long" resultType="Long">
+        SELECT
+            theater_id
+        FROM
+            ticket
+        WHERE
+            member_id = #{member_id}
+          AND
             orderStatus = 'Y'
         ORDER BY
             id
@@ -94,46 +122,46 @@
     <select id="selectCancelOrder" parameterType="Long" resultType="com.example.movie.dto.OrderDTO">
         SELECT
             id
-            ,screenDate
-            ,indate
-            ,totalPrice
+             ,screenDate
+             ,indate
+             ,totalPrice
         FROM
             ticket
         WHERE
             member_id = #{member_id}
-        AND
+          AND
             orderStatus = 'N'
         ORDER BY
             id
-        DESC
+                DESC
     </select>
 
-    <select id="selectCancelMovieIds" parameterType="Long" resultType="com.example.movie.dto.OrderDTO">
+    <select id="selectCancelMovieIds" parameterType="Long" resultType="Long">
         SELECT
             movie_id
         FROM
             ticket
         WHERE
             member_id = #{member_id}
-        AND
+          AND
             orderStatus = 'N'
         ORDER BY
             id
-        DESC
+                DESC
     </select>
 
-    <select id="selectCancelTheaterIds" parameterType="Long" resultType="com.example.movie.dto.OrderDTO">
+    <select id="selectCancelTheaterIds" parameterType="Long" resultType="Long">
         SELECT
             theater_id
         FROM
             ticket
         WHERE
             member_id = #{member_id}
-        AND
+          AND
             orderStatus = 'N'
         ORDER BY
             id
-        DESC
+                DESC
     </select>
 
     <select id="selectOrderById" parameterType="Long" resultType="com.example.movie.dto.OrderDTO">
@@ -148,18 +176,17 @@
             ticket
         WHERE
             member_id = #{member_id}
-        AND
+          AND
             orderStatus = 'Y'
         ORDER BY
             id
-        DESC
-        LIMIT 1
+                DESC
+            LIMIT 1
     </select>
 
-    <select id="selectIdOne" parameterType="Long" resultType="com.example.movie.dto.OrderDTO">
+    <select id="selectMovieIdOne" parameterType="Long" resultType="Long">
         SELECT
             movie_id
-            ,theater_id
         FROM
             ticket
         WHERE
@@ -169,6 +196,30 @@
         ORDER BY
             id
         DESC
+            LIMIT 1
+    </select>
+
+    <select id="selectTheaterIdOne" parameterType="Long" resultType="Long">
+        SELECT
+            theater_id
+        FROM
+            ticket
+        WHERE
+            member_id = #{member_id}
+          AND
+            orderStatus = 'Y'
+        ORDER BY
+            id
+        DESC
         LIMIT 1
     </select>
+
+    <update id="updateOrderStatus" parameterType="Long">
+        UPDATE
+            ticket
+        SET
+            orderStatus = 'N'
+        WHERE
+            id = #{id}
+    </update>
 </mapper>

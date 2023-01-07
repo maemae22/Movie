@@ -6,8 +6,10 @@ import com.example.movie.repository.OrderRepository;
 import com.example.movie.repository.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TheaterService {
@@ -19,29 +21,53 @@ public class TheaterService {
     OrderRepository or;
 
     public TheaterDTO selectTheaterName(Long member_id) {
-        OrderDTO order = or.selectIdOne(member_id);
-        return tr.selectTheaterName(order);
+        Long id = or.selectTheaterIdOne(member_id);
+        return tr.selectTheaterName(id);
     }
 
     public ArrayList<TheaterDTO> selectTheaterNames(Long member_id) {
-        ArrayList<OrderDTO> order = or.selectTheaterIds(member_id);
+        ArrayList<Long> ids = or.selectTheaterIds(member_id);
         ArrayList<TheaterDTO> theaterList = new ArrayList<>();
 
-        for (int i = 0; i < order.size(); i++) {
-            theaterList.add(tr.selectTheaterName(order.get(i)));
+        for (int i = 0; i < ids.size(); i++) {
+            theaterList.add(tr.selectTheaterName(ids.get(i)));
         }
 
         return theaterList;
     }
 
     public ArrayList<TheaterDTO> selectCancelTheaterName(Long member_id) {
-        ArrayList<OrderDTO> order = or.selectCancelTheaterIds(member_id);
+        ArrayList<Long> ids = or.selectCancelTheaterIds(member_id);
         ArrayList<TheaterDTO> theaterList = new ArrayList<>();
 
-        for (int i = 0; i < order.size(); i++) {
-            theaterList.add(tr.selectTheaterName(order.get(i)));
+        for (int i = 0; i < ids.size(); i++) {
+            theaterList.add(tr.selectTheaterName(ids.get(i)));
         }
 
         return theaterList;
+    }
+
+    public List<TheaterDTO> selectTheaters() {
+        return tr.selectTheaters();
+    }
+
+    public String deleteTheater(TheaterDTO theaterDTO) {
+        int result = tr.deleteTheater(theaterDTO);
+
+        if (result > 0) {
+            return "success";
+        } else {
+            return "failed";
+        }
+    }
+
+    public String insertTheater(TheaterDTO theaterDTO) {
+        int result = tr.insertTheater(theaterDTO);
+
+        if (result > 0) {
+            return "success";
+        } else {
+            return "failed";
+        }
     }
 }

@@ -1,14 +1,13 @@
 package com.example.movie.repository;
 
 import com.example.movie.mapper.BoardMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+@RequiredArgsConstructor
 @Repository
 public class BoardRepository {
 
-    @Autowired
-    BoardMapper bm;
-
+    private final BoardMapper bm;
 
 }

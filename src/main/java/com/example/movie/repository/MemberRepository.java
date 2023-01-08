@@ -13,10 +13,6 @@ public class MemberRepository {
     @Autowired
     MemberMapper mm;
 
-//    public MemberDTO selectLogin(MemberDTO memberDTO) {
-//        return mm.loginUserIdPassword(memberDTO);
-//    }
-
     public MemberDTO selectMemberDetail(String nickname) {
         return mm.selectMemberDetail(nickname);
     }
@@ -27,7 +23,7 @@ public class MemberRepository {
         return mm.updateMemberPassword(memberDTO);
     }
 
-    public int updateIsMemberStatus(MemberDTO memberDTO) {
+    public int updateIsMemberStatus(MemberDTO memberDTO) { // 본인이 회원 탈퇴
         return mm.updateIsMemberStatus(memberDTO);
     }
 
@@ -35,7 +31,7 @@ public class MemberRepository {
         return mm.selectAllCustomers();
     }
 
-    public int memberStatus(MemberDTO memberDTO) {
+    public int memberStatus(MemberDTO memberDTO) { // 관리자가 회원 탈퇴
         return mm.memberStatus(memberDTO);
     }
 }

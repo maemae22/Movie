@@ -5,7 +5,6 @@ import com.example.movie.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +35,11 @@ public class CommentService {
     }
 
     public ArrayList<CommentDTO> selectComment(Long member_id) {
-        return cr.selectComment(member_id);
+        if (cr.selectComment(member_id) == null) {
+            return null;
+        } else {
+            return cr.selectComment(member_id);
+        }
     }
 
 }

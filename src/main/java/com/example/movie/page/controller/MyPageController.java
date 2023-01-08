@@ -33,7 +33,6 @@ public class MyPageController {
         OrderDTO order = os.selectOrderById(memberDTO.getId());
 
         DailyMovieDTO movieDTO = movieService.selectMovieName(memberDTO.getId());
-
         TheaterDTO theaterDTO = ts.selectTheaterName(memberDTO.getId());
 
         ArrayList<CommentDTO> commentList = cs.selectComment(memberDTO.getId());
@@ -41,9 +40,10 @@ public class MyPageController {
         model.addAttribute("memberDTO", memberDTO);
         model.addAttribute("orderList", orderList);
         model.addAttribute("recentOrder", order);
-        model.addAttribute("recentMovie", movieDTO.getMovieNm());
-        model.addAttribute("recentTheater", theaterDTO.getTheaterName());
+        model.addAttribute("recentMovie", movieDTO);
+        model.addAttribute("recentTheater", theaterDTO);
         model.addAttribute("commentList", commentList);
+
         return "mypage/mypage";
     }
 

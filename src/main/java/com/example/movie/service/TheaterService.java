@@ -1,12 +1,10 @@
 package com.example.movie.service;
 
-import com.example.movie.dto.OrderDTO;
 import com.example.movie.dto.TheaterDTO;
 import com.example.movie.repository.OrderRepository;
 import com.example.movie.repository.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +19,13 @@ public class TheaterService {
     OrderRepository or;
 
     public TheaterDTO selectTheaterName(Long member_id) {
-        Long id = or.selectTheaterIdOne(member_id);
-        return tr.selectTheaterName(id);
+
+        if (or.selectTheaterIdOne(member_id) == null) {
+            return null;
+        } else {
+            Long id = or.selectTheaterIdOne(member_id);
+            return tr.selectTheaterName(id);
+        }
     }
 
     public ArrayList<TheaterDTO> selectTheaterNames(Long member_id) {

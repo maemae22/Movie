@@ -2,20 +2,9 @@ package com.example.movie.page.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class PageController {
-
-    @GetMapping("/")
-    public String index() {
-        return "mypage";
-    }
-
-//    @GetMapping("/member/login")
-//    public String myLogin() {
-//        return "mypage/login";
-//    }
 
     @GetMapping("/movie")
     public String movieList() {

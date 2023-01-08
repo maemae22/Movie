@@ -15,7 +15,6 @@ public class SignupController {
         this.signupService = signupService;
     }
 
-    //    private final
     @GetMapping("/signup")
     public String goSignup() {
         return "signup";

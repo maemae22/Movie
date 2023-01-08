@@ -14,7 +14,6 @@ public class CommentRepository {
     @Autowired
     CommentMapper cm;
 
-
     public List<CommentDTO> selectAllCommentByMovieId(long movieId) {
         return cm.selectAllCommentByMovieId(movieId);
     }

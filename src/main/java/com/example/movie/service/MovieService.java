@@ -30,8 +30,12 @@ public class MovieService {
     }
 
     public DailyMovieDTO selectMovieName(Long member_id) {
-        Long id = or.selectMovieIdOne(member_id);
-        return mr.selectMovieName(id);
+        if (or.selectMovieIdOne(member_id) == null) {
+            return null;
+        } else {
+            Long id = or.selectMovieIdOne(member_id);
+            return mr.selectMovieName(id);
+        }
     }
 
     public ArrayList<DailyMovieDTO> selectMovieNames(Long member_id) {
@@ -59,13 +63,9 @@ public class MovieService {
         ArrayList<Long> ids = cr.selectMovieId(member_id);
         ArrayList<DailyMovieDTO> movieList = new ArrayList<>();
 
-        log.info("ids {}", ids);
-
         for (int i = 0; i < ids.size(); i++) {
             movieList.add(mr.selectMovieNameComment(ids.get(i)));
         }
-
-        log.info("movieSer {}", movieList);
         return movieList;
     }
 }

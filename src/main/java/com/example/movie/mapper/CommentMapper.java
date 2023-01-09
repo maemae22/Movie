@@ -13,4 +13,7 @@ public interface CommentMapper {
     List<CommentDTO> selectAllCommentByMovieId(long movieId);
     List<CommentDTO> selectCommentByMemberId(long memberId);
     List<CommentDTO> selectCommentByCommentId(long id);
+
+    int updateGoodNumOneUpByCommentId(long id);
+    int updateBadNumOneUpByCommentId(long id);
 }

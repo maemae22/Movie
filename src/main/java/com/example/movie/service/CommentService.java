@@ -38,4 +38,11 @@ public class CommentService {
     public List<CommentDTO> selectCommentByCommentId(long id) {
         return cr.selectCommentByCommentId(id);
     }
+
+    public int updateGoodNumOneUpByCommentId(long id) {
+        return cr.updateGoodNumOneUpByCommentId(id);
+    }
+    public int updateBadNumOneUpByCommentId(long id) {
+        return cr.updateBadNumOneUpByCommentId(id);
+    }
 }

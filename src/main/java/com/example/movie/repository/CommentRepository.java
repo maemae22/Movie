@@ -36,5 +36,12 @@ public class CommentRepository {
         return cm.selectCommentByCommentId(id);
     }
 
+    public int updateGoodNumOneUpByCommentId(long id) {
+        return cm.updateGoodNumOneUpByCommentId(id);
+    }
+    public int updateBadNumOneUpByCommentId(long id) {
+        return cm.updateBadNumOneUpByCommentId(id);
+    }
+
 
 }

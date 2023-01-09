@@ -44,4 +44,9 @@ public class CommentController {
 //        System.out.println("updateBadNumOneUpByCommentId");
         return cs.updateBadNumOneUpByCommentId(commentId);
     }
+
+    @DeleteMapping("/api/comment/delete/{commentId}")
+    public int deleteComment(@PathVariable int commentId) {
+        return cs.deleteComment(commentId);
+    }
 }

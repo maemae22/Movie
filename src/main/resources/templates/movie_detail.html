@@ -412,6 +412,33 @@
             }
         });
     }
+
+    // function updateCommentByCommentId(id){
+    //     $.ajax({
+    //         url: "/api/comment/BadUp/" +id,
+    //         type: "PUT",
+    //         // data:{'id':id},
+    //         // dataType: "json",
+    //         success: function (data) {
+    //             // console.log("/api/comment/BadUp : id는 " + id+ "data는" +data);
+    //             init();
+    //         }
+    //     });
+    // }
+
+    function deleteCommentByCommentId(id){
+
+        if(confirm("한줄평을 정말로 삭제하시겠습니까?")) {
+
+            $.ajax({
+                url: "/api/comment/delete/" + id,
+                type: "DELETE",
+                success: function (data) {
+                    init();
+                }
+            });
+        }
+    }
 </script>
 
 </body></html>

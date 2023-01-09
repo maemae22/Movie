@@ -7,6 +7,8 @@
             (movie_cd, movie_nm, open_dt, movie_rank, audi_acc)
         VALUES
             (#{movieCd},#{movieNm},#{openDt},#{movieRank},#{audiAcc})
+    </insert>
+
     <select id="selectMovieName" resultType="com.example.movie.dto.DailyMovieDTO" parameterType="Long">
         SELECT
             movie_nm
@@ -15,8 +17,6 @@
         WHERE
             id = #{movie_id}
     </select>
-
-    </insert>
 
     <insert id="insertMovieDetail" parameterType="com.example.movie.dto.MovieDTO">
         INSERT IGNORE INTO MOVIE_DETAIL

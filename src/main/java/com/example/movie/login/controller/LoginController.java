@@ -19,16 +19,14 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String goLogin(HttpSession session) {
-        log.info("session{}",session.getAttribute("nickname"));
+    public String goLogin() {
         return "login";
 
     }
 
     @PostMapping("/login")
     public String login(MemberDTO memberDTO, HttpSession session) {
-        log.info("memberDTO = {}", memberDTO.toString());
-        return loginService.loginUserIdPassword(memberDTO, session);
-    }
+        loginService.loginUserIdPassword(memberDTO, session);
         return "redirect:/";
+    }
 }

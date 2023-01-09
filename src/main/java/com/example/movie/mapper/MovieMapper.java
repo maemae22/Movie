@@ -1,5 +1,6 @@
 package com.example.movie.mapper;
 
+import com.example.movie.dto.CommentDTO;
 import com.example.movie.dto.DailyMovieDTO;
 import com.example.movie.dto.MovieDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,4 +14,7 @@ public interface MovieMapper {
     int insertMovieDetail(MovieDTO movieDTO);
     ArrayList<HashMap<String, Object>> selectDailyMovieCode();
     Integer selectDateInsertChk();
+    DailyMovieDTO selectMovieName(Long movie_id);
+    DailyMovieDTO selectMovieNameComment(Long movie_id);
+
 }

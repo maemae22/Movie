@@ -7,6 +7,14 @@
             (movie_cd, movie_nm, open_dt, movie_rank, audi_acc)
         VALUES
             (#{movieCd},#{movieNm},#{openDt},#{movieRank},#{audiAcc})
+    <select id="selectMovieName" resultType="com.example.movie.dto.DailyMovieDTO" parameterType="Long">
+        SELECT
+            movie_nm
+        FROM
+            DAILY_BOXOFFICE
+        WHERE
+            id = #{movie_id}
+    </select>
 
     </insert>
 
@@ -35,5 +43,13 @@
         FROM DAILY_BOXOFFICE
         WHERE indate = current_date
             limit 1;
+    </select>
+    <select id="selectMovieNameComment" resultType="com.example.movie.dto.DailyMovieDTO" parameterType="Long">
+        SELECT
+            movie_nm
+        FROM
+            DAILY_BOXOFFICE
+        WHERE
+            id = #{movie_id}
     </select>
 </mapper>

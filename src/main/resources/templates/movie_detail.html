@@ -79,6 +79,20 @@
     <script type="text/javascript" src="https://img.cgv.co.kr/R2014/js/radar.js"></script>
 
     <script type="text/javascript" src="https://img.cgv.co.kr/R2014//js/system/system.packed.js"></script></head>
+
+<style>
+    table {
+        width: 100%;
+        border-top: 1px solid #444444;
+        border-collapse: collapse;
+    }
+    th, td {
+        border-bottom: 1px solid #444444;
+        padding: 10px;
+    }
+</style>
+
+
 <body class="" style="">
 
 <div class="skipnaiv">
@@ -142,7 +156,7 @@
                 </div><!-- .sect-base -->
 
                 <div class="cols-content" id="menu">
-                    <div class="col-detail">
+                    <div class="col-detail" style="width: 100%">
 
 <!--                            <div class="real-rating">-->
 <!--                                <input>-->
@@ -216,11 +230,12 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="width: 100%; max-width: 100%; margin-bottom: 20px; border-spacing: 0; border-collapse: collapse; border-color: grey; display: table;">
                                         <thead>
                                         <tr>
-                                            <th width='50'>닉네임</th>
-                                            <th width='420'>한줄평 내용</th>
-                                            <th width='90'>작성날짜</th>
-                                            <th width='30'>좋아요</th>
-                                            <th width='30'>신고</th>
+                                            <th width='140'>닉네임</th>
+                                            <th width='400'>한줄평 내용</th>
+                                            <th width='150'>작성날짜</th>
+                                            <th width='80'>좋아요</th>
+                                            <th width='80'>신고</th>
+                                            <th width='80'>비고</th>
                                         </tr>
                                         </thead>
                                         <tbody id="tbody">
@@ -346,8 +361,9 @@
                     con+='<td>'+data[i].memberId+'</td>';
                     con+='<td>'+data[i].content+'</td>';
                     con+='<td>'+data[i].indate+'</td>';
-                    con+='<td>'+data[i].good+'</td>';
-                    con+='<td>'+data[i].bad+'</td>';
+                    con+='<td><a onclick="changeStatus(\''+data[i].id+'\',\'N\')" className="btn btn-custon-four btn-danger" style="padding: 1px 15px"><button type="button" style="border: 1px solid gray; padding: 5px; margin: 3px">좋아요</button></a>'+data[i].good+'</td>';
+                    con+='<td><a onclick="changeStatus(\''+data[i].id+'\',\'N\')" className="btn btn-custon-four btn-danger" style="padding: 1px 15px"><button type="button" style="border: 1px solid gray; padding: 5px; margin: 3px">신고요</button></a>'+data[i].bad+'</td>';
+                    con+='<td><a onclick="changeStatus(\''+data[i].id+'\',\'N\')" className="btn btn-custon-four btn-danger" style="padding: 1px 15px"><button type="button" style="border: 1px solid gray; padding: 5px; margin: 3px">수정</button></a><a onclick="changeStatus(\''+data[i].id+'\',\'N\')" className="btn btn-custon-four btn-danger" style="padding: 1px 15px"><button type="button" style="border: 1px solid gray; padding: 5px; margin: 3px">삭제</button></a></td>';
 
 
                     // if(data[i].ismem=='Y'){

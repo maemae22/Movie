@@ -29,15 +29,10 @@
         DESC
     </select>
 
-    <select id="selectCommentByCommentId" parameterType="long" resultType="com.example.movie.dto.CommentDTO">
-        select id, member_id, movie_id, content, indate, good, bad
-        from comment
-        where id=#{id}
-    </select>
-
     <delete id="deleteComment" parameterType="long">
         delete from comment where id=#{id}
     </delete>
+
     <insert id="insertComment" parameterType="com.example.movie.dto.CommentDTO">
         insert into comment
             (member_id, movie_id, content)
@@ -50,7 +45,6 @@
             content=#{content}, good=#{good}, bad=#{bad}
         where id=#{id}
     </update>
-
 
     <select id="selectAllCommentByMovieId" parameterType="long" resultType="com.example.movie.dto.CommentDTO">
         select id, member_id, movie_id, content, indate, good, bad

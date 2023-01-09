@@ -1,6 +1,7 @@
 package com.example.movie.service;
 
 import com.example.movie.dto.DailyMovieDTO;
+import com.example.movie.dto.MovieDTO;
 import com.example.movie.repository.CommentRepository;
 import com.example.movie.repository.MovieRepository;
 import com.example.movie.repository.OrderRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Slf4j
 @Service
@@ -67,5 +69,17 @@ public class MovieService {
             movieList.add(mr.selectMovieNameComment(ids.get(i)));
         }
         return movieList;
+    }
+
+    public int insertDailyMovie(DailyMovieDTO dailyMovieDTO) {
+        return mr.insertDailyMovie(dailyMovieDTO);
+    }
+
+    public int insertMovieDetail(MovieDTO movieDTO) {
+        return mr.insertMovieDetail(movieDTO);
+    }
+
+    public ArrayList<HashMap<String, Object>> selectDailyMovieCode() {
+        return mr.selectDailyMovieCode();
     }
 }

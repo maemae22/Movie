@@ -35,7 +35,8 @@
 
     <select id="loginUserIdPassword" parameterType="com.example.movie.dto.MemberDTO" resultType="com.example.movie.dto.MemberDTO" >
         select
-            nickname
+            id
+            ,nickname
         from
             member
         where

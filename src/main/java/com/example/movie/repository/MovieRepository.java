@@ -14,6 +14,7 @@ import java.util.HashMap;
 public class MovieRepository {
     private MovieMapper mm;
 
+    private MovieMapper mm;
     @Autowired
     public MovieRepository(MovieMapper mm) {
         this.mm = mm;

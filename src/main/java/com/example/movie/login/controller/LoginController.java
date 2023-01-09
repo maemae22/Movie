@@ -5,6 +5,9 @@ import com.example.movie.login.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+
 @Slf4j
 @Controller
 @RequestMapping("/member")
@@ -16,18 +19,16 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String goLogin() {
+    public String goLogin(HttpSession session) {
+        log.info("session{}",session.getAttribute("nickname"));
         return "login";
-    }
 
-    @GetMapping("/login3")
-    public String goLogin3() {
-        return "login3";
     }
 
     @PostMapping("/login")
-    public String login( MemberDTO memberDTO) {
-        loginService.loginUserIdPassword(memberDTO);
-        return "redirect:/member";
+    public String login(MemberDTO memberDTO, HttpSession session) {
+        log.info("memberDTO = {}", memberDTO.toString());
+        return loginService.loginUserIdPassword(memberDTO, session);
     }
+        return "redirect:/";
 }

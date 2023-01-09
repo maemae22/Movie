@@ -13,6 +13,9 @@ public class MemberService {
     @Autowired
     MemberRepository mr;
 
+    public MemberDTO selectLogin(MemberDTO memberDTO) {
+        return mr.selectLogin(memberDTO);
+    }
 
     public MemberDTO selectMemberDetail(String nickname) {
         return mr.selectMemberDetail(nickname);

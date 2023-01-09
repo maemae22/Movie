@@ -14,7 +14,6 @@ public class SignupService {
 
     public SignupService(SignupRepository signupRepository,@Autowired HttpSession session) {
         this.signupRepository = signupRepository;
-        this.session = session;
     }
 
     public String signup(MemberDTO memberDTO) {

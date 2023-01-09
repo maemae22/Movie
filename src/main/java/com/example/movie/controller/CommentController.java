@@ -33,5 +33,15 @@ public class CommentController {
         return cs.selectAllCommentByMovieId(movieCd);
     }
 
+    @PutMapping("/api/comment/GoodUp/{commentId}")
+    public int updateGoodNumOneUpByCommentId(@PathVariable int commentId) {
+//        System.out.println("updateGoodNumOneUpByCommentId");
+        return cs.updateGoodNumOneUpByCommentId(commentId);
+    }
 
+    @PutMapping("/api/comment/BadUp/{commentId}")
+    public int updateBadNumOneUpByCommentId(@PathVariable int commentId) {
+//        System.out.println("updateBadNumOneUpByCommentId");
+        return cs.updateBadNumOneUpByCommentId(commentId);
+    }
 }

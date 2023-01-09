@@ -361,9 +361,9 @@
                     con+='<td>'+data[i].memberId+'</td>';
                     con+='<td>'+data[i].content+'</td>';
                     con+='<td>'+data[i].indate+'</td>';
-                    con+='<td><a onclick="changeStatus(\''+data[i].id+'\',\'N\')" className="btn btn-custon-four btn-danger" style="padding: 1px 15px"><button type="button" style="border: 1px solid gray; padding: 5px; margin: 3px">좋아요</button></a>'+data[i].good+'</td>';
-                    con+='<td><a onclick="changeStatus(\''+data[i].id+'\',\'N\')" className="btn btn-custon-four btn-danger" style="padding: 1px 15px"><button type="button" style="border: 1px solid gray; padding: 5px; margin: 3px">신고요</button></a>'+data[i].bad+'</td>';
-                    con+='<td><a onclick="changeStatus(\''+data[i].id+'\',\'N\')" className="btn btn-custon-four btn-danger" style="padding: 1px 15px"><button type="button" style="border: 1px solid gray; padding: 5px; margin: 3px">수정</button></a><a onclick="changeStatus(\''+data[i].id+'\',\'N\')" className="btn btn-custon-four btn-danger" style="padding: 1px 15px"><button type="button" style="border: 1px solid gray; padding: 5px; margin: 3px">삭제</button></a></td>';
+                    con+='<td><button type="button" onclick="goodup('+data[i].id+')" style="border: 1px solid gray; padding: 5px; margin: 3px">좋아요</button>'+data[i].good+'</td>';
+                    con+='<td><button type="button" onclick="badup('+data[i].id+')" style="border: 1px solid gray; padding: 5px; margin: 3px">신고요</button>'+data[i].bad+'</td>';
+                    con+='<td><button type="button" onclick="updateCommentByCommentId('+data[i].id+')" style="border: 1px solid gray; padding: 5px; margin: 3px">수정</button><button type="button" onclick="deleteCommentByCommentId('+data[i].id+')" style="border: 1px solid gray; padding: 5px; margin: 3px">삭제</button></td>';
 
 
                     // if(data[i].ismem=='Y'){
@@ -387,6 +387,31 @@
         });
     }
 
+    function goodup(id){
+        $.ajax({
+            url: "/api/comment/GoodUp/" +id,
+            type: "PUT",
+            // data:{'id':id},
+            // dataType: "json",
+            success: function (data) {
+                // console.log("/api/comment/GoodUp : id는 " + id+ "data는" +data);
+                init();
+            }
+        });
+    }
+
+    function badup(id){
+        $.ajax({
+            url: "/api/comment/BadUp/" +id,
+            type: "PUT",
+            // data:{'id':id},
+            // dataType: "json",
+            success: function (data) {
+                // console.log("/api/comment/BadUp : id는 " + id+ "data는" +data);
+                init();
+            }
+        });
+    }
 </script>
 
 </body></html>

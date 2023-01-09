@@ -3,16 +3,16 @@ package com.example.movie.repository;
 import com.example.movie.dto.BoardDTO;
 import com.example.movie.dto.ReplyDTO;
 import com.example.movie.mapper.BoardMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class BoardRepository {
 
-    @Autowired
-    BoardMapper bm;
+    private final BoardMapper bm;
 
     public List<BoardDTO> selectBoard() {
         return bm.selectBoard();

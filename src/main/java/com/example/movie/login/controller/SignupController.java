@@ -1,6 +1,6 @@
 package com.example.movie.login.controller;
 
-import com.example.movie.login.dto.MemberDTO;
+import com.example.movie.dto.MemberDTO;
 import com.example.movie.login.service.SignupService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,6 @@ public class SignupController {
         this.signupService = signupService;
     }
 
-    //    private final
     @GetMapping("/signup")
     public String goSignup() {
         return "signup";

@@ -12,15 +12,17 @@ import java.util.HashMap;
 
 @Repository
 public class MovieRepository {
-
     private MovieMapper mm;
+
     @Autowired
     public MovieRepository(MovieMapper mm) {
         this.mm = mm;
     }
+
     public int insertDailyMovie(DailyMovieDTO dailyMovieDTO){
         return mm.insertDailyMovie(dailyMovieDTO);
     }
+
     public int insertMovieDetail(MovieDTO movieDTO){
         return mm.insertMovieDetail(movieDTO);
     }
@@ -29,5 +31,12 @@ public class MovieRepository {
     }
     public Integer selectDateInsertChk(){
         return mm.selectDateInsertChk();
+    }
+
+    public DailyMovieDTO selectMovieName(Long movie_id) {
+        return mm.selectMovieName(movie_id);
+    }
+    public DailyMovieDTO selectMovieNameComment(Long movie_id) {
+        return mm.selectMovieNameComment(movie_id);
     }
 }

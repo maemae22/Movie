@@ -39,10 +39,6 @@ public class PageController {
         return "index";
     }
 
-    @GetMapping("/member/login")
-    public String myLogin() {
-        return "mypage/login";
-    }
     @GetMapping("/movie")
     public String movieList() {
         return "movie";

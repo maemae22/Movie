@@ -63,18 +63,26 @@
     <script src="../js/admin/vendor/modernizr-2.8.3.min.js"></script>
     <script>
     	function subForm(){
-    		oEditors.getById["smartEditor"].exec("UPDATE_CONTENTS_FIELD", []);
-    		var theaterDetail = $("#smartEditor").val();
-			var theaterName=$("#pretheaterName").val();
-			var movieList = $("#premovieList").val();
-    		var movieTimeList = $("#premovieTimeList").val();
+    		// oEditors.getById["smartEditor"].exec("UPDATE_CONTENTS_FIELD", []);
+    		// var theaterDetail = $("#smartEditor").val();
+			var selectedTheater=$("#preselectedTheater").val();
+			var seats=$("#preseats").val();
+			var movieName = $("#premovieName").val();
+			var movieDate = $("#premovieDate").val();
+			var movieTime = $("#premovieTime").val();
+			var latitude = $("#prelatitude").val();
+    		var longitude = $("#prelongitude").val();
 
-    		$("#theaterDetail").val(theaterDetail);
-    		$("#theaterName").val(theaterName);
-    		$("#movieList").val(movieList);
-    		$("#movieTimeList").val(movieTimeList);
+    		// $("#theaterDetail").val(theaterDetail);
+    		$("#selectedTheater").val(selectedTheater);
+    		$("#seats").val(seats);
+    		$("#movieName").val(movieName);
+    		$("#movieDate").val(movieDate);
+    		$("#movieTime").val(movieTime);
+    		$("#latitude").val(latitude);
+    		$("#longitude").val(longitude);
 
-    		if($("#theaterName").val().length < 1){
+    		if($("#selectedTheater").val().length < 1){
     			alert("빈칸없이 작성해주세요.");
     			return;
     		}
@@ -84,17 +92,20 @@
                 type:"POST",
                 data:
                     {
-                        "theaterDetail":theaterDetail,
-                        "theaterName":theaterName,
-                        "movieList":movieList,
-                        "movieTimeList":movieTimeList,
+                        "selectedTheater":selectedTheater,
+                        "seats":seats,
+                        "movieName":movieName,
+                        "movieDate":movieDate,
+                        "movieTime":movieTime,
+                        "latitude":latitude,
+                        "longitude":longitude
                     },
                 success: function (data) {
                    if(data=='success'){
-                       alert("제품등록 성공");
+                       alert("등록 성공");
                        location.href="/admin/theaterList";
                    }else{
-                       alert("제품등록 실패");
+                       alert("등록 실패");
                    }
                 }
             });
@@ -145,10 +156,13 @@
 
         </div>
        <form id="conForm" method="post" action="/admin/regiTheater">
-          <input name="theaterName" id="theaterName" type="hidden" class="form-control"/>
-          <input name="movieList" id="movieList" type="hidden" class="form-control"/>
-          <input name="movieTimeList" id="movieTimeList" type="hidden" class="form-control"/>
-          <input name="theaterDetail" id="theaterDetail" type="hidden" class="form-control"/>
+          <input name="selectedTheater" id="selectedTheater" type="hidden" class="form-control"/>
+          <input name="movieName" id="movieName" type="hidden" class="form-control"/>
+          <input name="movieDate" id="movieDate" type="hidden" class="form-control"/>
+          <input name="movieTime" id="movieTime" type="hidden" class="form-control"/>
+          <input name="seats" id="seats" type="hidden" class="form-control"/>
+          <input name="latitude" id="latitude" type="hidden" class="form-control"/>
+          <input name="longitude" id="longitude" type="hidden" class="form-control"/>
        </form>
          <div class="product-status mg-b-30">
             <div class="container-fluid">
@@ -177,41 +191,73 @@
                                                                 <label class="login2 pull-right pull-right-pro"  style="color:white;">극장명</label>
                                                             </div>
                                                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                                                <input style="color:white;"  name="pretheaterName" id="pretheaterName" type="text" class="form-control" />
+                                                                <input style="color:white;"  name="preselectedTheater" id="preselectedTheater" type="text" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="padding-top:28px;">
+                                                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+                                                                <label class="login2 pull-right pull-right-pro"  style="color:white;">좌석</label>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                                                <input style="color:white;"  name="preseats" id="preseats" type="text" class="form-control" />
                                                             </div>
                                                         </div>
                                                         <div class="row" style="padding-top:18px;">
                                                             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
-                                                                <label class="login2 pull-right pull-right-pro"  style="color:white;">영화리스트</label>
+                                                                <label class="login2 pull-right pull-right-pro"  style="color:white;">영화제목</label>
                                                             </div>
                                                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                                                <input style="color:white;" value="" name="premovieList" id="premovieList"  type="text" class="form-control" />
+                                                                <input style="color:white;" value="" name="premovieName" id="premovieName"  type="text" class="form-control" />
                                                             </div>
                                                         </div>
                                                         <div class="row" style="padding-top:18px;">
                                                             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
-                                                                <label class="login2 pull-right pull-right-pro"  style="color:white;">영화시간</label>
+                                                                <label class="login2 pull-right pull-right-pro"  style="color:white;">상영날짜</label>
                                                             </div>
                                                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                                                <input style="color:white;" name="premovieTimeList" id="premovieTimeList" type="time" class="form-control" />
+                                                                <input style="color:white;" name="premovieDate" id="premovieDate" type="date" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="padding-top:18px;">
+                                                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+                                                                <label class="login2 pull-right pull-right-pro"  style="color:white;">상영시간</label>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                                                <input style="color:white;" name="premovieTime" id="premovieTime" type="time" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="padding-top:18px;">
+                                                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+                                                                <label class="login2 pull-right pull-right-pro"  style="color:white;">위도</label>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                                                <input style="color:white;" name="prelatitude" id="prelatitude" type="text" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="padding-top:18px;">
+                                                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+                                                                <label class="login2 pull-right pull-right-pro"  style="color:white;">경도</label>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                                                <input style="color:white;" name="prelongitude" id="prelongitude" type="text" class="form-control" />
                                                             </div>
                                                         </div>
 
-                                                        <div class="row" style="padding-top:18px;">
-                                                        	<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro"  style="color:white;">극장상세설명</label>
-                                                            </div>
-		                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-				                                                 
-				                                                 <div class="jsx-2303464893 editor"> 
-																	<div class="fr-box fr-basic fr-top" role="application"> 
-																		<div class="fr-wrapper show-placeholder" dir="auto" style="overflow: scroll;background:white;"> 
-																			<textarea name="content" id="smartEditor" style="width: 100%; height: 412px; background:white;"></textarea> 
-																		</div> 
-																	</div> 
-																</div>
-				                                            </div>
-                                                        </div>
+<!--                                                        <div class="row" style="padding-top:18px;">-->
+<!--                                                        	<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">-->
+<!--                                                                <label class="login2 pull-right pull-right-pro"  style="color:white;">극장상세설명</label>-->
+<!--                                                            </div>-->
+<!--		                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">-->
+<!--				                                                 -->
+<!--				                                                 <div class="jsx-2303464893 editor"> -->
+<!--																	<div class="fr-box fr-basic fr-top" role="application"> -->
+<!--																		<div class="fr-wrapper show-placeholder" dir="auto" style="overflow: scroll;background:white;"> -->
+<!--																			<textarea name="content" id="smartEditor" style="width: 100%; height: 412px; background:white;"></textarea> -->
+<!--																		</div> -->
+<!--																	</div> -->
+<!--																</div>-->
+<!--				                                            </div>-->
+<!--                                                        </div>-->
                                                        
                                                     </div>
                                                     <div class="form-group-inner">

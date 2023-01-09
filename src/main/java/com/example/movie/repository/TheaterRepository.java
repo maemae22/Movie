@@ -21,6 +21,10 @@ public class TheaterRepository {
         return tm.selectTheaters();
     }
 
+    public TheaterDTO selectTheaterData(Long theater_id) {
+        return tm.selectTheaterData(theater_id);
+    }
+
 
     public int deleteTheater(TheaterDTO theaterDTO) {
         return tm.deleteTheater(theaterDTO);

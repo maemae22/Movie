@@ -50,7 +50,7 @@
                 <li>
                   <dl>
                     <dt>관람극장</dt>
-                    <dd th:if="${theaterList != null}" th:text="${theaterList[i.index].getTheaterName}">극장 이름</dd>
+                    <dd th:if="${theaterList != null}" th:text="${theaterList[i.index].selectedTheater}">극장 이름</dd>
                   </dl>
                 </li>
                 <li>
@@ -121,7 +121,7 @@
 
         <tr th:if="${cancelList != null}" th:each="cancel, i:${cancelList}">
           <td th:if="${movieCancelList != null}" th:text="${movieCancelList[i.index].movieNm}">아바타-물의 길(3D)</td>
-          <td th:if="${theaterCancelList != null}" th:text="${theaterCancelList[i.index].getTheaterName()}">CGV 강남</td>
+          <td th:if="${theaterCancelList != null}" th:text="${theaterCancelList[i.index].selectedTheater}">CGV 강남</td>
           <td th:text="${cancel.screenDate}">2023.01.08(일) 20:00</td>
           <td th:text="${cancel.indate}">2023.01.02(월)</td>
           <td th:text="${cancel.totalPrice} + '원'"></td>
@@ -138,7 +138,7 @@
 
   <script>
     function theaterData(id) {
-      var url = "/theater/detail/"+id;
+      var url = "/member/theater/detail/"+id;
       var name = "theaterInformation"
       var option = "width = 600, height = 500, top = 100, left = 200, location = no"
       window.open(url, name, option);

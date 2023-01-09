@@ -121,9 +121,12 @@
                                 <tr>
                                     <th>아이디</th>
                                     <th>극장명</th>
+                                    <th>좌석</th>
                                     <th>영화제목</th>
+                                    <th>상영날짜</th>
                                     <th>상영시간</th>
-                                    <th>극장설명</th>
+                                    <th>위도</th>
+                                    <th>경도</th>
                                     <th>삭제</th>
                                 </tr>
                                 </thead>
@@ -131,9 +134,12 @@
                                 <tr>
                                     <th>아이디</th>
                                     <th>극장명</th>
+                                    <th>좌석</th>
                                     <th>영화제목</th>
+                                    <th>상영날짜</th>
                                     <th>상영시간</th>
-                                    <th>극장설명</th>
+                                    <th>위도</th>
+                                    <th>경도</th>
                                     <th>삭제</th>
                                 </tr>
                                 </tfoot>
@@ -231,10 +237,13 @@
                 for(let i=0;i<data.length;i++){
                     con+='<tr>';
                     con+='<td>'+data[i].id+'</td>';
-                    con+='<td>'+data[i].theaterName+'</td>';
-                    con+='<td>'+data[i].movieList+'</td>';
-                    con+='<td>'+data[i].movieTimeList+'</td>';
-                    con+='<td>'+data[i].theaterDetail+'</td>';
+                    con+='<td>'+data[i].selectedTheater+'</td>';
+                    con+='<td>'+data[i].seats+'</td>';
+                    con+='<td>'+data[i].movieName+'</td>';
+                    con+='<td>'+data[i].movieDate+'</td>';
+                    con+='<td>'+data[i].movieTime+'</td>';
+                    con+='<td>'+data[i].latitude+'</td>';
+                    con+='<td>'+data[i].longitude+'</td>';
                     con+='<td><a onclick="deleteProduct(\''+data[i].id+'\',\'Y\')" className="btn btn-custon-four btn-success" style="padding: 1px 15px">삭제</a></td>';
                     con+='</tr>';
                 }
@@ -252,10 +261,10 @@
                 data:{'id':id},
                 success: function (data) {
                     if(data=='success'){
-                        alert("제품을 삭제하였습니다.");
+                        alert("삭제하였습니다.");
                         init();
                     }else{
-                        alert("제품 삭제를 실패 하였습니다.");
+                        alert("삭제를 실패 하였습니다.");
                     }
                 }
             });

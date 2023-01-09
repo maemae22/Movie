@@ -9,8 +9,11 @@ import lombok.*;
 @ToString
 public class TheaterDTO {
     private Long id;
-    private String theaterName;
-    private String movieList;
-    private String movieTimeList;
-    private String theaterDetail;
+    private String selectedTheater;
+    private Float latitude;
+    private Float longitude;
+    private String seats;
+    private String movieName; //ReserveDTO
+    private String movieDate; //ReserveDTO
+    private String movieTime;
 }

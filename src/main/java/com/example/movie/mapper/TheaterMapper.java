@@ -9,6 +9,7 @@ import java.util.List;
 public interface TheaterMapper {
     TheaterDTO selectTheaterName(Long theater_id);
     List<TheaterDTO> selectTheaters();
+    TheaterDTO selectTheaterData(Long theater_id);
 
     int deleteTheater(TheaterDTO theaterDTO);
 

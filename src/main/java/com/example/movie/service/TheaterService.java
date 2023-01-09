@@ -18,6 +18,10 @@ public class TheaterService {
     @Autowired
     OrderRepository or;
 
+    public TheaterDTO selectTheaterData(Long theater_id) {
+        return tr.selectTheaterData(theater_id);
+    }
+
     public TheaterDTO selectTheaterName(Long member_id) {
 
         if (or.selectTheaterIdOne(member_id) == null) {

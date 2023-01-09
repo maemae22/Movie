@@ -50,7 +50,7 @@
                                 </dt>
                                 <dd>
                                     <em>관람극장</em>
-                                    <strong th:if="${recentTheater != null}" th:text="${recentTheater.theaterName}">CGV 강남</strong>
+                                    <strong th:if="${recentTheater != null}" th:text="${recentTheater.selectedTheater}">CGV 강남</strong>
                                     <strong th:unless="${recentTheater != null}" th:text="${recentTheater}"></strong>
                                 </dd>
                                 <dd>
@@ -116,8 +116,8 @@
                 'seat': mail.seat,
                 'ticketCount': mail.ticketCount,
                 'totalPrice': mail.totalPrice,
-                'movieNm': movie,
-                'theaterName': theater
+                'movieNm': movie.movieNm,
+                'selectedTheater': theater.selectedTheater
             },
             success: function (data) {
                 console.log(data);

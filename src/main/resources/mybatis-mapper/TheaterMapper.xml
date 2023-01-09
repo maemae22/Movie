@@ -5,7 +5,7 @@
     <select id="selectTheaterName" resultType="com.example.movie.dto.TheaterDTO" parameterType="Long">
         SELECT
             id
-            ,theaterName
+            ,selectedTheater
         FROM
             theater
         WHERE
@@ -15,12 +15,31 @@
     <select id="selectTheaters" resultType="com.example.movie.dto.TheaterDTO">
         SELECT
             id
-             ,theaterName
-             ,movieList
-             ,movieTimeList
-             ,theaterDetail
+             ,selectedTheater
+             ,seats
+             ,movieName
+             ,movieDate
+             ,movieTime
+             ,latitude
+             ,longitude
         FROM
             theater
+    </select>
+
+    <select id="selectTheaterData" resultType="com.example.movie.dto.TheaterDTO">
+        SELECT
+            id
+             ,selectedTheater
+             ,seats
+             ,movieName
+             ,movieDate
+             ,movieTime
+             ,latitude
+             ,longitude
+        FROM
+            theater
+        WHERE
+            id = #{theater_id}
     </select>
 
     <delete id="deleteTheater" parameterType="com.example.movie.dto.TheaterDTO">
@@ -33,8 +52,8 @@
 
     <insert id="insertTheater" parameterType="com.example.movie.dto.TheaterDTO" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO theater
-        (theaterName, movieList, movieTimeList, theaterDetail)
+        (selectedTheater, latitude, longitude, seats, movieName, movieDate, movieTime)
         VALUES
-        (#{theaterName}, #{movieList}, #{movieTimeList}, #{theaterDetail})
+        (#{selectedTheater}, #{latitude}, #{longitude}, #{seats}, #{movieName}, #{movieDate}, #{movieTime})
     </insert>
 </mapper>

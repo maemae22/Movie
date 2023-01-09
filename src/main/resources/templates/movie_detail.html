@@ -211,6 +211,23 @@
 <!--                                        <div class="box-comment"><p>못봄! ㅠ 예매를 잘못해서 못봄! ㅠㅅㅠ</p></div>-->
 <!--                                    </li>-->
                                     <!-- 반복 여기까지 -->
+
+                                    <!-- 테이블의 등장 .. ,, -->
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="width: 100%; max-width: 100%; margin-bottom: 20px; border-spacing: 0; border-collapse: collapse; border-color: grey; display: table;">
+                                        <thead>
+                                        <tr>
+                                            <th width='50'>닉네임</th>
+                                            <th width='420'>한줄평 내용</th>
+                                            <th width='90'>작성날짜</th>
+                                            <th width='30'>좋아요</th>
+                                            <th width='30'>신고</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tbody">
+
+                                        </tbody>
+                                    </table>
+
                                 </ul>
                             </div>
                         </div><!-- .sect-grade -->
@@ -294,39 +311,57 @@
                 let con='';
                 for(let i=0;i<data.length;i++){
 
-                    con+='<li class="" data-reportcnt="0" data-spoilercnt="0">';
-                    con+='<a class="screen_spoiler">&nbsp;</a>';
-                    con+='<div class="box-contents">';
-                    con+='<ul class="writerinfo">';
-                    con+='<li class="writer-name"><span class=" egg-icon good "></span>'+data[i].memberId+'</li>';
-                    con+='<li class="writer-etc">';
-                    con+='<span class="day">'+data[i].indate+'</span>';
-                    con+='<div>';
-                    con+='<span class="like point_like" data-commentidx="33689979" data-ismygood="false">';
-                    con+='<a class="btn_point_like">';
-                    con+='<span>';
-                    con+='<img alt="like" class="like_red" src="http://img.cgv.co.kr/R2014/images/point/ico_point_default.png">';
-                    con+='</span>';
-                    con+='<span>'+data[i].good+'</span>';
-                    con+='</a>';
-                    con+='</span>';
-                    con+='</div>';
-                    con+='<div>';
-                    con+='<span class="like point_like" data-commentidx="33689979" data-ismygood="false">';
-                    con+='<a class="btn_point_like">';
-                    con+='<span>| 신고</span>';
-                    con+='<span>'+data[i].bad+'</span>';
-                    con+='</a>';
-                    con+='</span>';
-                    con+='</div>';
-                    con+='</li>';
-                    con+='</ul>';
-                    con+='</div>';
-                    con+='<div class="box-comment"><p>'+data[i].content+'</p></div>';
-                    con+='</li>';
+                    // con+='<li class="" data-reportcnt="0" data-spoilercnt="0">';
+                    // con+='<a class="screen_spoiler">&nbsp;</a>';
+                    // con+='<div class="box-contents">';
+                    // con+='<ul class="writerinfo">';
+                    // con+='<li class="writer-name"><span class=" egg-icon good "></span>'+data[i].memberId+'</li>';
+                    // con+='<li class="writer-etc">';
+                    // con+='<span class="day">'+data[i].indate+'</span>';
+                    // con+='<div>';
+                    // con+='<span class="like point_like" data-commentidx="33689979" data-ismygood="false">';
+                    // con+='<a class="btn_point_like">';
+                    // con+='<span>';
+                    // con+='<img alt="like" class="like_red" src="http://img.cgv.co.kr/R2014/images/point/ico_point_default.png">';
+                    // con+='</span>';
+                    // con+='<span>'+data[i].good+'</span>';
+                    // con+='</a>';
+                    // con+='</span>';
+                    // con+='</div>';
+                    // con+='<div>';
+                    // con+='<span class="like point_like" data-commentidx="33689979" data-ismygood="false">';
+                    // con+='<a class="btn_point_like">';
+                    // con+='<span>| 신고</span>';
+                    // con+='<span>'+data[i].bad+'</span>';
+                    // con+='</a>';
+                    // con+='</span>';
+                    // con+='</div>';
+                    // con+='</li>';
+                    // con+='</ul>';
+                    // con+='</div>';
+                    // con+='<div class="box-comment"><p>'+data[i].content+'</p></div>';
+                    // con+='</li>';
+
+                    con+='<tr>';
+                    con+='<td>'+data[i].memberId+'</td>';
+                    con+='<td>'+data[i].content+'</td>';
+                    con+='<td>'+data[i].indate+'</td>';
+                    con+='<td>'+data[i].good+'</td>';
+                    con+='<td>'+data[i].bad+'</td>';
+
+
+                    // if(data[i].ismem=='Y'){
+                    //     con+='<td><a onclick="changeStatus(\''+data[i].id+'\',\'N\')" className="btn btn-custon-four btn-danger" style="padding: 1px 15px">비활성화</a></td>';
+                    // }else{
+                    //     con+='<td><a onclick="changeStatus(\''+data[i].id+'\',\'Y\')" className="btn btn-custon-four btn-success" style="padding: 1px 15px">활성화</a></td>';
+                    // }
+
+                    con+='</tr>';
 
                 }
-                $('#initAllComment').html(con);
+                // $('#initAllComment').html(con);
+                $('#tbody').html(con);
+                $('#dataTable').DataTable();
             },
             error: function(xhr) {
                 console.log("initAllComment 실패다ㅠ");

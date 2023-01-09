@@ -5,19 +5,19 @@ CREATE TABLE member
 
     , userId VARCHAR(50) NOT NULL -- 아이디
 
-    , password VARCHAR(50) DEFAULT NULL -- 비밀번호
+    , password VARCHAR(50) NOT NULL -- 비밀번호
 
-    , name VARCHAR(50) DEFAULT NULL -- 이름
+    , name VARCHAR(50) NOT NULL -- 이름
 
-    , nickname VARCHAR(50) DEFAULT NULL -- 닉네임
+    , nickname VARCHAR(50) NOT NULL -- 닉네임
 
-    , phone VARCHAR(50) DEFAULT NULL -- 전화번호
+    , phone VARCHAR(50) NOT NULL -- 전화번호
 
     , address VARCHAR(50) DEFAULT NULL -- 주소
 
     , addressDetail VARCHAR(50) DEFAULT NULL -- 상세주소
 
-    , email VARCHAR(50) DEFAULT NULL -- 이메일
+    , email VARCHAR(50) NOT NULL -- 이메일
 
     , gender VARCHAR(50) DEFAULT NULL -- 성별
 

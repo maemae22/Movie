@@ -14,19 +14,18 @@ import javax.servlet.http.HttpSession;
 public class LoginService {
 
     private final LoginRepository loginRepository;
-    private HttpSession session;
 
-    public LoginService(LoginRepository loginRepository, @Autowired HttpSession session) {
+    public LoginService(LoginRepository loginRepository) {
         this.loginRepository = loginRepository;
-        this.session = session;
     }
 
-    public String loginUserIdPassword(MemberDTO memberDTO) {
-       MemberDTO member = loginRepository.loginUserIdPassword(memberDTO);
+    public String loginUserIdPassword(MemberDTO memberDTO, HttpSession session) {
+        MemberDTO member = loginRepository.loginUserIdPassword(memberDTO);
+
         if (member != null) {
-            log.info("memberInfo = {}",member.toString());
-            session.setAttribute("nickname",member.getNickname());
-            return memberDTO.getNickname();
+            log.info("memberInfo = {}", member.toString());
+            session.setAttribute("nickname", member.getNickname());
+            return "redirect:/";
         }
         return "error";
     }

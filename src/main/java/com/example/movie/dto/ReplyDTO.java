@@ -9,13 +9,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class BoardDTO {
+public class ReplyDTO {
 
     private Long id;            // pk
     private Long member_id;     // member 테이블의 pk
+    private Long board_id;      // board 테이블의 pk
     private String nickname;    // 닉네임
-    private String title;       // 게시글 제목
-    private String content;     // 게시글 내용
-    private String indate;      // 게시글 생성일시
+    private String content;     // 리플 내용
+    private String indate;      // 리플 생성일시
 
 }

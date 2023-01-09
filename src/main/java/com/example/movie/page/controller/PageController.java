@@ -5,6 +5,7 @@ import com.example.movie.service.MovieService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -50,6 +51,28 @@ public class PageController {
     @GetMapping("/movie_detail/{movieId}")
     public String movieDetail(@PathVariable long movieId) {
         return "movie_detail";
+    }
+
+    @GetMapping("/board")
+    public String board() {
+        return "board";
+    }
+
+    @GetMapping("/board/{id}")
+    public String boardDetail(@PathVariable String id, Model model) {
+        model.addAttribute("id", id);
+        return "boardDetail";
+    }
+
+    @GetMapping("/board/insert")
+    public String insertBoard() {
+        return "boardInsert";
+    }
+
+    @GetMapping("/board/update/{id}")
+    public String updateBoard(@PathVariable String id, Model model) {
+        model.addAttribute("id", id);
+        return "boardUpdate";
     }
 
 }

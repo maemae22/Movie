@@ -35,4 +35,7 @@
         where id=#{id}
     </select>
 
+    <delete id="deleteComment" parameterType="long">
+        delete from comment where id=#{id}
+    </delete>
 </mapper>

@@ -32,7 +32,7 @@ public class CommentRepository {
     public List<CommentDTO> selectCommentByMemberId(long memberId) {
         return cm.selectCommentByMemberId(memberId);
     }
-    public List<CommentDTO> selectCommentByCommentId(long id) {
+    public CommentDTO selectCommentByCommentId(long id) {
         return cm.selectCommentByCommentId(id);
     }
 

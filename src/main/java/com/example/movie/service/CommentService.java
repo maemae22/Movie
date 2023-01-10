@@ -35,7 +35,7 @@ public class CommentService {
     public List<CommentDTO> selectCommentByUserId(long memberId) {
         return cr.selectCommentByMemberId(memberId);
     }
-    public List<CommentDTO> selectCommentByCommentId(long id) {
+    public CommentDTO selectCommentByCommentId(long id) {
         return cr.selectCommentByCommentId(id);
     }
 

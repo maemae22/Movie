@@ -54,4 +54,9 @@ public class CommentController {
     public CommentDTO getComment(@PathVariable int commentId) {
         return cs.selectCommentByCommentId(commentId);
     }
+
+    @PutMapping("/api/comment/update/{commentId}")
+    public int updateComment(@PathVariable int commentId, @RequestBody CommentDTO commentDTO) {
+        return cs.updateComment(commentDTO);
+    }
 }

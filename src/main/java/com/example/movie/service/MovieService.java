@@ -31,4 +31,13 @@ public class MovieService {
     public Integer selectDateInsertChk(){
         return mr.selectDateInsertChk();
     }
+    public ArrayList<MovieDTO> selectMovieDtMovieNmDirNm(){
+        return mr.selectMovieDtMovieNmDirNm();
+    }
+    public Integer updateMvDtImgAndSummary(MovieDTO movieDTO){
+        return mr.updateMvDtImgAndSummary(movieDTO);
+    }
+    public ArrayList<HashMap<String, String>> selectDailyRank(){
+        return mr.selectDailyRank();
+    }
 }

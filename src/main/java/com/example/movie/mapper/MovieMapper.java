@@ -13,4 +13,7 @@ public interface MovieMapper {
     int insertMovieDetail(MovieDTO movieDTO);
     ArrayList<HashMap<String, Object>> selectDailyMovieCode();
     Integer selectDateInsertChk();
+    ArrayList<MovieDTO> selectMovieDtMovieNmDirNm();
+    Integer updateMvDtImgAndSummary(MovieDTO movieDTO);
+    ArrayList<HashMap<String,String>> selectDailyRank();
 }

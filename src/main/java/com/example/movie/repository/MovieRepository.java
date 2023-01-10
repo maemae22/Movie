@@ -30,4 +30,13 @@ public class MovieRepository {
     public Integer selectDateInsertChk(){
         return mm.selectDateInsertChk();
     }
+    public ArrayList<MovieDTO> selectMovieDtMovieNmDirNm(){
+        return mm.selectMovieDtMovieNmDirNm();
+    }
+    public Integer updateMvDtImgAndSummary(MovieDTO movieDTO){
+        return mm.updateMvDtImgAndSummary(movieDTO);
+    }
+    public ArrayList<HashMap<String, String>> selectDailyRank(){
+        return mm.selectDailyRank();
+    }
 }

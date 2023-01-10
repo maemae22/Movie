@@ -25,6 +25,7 @@
         select id, member_id, movie_id, content, indate, good, bad
         from comment
         where movie_id=#{movieId}
+        order by indate desc
     </select>
 
     <select id="selectCommentByMemberId" parameterType="long" resultType="com.example.movie.dto.CommentDTO">

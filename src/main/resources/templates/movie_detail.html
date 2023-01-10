@@ -175,7 +175,7 @@
                                     <div class="real-rating">
                                         <div class="reply_write ">
                                             <label for="Commentcontent" class="lab_write screen_out">한줄평</label>
-                                            <span class="textCount" style="color:orange;">0자</span> <span class="textTotal" style="color:orange;">/250자</span>
+                                            <span class="textCount" id="firstNumm" style="color:orange;">0자</span> <span class="textTotal" style="color:orange;">/250자</span>
                                             <textarea id="Commentcontent" name="content" class="tf_reply" placeholder="이 영화의 한줄평을 입력해주세요" maxlength="250" style="width: 70%; margin-left:10px"></textarea>
                                         </div>
 
@@ -443,6 +443,7 @@
             // dataType: "text",
             success: function(data) {
                 document.getElementById("Commentcontent").value='';
+                $('.textCount').text('0자');
                 initAllComment();
             },
             error: function(xhr) {
@@ -468,6 +469,7 @@
             $(this).val($(this).val().substring(0, 250));
             // 200자 넘으면 알림창 뜨도록
             alert('한줄평은 250자 이내로 입력해주세요.');
+            $('.textCount').text('250자');
         };
     });
 

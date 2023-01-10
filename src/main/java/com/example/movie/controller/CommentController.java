@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 public class CommentController {
@@ -22,9 +24,7 @@ public class CommentController {
     LoginService ls;
 
     @PostMapping("/api/comment/add")
-    public int insertComment(CommentDTO commentDTO, HttpSession session) {
-        String nickname = String.valueOf(session.getAttribute("nickname"));
-        commentDTO.setMemberId(ls.selectMemberIdByEmail(nickname));
+    public int insertComment(@RequestBody CommentDTO commentDTO) {
         return cs.insertComment(commentDTO);
     }
 
@@ -48,5 +48,10 @@ public class CommentController {
     @DeleteMapping("/api/comment/delete/{commentId}")
     public int deleteComment(@PathVariable int commentId) {
         return cs.deleteComment(commentId);
+    }
+
+    @PostMapping("/api/comment/{commentId}")
+    public CommentDTO getComment(@PathVariable int commentId) {
+        return cs.selectCommentByCommentId(commentId);
     }
 }

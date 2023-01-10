@@ -236,7 +236,7 @@
                                             <th width='150'>작성날짜</th>
                                             <th width='80'>좋아요</th>
                                             <th width='80'>신고</th>
-                                            <th width='80'>비고</th>
+                                            <th width='80'>수정/삭제</th>
                                         </tr>
                                         </thead>
                                         <tbody id="tbody">
@@ -326,53 +326,14 @@
             success: function (data) {
                 let con='';
                 for(let i=0;i<data.length;i++){
-
-                    // con+='<li class="" data-reportcnt="0" data-spoilercnt="0">';
-                    // con+='<a class="screen_spoiler">&nbsp;</a>';
-                    // con+='<div class="box-contents">';
-                    // con+='<ul class="writerinfo">';
-                    // con+='<li class="writer-name"><span class=" egg-icon good "></span>'+data[i].memberId+'</li>';
-                    // con+='<li class="writer-etc">';
-                    // con+='<span class="day">'+data[i].indate+'</span>';
-                    // con+='<div>';
-                    // con+='<span class="like point_like" data-commentidx="33689979" data-ismygood="false">';
-                    // con+='<a class="btn_point_like">';
-                    // con+='<span>';
-                    // con+='<img alt="like" class="like_red" src="http://img.cgv.co.kr/R2014/images/point/ico_point_default.png">';
-                    // con+='</span>';
-                    // con+='<span>'+data[i].good+'</span>';
-                    // con+='</a>';
-                    // con+='</span>';
-                    // con+='</div>';
-                    // con+='<div>';
-                    // con+='<span class="like point_like" data-commentidx="33689979" data-ismygood="false">';
-                    // con+='<a class="btn_point_like">';
-                    // con+='<span>| 신고</span>';
-                    // con+='<span>'+data[i].bad+'</span>';
-                    // con+='</a>';
-                    // con+='</span>';
-                    // con+='</div>';
-                    // con+='</li>';
-                    // con+='</ul>';
-                    // con+='</div>';
-                    // con+='<div class="box-comment"><p>'+data[i].content+'</p></div>';
-                    // con+='</li>';
-
                     con+='<tr id="comment'+data[i].id+'">';
                     con+='<td>'+data[i].memberId+'</td>';
                     con+='<td id="commentContent'+data[i].id+'">'+data[i].content+'</td>';
                     con+='<td>'+data[i].indate+'</td>';
                     con+='<td><button type="button" onclick="goodup('+data[i].id+')" style="border: 1px solid gray; padding: 5px; margin: 3px">좋아요</button>'+data[i].good+'</td>';
                     con+='<td><button type="button" onclick="badup('+data[i].id+')" style="border: 1px solid gray; padding: 5px; margin: 3px">신고요</button>'+data[i].bad+'</td>';
-                    con+='<td><button type="button" id="commentUpdate'+data[i].id+'" onclick="updateComment('+data[i].id+')" style="border: 1px solid gray; padding: 5px; margin: 3px">수정</button><button type="button" id="commentDelete'+data[i].id+'" onclick="deleteCommentByCommentId('+data[i].id+')" style="border: 1px solid gray; padding: 5px; margin: 3px">삭제</button></td>';
-
-
-                    // if(data[i].ismem=='Y'){
-                    //     con+='<td><a onclick="changeStatus(\''+data[i].id+'\',\'N\')" className="btn btn-custon-four btn-danger" style="padding: 1px 15px">비활성화</a></td>';
-                    // }else{
-                    //     con+='<td><a onclick="changeStatus(\''+data[i].id+'\',\'Y\')" className="btn btn-custon-four btn-success" style="padding: 1px 15px">활성화</a></td>';
-                    // }
-
+                    con+='<td><span id="commentUpdate'+data[i].id+'"><button type="button" onclick="updateShowComment('+data[i].id+')" style="border: 1px solid gray; padding: 5px; margin: 3px">수정</button></span>';
+                    con+='<button type="button" id="commentDelete'+data[i].id+'" onclick="deleteCommentByCommentId('+data[i].id+')" style="border: 1px solid gray; padding: 5px; margin: 3px">삭제</button></td>';
                     con+='</tr>';
 
                 }
@@ -454,6 +415,8 @@
     });
 
     $('#Commentcontent').keyup(function (e) {
+        // console.log("Commentcontent 함수 호출");
+
         let content = $(this).val();
 
         // 글자수 세기
@@ -473,7 +436,9 @@
         };
     });
 
-    function updateComment(id){
+    function updateShowComment(id){
+        console.log("updateShowComment 실행됨");
+
         $.ajax({
             url: "/api/comment/" +id,
             type: "POST",
@@ -481,23 +446,79 @@
             // dataType: "json",
             success: function (data) {
 
-                let con='';
-                $('#commentContent'+data[i].id+'').html(con);
-                $('#commentUpdate'+data[i].id+'').html('저장');
+                let con = '';
+                con+='<div class="reply_write ">';
+                con+='<label for="CommentcontentUpdate" class="lab_write screen_out">한줄평 수정 (250자 이내 작성)</label>';
+                // con+='<span class="textCountUpdate" style="color:orange;">0자</span> <span class="textTotal" style="color:orange;">/250자</span>';
+                con+='<textarea id="CommentcontentUpdate" name="content" class="tf_reply" placeholder="이 영화의 한줄평을 입력해주세요" maxLength="250" style="width: 100%; margin-left:10px"></textarea>';
+                con+='</div>';
 
-                initAllComment();
+                // <div class="reply_write ">
+                //     <label for="CommentcontentUpdate" class="lab_write screen_out">한줄평</label>
+                //     <span class="textCount" id="firstNumm" style="color:orange;">0자</span> <span
+                //     class="textTotal" style="color:orange;">/250자</span>
+                //     <textarea id="CommentcontentUpdate" name="content" class="tf_reply" placeholder="이 영화의 한줄평을 입력해주세요"
+                //               maxLength="250" style="width: 70%; margin-left:10px"></textarea>
+                // </div>
+
+                $('#commentContent'+id).html(con);
+                document.getElementById("CommentcontentUpdate").value=data.content;
+
+                $('#commentUpdate'+id).html('<button type="button" onclick="updateCommentByCommentId('+id+')"\n' +
+                    '                        style="border: 1px solid gray; padding: 5px; margin: 3px; background-color: pink">수정완료</button>');
             }
         });
     }
 
+    // $('#CommentcontentUpdate').keyup(function () {
+    //     console.log("CommentcontentUpdate 함수 호출");
+    //
+    //     let content = $(this).val();
+    //
+    //     // 글자수 세기
+    //     if (content.length == 0 || content == '') {
+    //         $('.textCountUpdate').text('0자');
+    //     } else {
+    //         $('.textCountUpdate').text(content.length + '자');
+    //     }
+    //
+    //     // 글자수 제한
+    //     if (content.length > 250) {
+    //         // 200자 부터는 타이핑 되지 않도록
+    //         $(this).val($(this).val().substring(0, 250));
+    //         // 200자 넘으면 알림창 뜨도록
+    //         alert('한줄평은 250자 이내로 입력해주세요.');
+    //         $('.textCountUpdate').text('250자');
+    //     };
+    // });
+
     function updateCommentByCommentId(id){
+        console.log("updateCommentByCommentId 함수 실행");
+
+        let commentContentUpdate = $("#CommentcontentUpdate").val();
+
+        if(commentContentUpdate.length == 0) {
+            alert("한줄평 내용을 입력해주세요.");
+            return false;
+        }
+
+        if(commentContentUpdate.length > 250) {
+            alert("한줄평은 250자 이내로 입력해주세요.");
+            return false;
+        }
+
         $.ajax({
             url: "/api/comment/update/" +id,
             type: "PUT",
-            // data:{'id':id},
-            // dataType: "json",
+            data: JSON.stringify({
+                "id": id,
+                "content" : commentContentUpdate,
+            }),
+            contentType : "application/json",
             success: function (data) {
                 // console.log("/api/comment/BadUp : id는 " + id+ "data는" +data);
+                // document.getElementById("Commentcontent").value='';
+                // $('.textCount').text('0자');
                 initAllComment();
             }
         });

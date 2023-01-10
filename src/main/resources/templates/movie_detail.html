@@ -175,7 +175,8 @@
                                     <div class="real-rating">
                                         <div class="reply_write ">
                                             <label for="Commentcontent" class="lab_write screen_out">한줄평</label>
-                                            <textarea id="Commentcontent" name="content" class="tf_reply" placeholder="이 영화의 한줄평을 입력해주세요" style="width: 70%; margin-left:10px"></textarea>
+                                            <span class="textCount" style="color:orange;">0자</span> <span class="textTotal" style="color:orange;">/250자</span>
+                                            <textarea id="Commentcontent" name="content" class="tf_reply" placeholder="이 영화의 한줄평을 입력해주세요" maxlength="250" style="width: 70%; margin-left:10px"></textarea>
                                         </div>
 
                                         <div class="wrap_btn">
@@ -441,6 +442,7 @@
             contentType : "application/json",
             // dataType: "text",
             success: function(data) {
+                document.getElementById("Commentcontent").value='';
                 initAllComment();
             },
             error: function(xhr) {
@@ -448,6 +450,25 @@
                 console.log("에러메세지 = " + textStatus);
             }
         });
+    });
+
+    $('#Commentcontent').keyup(function (e) {
+        let content = $(this).val();
+
+        // 글자수 세기
+        if (content.length == 0 || content == '') {
+            $('.textCount').text('0자');
+        } else {
+            $('.textCount').text(content.length + '자');
+        }
+
+        // 글자수 제한
+        if (content.length > 250) {
+            // 200자 부터는 타이핑 되지 않도록
+            $(this).val($(this).val().substring(0, 250));
+            // 200자 넘으면 알림창 뜨도록
+            alert('한줄평은 250자 이내로 입력해주세요.');
+        };
     });
 
     function updateComment(id){

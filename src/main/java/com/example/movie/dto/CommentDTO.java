@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
 public class CommentDTO {
 
     private Long id;
-    private Long memberId;
-    private Long movieId;
+    private Long member_id;
+    private Long movie_id;
     private String content;
-    private LocalDateTime indate;
+    private String indate;
     private int good;
     private int bad;
 

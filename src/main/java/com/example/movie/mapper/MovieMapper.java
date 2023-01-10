@@ -1,5 +1,6 @@
 package com.example.movie.mapper;
 
+import com.example.movie.dto.CommentDTO;
 import com.example.movie.dto.DailyMovieDTO;
 import com.example.movie.dto.MovieDTO;
 import org.apache.ibatis.annotations.Mapper;

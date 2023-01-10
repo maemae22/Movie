@@ -32,11 +32,13 @@ public class MovieRepository {
     public Integer selectDateInsertChk(){
         return mm.selectDateInsertChk();
     }
-
-    public DailyMovieDTO selectMovieName(Long movie_id) {
-        return mm.selectMovieName(movie_id);
+    public ArrayList<MovieDTO> selectMovieDtMovieNmDirNm(){
+        return mm.selectMovieDtMovieNmDirNm();
     }
-    public DailyMovieDTO selectMovieNameComment(Long movie_id) {
-        return mm.selectMovieNameComment(movie_id);
+    public Integer updateMvDtImgAndSummary(MovieDTO movieDTO){
+        return mm.updateMvDtImgAndSummary(movieDTO);
+    }
+    public ArrayList<HashMap<String, String>> selectDailyRank(){
+        return mm.selectDailyRank();
     }
 }

@@ -13,7 +13,6 @@
     <update id="updateComment" parameterType="com.example.movie.dto.CommentDTO">
         update comment set
             content=#{content}
-#                          , good=#{good}, bad=#{bad}
         where id=#{id}
     </update>
 

@@ -19,9 +19,11 @@ public class MovieRepository {
     public MovieRepository(MovieMapper mm) {
         this.mm = mm;
     }
+
     public int insertDailyMovie(DailyMovieDTO dailyMovieDTO){
         return mm.insertDailyMovie(dailyMovieDTO);
     }
+
     public int insertMovieDetail(MovieDTO movieDTO){
         return mm.insertMovieDetail(movieDTO);
     }
@@ -33,4 +35,20 @@ public class MovieRepository {
     }
     public List<MovieDTO> selectAllMovies() { return mm.selectAllMovies(); }
     public MovieDTO selectMovieDetailByMovieCode(int movieCd) { return mm.selectMovieDetailByMovieCode(movieCd); }
+    public ArrayList<MovieDTO> selectMovieDtMovieNmDirNm(){
+        return mm.selectMovieDtMovieNmDirNm();
+    }
+    public Integer updateMvDtImgAndSummary(MovieDTO movieDTO){
+        return mm.updateMvDtImgAndSummary(movieDTO);
+    }
+    public ArrayList<HashMap<String, String>> selectDailyRank(){
+        return mm.selectDailyRank();
+    }
+
+    public DailyMovieDTO selectMovieName(Long movie_id) {
+        return mm.selectMovieName(movie_id);
+    }
+    public DailyMovieDTO selectMovieNameComment(Long movie_id) {
+        return mm.selectMovieNameComment(movie_id);
+    }
 }

@@ -3,6 +3,7 @@ package com.example.movie.mapper;
 import com.example.movie.dto.CommentDTO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper
@@ -16,4 +17,7 @@ public interface CommentMapper {
 
     int updateGoodNumOneUpByCommentId(long id);
     int updateBadNumOneUpByCommentId(long id);
+    List<CommentDTO> selectCommentByCommentId(long id);
+    ArrayList<CommentDTO> selectComment(Long member_id);
+    ArrayList<Long> selectMovieId(Long member_id);
 }

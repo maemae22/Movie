@@ -1,22 +1,28 @@
 package com.example.movie.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class MemberDTO {
 
-    private Long id;
+    private long id;
+    private String userId;
     private String password;
+    private String nickname;
     private String name;
-    private String email;
     private String phone;
+    private String address;
+    private String addressDetail;
+    private String email;
+    private String gender;
+    private String sns;
+    private String birth;
     private String indate;
-    private int isMember;
+    private String isMember;
+    private String role;
 
 }

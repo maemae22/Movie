@@ -2,6 +2,36 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.movie.mapper.CommentMapper">
+    <select id="selectComment" parameterType="Long" resultType="com.example.movie.dto.CommentDTO">
+        SELECT
+            id
+            ,member_id
+            ,movie_id
+            ,content
+            ,indate
+            ,good
+            ,bad
+        FROM
+            comment
+        WHERE
+            member_id = #{member_id}
+    </select>
+
+    <select id="selectMovieId" parameterType="Long" resultType="Long">
+        SELECT
+            movie_id
+        FROM
+            comment
+        WHERE
+            member_id = #{member_id}
+        ORDER BY
+            indate
+        DESC
+    </select>
+
+    <delete id="deleteComment" parameterType="long">
+        delete from comment where id=#{id}
+    </delete>
 
     <insert id="insertComment" parameterType="com.example.movie.dto.CommentDTO">
         insert into comment
@@ -15,10 +45,6 @@
             content=#{content}
         where id=#{id}
     </update>
-
-    <delete id="deleteComment" parameterType="long">
-        delete from comment where id=#{id}
-    </delete>
 
     <select id="selectAllCommentByMovieId" parameterType="long" resultType="com.example.movie.dto.CommentDTO">
         select id, member_id, movie_id, content, indate, good, bad

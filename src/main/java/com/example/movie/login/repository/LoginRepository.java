@@ -1,6 +1,6 @@
 package com.example.movie.login.repository;
 
-import com.example.movie.login.dto.MemberDTO;
+import com.example.movie.dto.MemberDTO;
 import com.example.movie.mapper.MemberMapper;
 import org.springframework.stereotype.Repository;
 

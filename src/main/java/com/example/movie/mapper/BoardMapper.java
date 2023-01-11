@@ -19,7 +19,9 @@ public interface BoardMapper {
 
     int deleteBoard(BoardDTO boardDTO);
 
-    List<ReplyDTO> selectReply();
+    List<ReplyDTO> selectReply(int board_id);
+
+    ReplyDTO selectReplyById(int id);
 
     int insertReply(ReplyDTO replyDTO);
 

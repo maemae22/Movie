@@ -12,6 +12,9 @@
             , indate
         FROM
             board
+        ORDER BY
+            id
+        DESC
     </select>
 
     <select id="selectBoardDetail" resultType="com.example.movie.dto.BoardDTO">
@@ -34,15 +37,13 @@
             , nickname
             , title
             , content
-            , indate
         )
         VALUES
         (
-            (SELECT id FROM member WHERE nickname = #{nickname})
+            #{member_id}
             , #{nickname}
             , #{title}
             , #{content}
-            , CURRENT_TIMESTAMP()
         )
     </insert>
 
@@ -70,6 +71,20 @@
             , indate
         FROM
             reply
+        WHERE
+            board_id = #{board_id}
+        ORDER BY
+            id
+        DESC
+    </select>
+
+    <select id="selectReplyById" resultType="com.example.movie.dto.ReplyDTO">
+        SELECT
+             content
+        FROM
+            reply
+        WHERE
+            id = #{id}
     </select>
 
     <insert id="insertReply" parameterType="com.example.movie.dto.ReplyDTO">
@@ -79,16 +94,13 @@
             , board_id
             , nickname
             , content
-            , indate
         )
         VALUES
         (
-            (SELECT id FROM member WHERE nickname = #{nickname})
+            #{member_id}
             , #{board_id}
             , #{nickname}
-            , #{title}
             , #{content}
-            , CURRENT_TIMESTAMP()
         )
     </insert>
 

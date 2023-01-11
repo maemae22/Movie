@@ -40,26 +40,4 @@ public class PageController {
         return "movie_detail";
     }
 
-    @GetMapping("/board")
-    public String board() {
-        return "board";
-    }
-
-    @GetMapping("/board/{id}")
-    public String boardDetail(@PathVariable String id, Model model) {
-        model.addAttribute("id", id);
-        return "boardDetail";
-    }
-
-    @GetMapping("/board/insert")
-    public String insertBoard() {
-        return "boardInsert";
-    }
-
-    @GetMapping("/board/update/{id}")
-    public String updateBoard(@PathVariable String id, Model model) {
-        model.addAttribute("id", id);
-        return "boardUpdate";
-    }
-
 }

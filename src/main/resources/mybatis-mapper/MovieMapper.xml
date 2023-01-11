@@ -70,4 +70,12 @@
         FROM movie_detail a INNER JOIN daily_boxoffice b ON a.movie_cd = b.movie_cd
         WHERE b.indate = current_date;
     </select>
+    <select id="selectMovieNameComment" resultType="com.example.movie.dto.DailyMovieDTO" parameterType="Long">
+        SELECT
+            movie_nm
+        FROM
+            DAILY_BOXOFFICE
+        WHERE
+            id = #{movie_id}
+    </select>
 </mapper>

@@ -21,7 +21,6 @@ public class LoginController {
     @GetMapping("/login")
     public String goLogin() {
         return "login";
-
     }
 
     @PostMapping("/login")

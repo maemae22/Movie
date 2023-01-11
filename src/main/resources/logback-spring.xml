@@ -14,7 +14,7 @@
     <!--나중에 LogStashTcpSocketAppender를 통해 LogStash 연동 가능-->
 
     <!-- 로그의 저장 위치 -->
-    <property name="LOGS" value="file:/logs" />
+    <property name="LOGS" value="C:/logs" />
 
     <!-- appender-> 출력 위치, CONSOLE 표기 패턴-->
     <appender name="Console"

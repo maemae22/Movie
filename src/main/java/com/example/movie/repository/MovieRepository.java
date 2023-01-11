@@ -41,4 +41,11 @@ public class MovieRepository {
     public ArrayList<HashMap<String, String>> selectDailyRank(){
         return mm.selectDailyRank();
     }
+
+    public DailyMovieDTO selectMovieName(Long movie_id) {
+        return mm.selectMovieName(movie_id);
+    }
+    public DailyMovieDTO selectMovieNameComment(Long movie_id) {
+        return mm.selectMovieNameComment(movie_id);
+    }
 }

@@ -83,9 +83,6 @@ public class MovieService {
         return mr.selectDailyMovieCode();
     }
 
-    public Integer selectDateInsertChk(){
-        return mr.selectDateInsertChk();
-    }
     public ArrayList<MovieDTO> selectMovieDtMovieNmDirNm(){
         return mr.selectMovieDtMovieNmDirNm();
     }

@@ -50,7 +50,8 @@
                         <li><a href="/">특별관</a></li>
                         <li><a href="/">스토어</a></li>
                         <li><a href="/member/signup">회원가입</a></li>
-                        <li><a href="/member/login">로그인</a></li>
+                        <li><a href="/member/login" th:if="${session.nickname == null}">로그인</a></li>
+                        <li><a href="/member" th:if="${session.nickname != null}" style="font-size: 15px">마이페이지</a></li>
                     </ul>
                 </nav>
             </div>

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Mapper
 public interface MovieMapper {
@@ -14,6 +15,8 @@ public interface MovieMapper {
     int insertMovieDetail(MovieDTO movieDTO);
     ArrayList<HashMap<String, Object>> selectDailyMovieCode();
     Integer selectDateInsertChk();
+    List<MovieDTO> selectAllMovies();
+    MovieDTO selectMovieDetailByMovieCode(int movieCd);
     ArrayList<MovieDTO> selectMovieDtMovieNmDirNm();
     Integer updateMvDtImgAndSummary(MovieDTO movieDTO);
     ArrayList<HashMap<String,String>> selectDailyRank();

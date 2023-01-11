@@ -16,22 +16,16 @@
 
 <script>
     $(document).ready(function() {
-        console.log("안녕");
         init();
 
     });
 
     function init(){
-        var idid = 'hello';
-        console.log("init() 메서드 실행되었음");
         $.ajax({
             // type: "GET",
-            url: "/movies",
+            url: "/api/movies",
             // dataType: "json",
             success: function (data) {
-                console.log("success");
-                console.log("data = " + data);
-
                 let con='';
                 for(let i=0;i<data.length;i++){
 
@@ -46,13 +40,13 @@
                     // </div>
 
                     con+='<div className="moive">';
-                    con+='<a href="/movie/'+data[i].movieCode+'">';
+                    con+='<a href="/movie/'+data[i].movieCd+'">';
                     con+='<img src="'+data[i].image+'" width="197" height="260">';
                     con+='</a>';
-                    con+='<p><a href="/movie/'+data[i].movieCode+'">';
-                    con+=data[i].movieName;
+                    con+='<p><a href="/movie/'+data[i].movieCd+'">';
+                    con+=data[i].movieNm;
                     con+='</a></p>';
-                    con+='<p>개봉일 : '+data[i].openDate+'</p>';
+                    con+='<p>개봉일 : '+data[i].openDt+'</p>';
                     con+='</div>';
 
                 }

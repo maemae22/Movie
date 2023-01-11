@@ -30,8 +30,15 @@ public class CommentService {
     public List<CommentDTO> selectCommentByUserId(long memberId) {
         return cr.selectCommentByMemberId(memberId);
     }
-    public List<CommentDTO> selectCommentByCommentId(long id) {
+    public CommentDTO selectCommentByCommentId(long id) {
         return cr.selectCommentByCommentId(id);
+    }
+
+    public int updateGoodNumOneUpByCommentId(long id) {
+        return cr.updateGoodNumOneUpByCommentId(id);
+    }
+    public int updateBadNumOneUpByCommentId(long id) {
+        return cr.updateBadNumOneUpByCommentId(id);
     }
 
     public ArrayList<CommentDTO> selectComment(Long member_id) {

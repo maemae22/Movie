@@ -16,9 +16,9 @@ import java.util.HashMap;
 @Service
 public class MovieService {
 
-    private MovieRepository mr;
-    private OrderRepository or;
-    private CommentRepository cr;
+    private final MovieRepository mr;
+    private final OrderRepository or;
+    private final CommentRepository cr;
 
     @Autowired
     public MovieService(MovieRepository mr, OrderRepository or, CommentRepository cr) {
@@ -86,6 +86,8 @@ public class MovieService {
     public ArrayList<MovieDTO> selectMovieDtMovieNmDirNm(){
         return mr.selectMovieDtMovieNmDirNm();
     }
+    public List<MovieDTO> selectAllMovies() { return mr.selectAllMovies(); }
+    public MovieDTO selectMovieDetailByMovieCode(int movieCd) { return mr.selectMovieDetailByMovieCode(movieCd); }
     public Integer updateMvDtImgAndSummary(MovieDTO movieDTO){
         return mr.updateMvDtImgAndSummary(movieDTO);
     }

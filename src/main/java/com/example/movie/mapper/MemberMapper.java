@@ -9,6 +9,8 @@ import java.util.List;
 public interface MemberMapper {
     int signupMember(MemberDTO memberDTO);
     MemberDTO loginUserIdPassword(MemberDTO memberDTO);
+    Long selectMemberIdByNickname(String email);
+
     MemberDTO selectMemberDetail(String nickname);
     int updateMemberPassword(MemberDTO memberDTO);
     int updateMemberName(MemberDTO memberDTO);

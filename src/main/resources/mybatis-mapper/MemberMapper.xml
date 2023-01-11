@@ -3,4 +3,52 @@
 
 <mapper namespace="com.example.movie.mapper.MemberMapper">
 
+    <insert id="signupMember" parameterType="com.example.movie.login.dto.MemberDTO">
+        insert into member
+                (
+                    userId
+                    ,password
+                    ,name
+                    ,nickname
+                    ,phone
+                    ,address
+                    ,addressDetail
+                    ,email
+                    ,gender
+                    ,sns
+                    ,birth
+                )
+            values
+                (
+                 #{userId}
+                , #{password}
+                , #{name}
+                , #{nickname}
+                , #{phone}
+                , #{address}
+                , #{addressDetail}
+                , #{email}
+                , #{gender}
+                , #{sns}
+                , #{birth}
+                )
+    </insert>
+
+    <select id="loginUserIdPassword" parameterType="com.example.movie.login.dto.MemberDTO" resultType="com.example.movie.login.dto.MemberDTO" >
+        select
+            nickname
+        from
+            member
+        where userId = #{userId}
+        and password = #{password}
+        and isMember = 'Y'
+    </select>
+
+    <select id="selectMemberIdByNickname" parameterType="String" resultType="Long">
+        select
+            id
+        from
+            member
+        where nickname = #{nickname}
+    </select>
 </mapper>

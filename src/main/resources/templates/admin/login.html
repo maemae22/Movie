@@ -120,10 +120,10 @@
         }
         $.ajax({
             type : "POST",
-            url : "/admin/login", //요청 할 URL
+            url : "/member/login", //요청 할 URL
             data : {
                 'userId':userId,
-                'password':pw
+                'password':password
             }, //넘길 파라미터
             success : function(data) {
                 //통신이 정상적으로 되었을때 실행 할 내용

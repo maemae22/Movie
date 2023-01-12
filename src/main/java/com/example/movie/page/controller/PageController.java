@@ -35,8 +35,9 @@ public class PageController {
         return "movie";
     }
 
-    @GetMapping("/movie_detail/{movieId}")
-    public String movieDetail(@PathVariable long movieId) {
+    @GetMapping("/movie/{movieCode}")
+    public String movieDetail(@PathVariable int movieCode, Model model) {
+        model.addAttribute("movieCode", movieCode);
         return "movie_detail";
     }
 

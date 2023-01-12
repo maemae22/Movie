@@ -16,4 +16,6 @@ public class LoginRepository {
     public MemberDTO loginUserIdPassword(MemberDTO memberDTO) {
         return memberMapper.loginUserIdPassword(memberDTO);
     }
+
+    public Long selectMemberIdByNickname(String email) { return memberMapper.selectMemberIdByNickname(email); }
 }

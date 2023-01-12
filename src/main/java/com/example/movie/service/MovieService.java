@@ -11,14 +11,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Slf4j
 @Service
 public class MovieService {
 
-    private MovieRepository mr;
-    private OrderRepository or;
-    private CommentRepository cr;
+    private final MovieRepository mr;
+    private final OrderRepository or;
+    private final CommentRepository cr;
 
     @Autowired
     public MovieService(MovieRepository mr, OrderRepository or, CommentRepository cr) {
@@ -86,10 +87,24 @@ public class MovieService {
     public ArrayList<MovieDTO> selectMovieDtMovieNmDirNm(){
         return mr.selectMovieDtMovieNmDirNm();
     }
+    public List<MovieDTO> selectAllMovies() { return mr.selectAllMovies(); }
+    public MovieDTO selectMovieDetailByMovieCode(int movieCd) { return mr.selectMovieDetailByMovieCode(movieCd); }
     public Integer updateMvDtImgAndSummary(MovieDTO movieDTO){
         return mr.updateMvDtImgAndSummary(movieDTO);
     }
     public ArrayList<HashMap<String, String>> selectDailyRank(){
         return mr.selectDailyRank();
+    }
+    public List<DailyMovieDTO> selectMovieNameByCode(Long member_id) {
+        ArrayList<Long> ids = cr.selectMovieId(member_id);
+        List<Integer> params = new ArrayList<>();
+        List<DailyMovieDTO> movie = new ArrayList<>();
+
+        for (int i = 0; i < ids.size(); i++) {
+            params.add(ids.get(i).intValue());
+            movie.add(mr.selectMovieNameByCode(params.get(i)));
+        }
+
+        return movie;
     }
 }

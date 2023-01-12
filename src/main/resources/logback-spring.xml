@@ -14,7 +14,7 @@
     <!--나중에 LogStashTcpSocketAppender를 통해 LogStash 연동 가능-->
 
     <!-- 로그의 저장 위치 -->
-    <property name="LOGS" value="C:/logs" />
+    <property name="LOGS" value="C:/log" />
 
     <!-- appender-> 출력 위치, CONSOLE 표기 패턴-->
     <appender name="Console"
@@ -49,7 +49,7 @@
     </appender>
 
     <!--전역 로깅 설정 ROOT 부터 하위로 내려감, additivity-> 상속여부-->
-    <logger name="com.example.movie" level="info" additivity="false">
+    <logger name="com.example.movie" level="trace" additivity="false">
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </logger>

@@ -36,41 +36,79 @@ public class MovieService {
         if (or.selectMovieIdOne(member_id) == null) {
             return null;
         } else {
-            Long id = or.selectMovieIdOne(member_id);
+            Integer id = or.selectMovieIdOne(member_id).intValue();
             return mr.selectMovieName(id);
+        }
+    }
+
+    public MovieDTO selectMovieImg(Long member_id) {
+        if (or.selectMovieIdOne(member_id) == null) {
+            return null;
+        } else {
+            Integer id = or.selectMovieIdOne(member_id).intValue();
+            return mr.selectMovieImg(id);
         }
     }
 
     public ArrayList<DailyMovieDTO> selectMovieNames(Long member_id) {
         ArrayList<Long> ids = or.selectMovieIds(member_id);
+        List<Integer> params = new ArrayList<>();
         ArrayList<DailyMovieDTO> movieList = new ArrayList<>();
 
         for (int i = 0; i < ids.size(); i++) {
-            movieList.add(mr.selectMovieName(ids.get(i)));
+            params.add(ids.get(i).intValue());
+            movieList.add(mr.selectMovieName(params.get(i)));
         }
         return movieList;
+    }
+
+    public List<DailyMovieDTO> selectMovieNameByCode(Long member_id) {
+        ArrayList<Long> ids = cr.selectMovieId(member_id);
+        List<Integer> params = new ArrayList<>();
+        List<DailyMovieDTO> movie = new ArrayList<>();
+
+        for (int i = 0; i < ids.size(); i++) {
+            params.add(ids.get(i).intValue());
+            movie.add(mr.selectMovieNameByCode(params.get(i)));
+        }
+
+        return movie;
+    }
+
+    public ArrayList<MovieDTO> selectMovieImgs(Long member_id) {
+        ArrayList<Long> ids = or.selectMovieIds(member_id);
+        ArrayList<Integer> params = new ArrayList<>();
+        ArrayList<MovieDTO> movie = new ArrayList<>();
+
+        for (int i = 0; i < ids.size(); i++) {
+            params.add(ids.get(i).intValue());
+            movie.add(mr.selectMovieImg(params.get(i)));
+        }
+        return movie;
     }
 
     public ArrayList<DailyMovieDTO> selectCancelMovieNames(Long member_id) {
         ArrayList<Long> ids = or.selectCancelMovieIds(member_id);
+        List<Integer> params = new ArrayList<>();
         ArrayList<DailyMovieDTO> movieList = new ArrayList<>();
 
         for (int i = 0; i < ids.size(); i++) {
-            movieList.add(mr.selectMovieName(ids.get(i)));
+            params.add(ids.get(i).intValue());
+            movieList.add(mr.selectMovieName(params.get(i)));
         }
 
         return movieList;
     }
 
-    public ArrayList<DailyMovieDTO> selectMovieIdByComment(Long member_id) {
-        ArrayList<Long> ids = cr.selectMovieId(member_id);
-        ArrayList<DailyMovieDTO> movieList = new ArrayList<>();
-
-        for (int i = 0; i < ids.size(); i++) {
-            movieList.add(mr.selectMovieNameComment(ids.get(i)));
-        }
-        return movieList;
-    }
+//    public ArrayList<DailyMovieDTO> selectMovieIdByComment(Long member_id) {
+//        ArrayList<Long> ids = cr.selectMovieId(member_id);
+//        ArrayList<DailyMovieDTO> movieList = new ArrayList<>();
+//
+//        for (int i = 0; i < ids.size(); i++) {
+//            movieList.add(mr.selectMovieNameComment(ids.get(i)));
+//        }
+//        return movieList;
+//    }
 
     public int insertDailyMovie(DailyMovieDTO dailyMovieDTO) {
         return mr.insertDailyMovie(dailyMovieDTO);

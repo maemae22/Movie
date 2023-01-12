@@ -28,16 +28,20 @@ public class MyPageController {
         MemberDTO memberDTO = ms.selectMemberDetail((String) session.getAttribute("nickname"));
 
         ArrayList<OrderDTO> orderList = os.selectOrderByMember(memberDTO.getId());
-        OrderDTO order = os.selectOrderById(memberDTO.getId());
 
+        OrderDTO order = os.selectOrderById(memberDTO.getId());
+        MovieDTO movie = movieService.selectMovieImg(memberDTO.getId());
         DailyMovieDTO movieDTO = movieService.selectMovieName(memberDTO.getId());
         TheaterDTO theaterDTO = ts.selectTheaterName(memberDTO.getId());
 
         ArrayList<CommentDTO> commentList = cs.selectComment(memberDTO.getId());
 
+        log.info("movie {}", movie);
+
         model.addAttribute("memberDTO", memberDTO);
         model.addAttribute("orderList", orderList);
         model.addAttribute("recentOrder", order);
+        model.addAttribute("recentMovieImg", movie);
         model.addAttribute("recentMovie", movieDTO);
         model.addAttribute("recentTheater", theaterDTO);
         model.addAttribute("commentList", commentList);
@@ -101,6 +105,7 @@ public class MyPageController {
         ArrayList<OrderDTO> cancelList = os.selectCancelOrder(memberDTO.getId());
 
         ArrayList<DailyMovieDTO> movieList = movieService.selectMovieNames(memberDTO.getId());
+        ArrayList<MovieDTO> movie = movieService.selectMovieImgs(memberDTO.getId());
         ArrayList<TheaterDTO> theaterList = ts.selectTheaterNames(memberDTO.getId());
 
         ArrayList<DailyMovieDTO> movieCancelList = movieService.selectCancelMovieNames(memberDTO.getId());
@@ -111,6 +116,7 @@ public class MyPageController {
         model.addAttribute("cancelList", cancelList);
 
         model.addAttribute("movieList", movieList);
+        model.addAttribute("movie", movie);
         model.addAttribute("theaterList", theaterList);
 
         model.addAttribute("movieCancelList", movieCancelList);

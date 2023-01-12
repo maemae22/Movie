@@ -17,7 +17,7 @@
             orderStatus = 'Y'
         ORDER BY
             id
-                DESC
+        DESC
     </select>
 
     <select id="selectMovieIds" parameterType="Long" resultType="Long">

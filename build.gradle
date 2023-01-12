@@ -19,12 +19,23 @@ repositories {
 }
 
 dependencies {
+
 	implementation 'org.springframework.boot:spring-boot-starter-aop' // AOP
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 	runtimeOnly 'mysql:mysql-connector-java' // MySQL
 	implementation 'org.springframework.boot:spring-boot-starter-web' // Spring Web
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' // thymeleaf
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	//스프링 시큐리티
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
 
 	// localhost:8080/swagger-ui.html
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'

@@ -13,6 +13,18 @@ public class MemberRepository {
     @Autowired
     MemberMapper mm;
 
+    public MemberDTO findByMemberId(String userId) {
+        return mm.findByUserId(userId);
+    }
+
+    public MemberDTO findByMemberNickname(String memberNickname) {
+        return mm.findByMemberNickname(memberNickname);
+    }
+
+    public int signupMember(MemberDTO memberDTO) {
+        return mm.signupMember(memberDTO);
+    }
+
     public MemberDTO selectMemberDetail(String nickname) {
         return mm.selectMemberDetail(nickname);
     }

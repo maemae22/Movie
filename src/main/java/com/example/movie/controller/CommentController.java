@@ -31,10 +31,10 @@ public class CommentController {
     @Autowired
     LoginService ls;
 
-    @GetMapping("movie/{movieId}")
-    public String movieDetail(@PathVariable long movieId, Model model) {
-        return "movie_detail";
-    }
+//    @GetMapping("movie/{movieId}")
+//    public String movieDetail(@PathVariable long movieId, Model model) {
+//        return "movie_detail";
+//    }
 
     @PostMapping("/api/comment/add")
     public int insertComment(@RequestBody CommentDTO commentDTO) {
@@ -42,7 +42,7 @@ public class CommentController {
     }
     @DeleteMapping("/member/user-comment/{id}")
     public String deleteComment(@PathVariable Long id) {
-        return cs.deleteComment(id);
+        return cs.deleteCommentR(id);
     }
 
     @GetMapping("/api/comments/{movieCd}")
@@ -63,7 +63,7 @@ public class CommentController {
     }
 
     @DeleteMapping("/api/comment/delete/{commentId}")
-    public int deleteComment(@PathVariable int commentId) {
+    public int deleteComment(@PathVariable long commentId) {
         return cs.deleteComment(commentId);
     }
 

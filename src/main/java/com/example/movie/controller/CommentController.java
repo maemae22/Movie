@@ -2,7 +2,6 @@ package com.example.movie.controller;
 
 import com.example.movie.dto.CommentDTO;
 import com.example.movie.dto.MovieDTO;
-import com.example.movie.login.service.LoginService;
 import com.example.movie.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +27,8 @@ public class CommentController {
 
     @Autowired
     CommentService cs;
-    @Autowired
-    LoginService ls;
+//    @Autowired
+//    LoginService ls;
 
 //    @GetMapping("movie/{movieId}")
 //    public String movieDetail(@PathVariable long movieId, Model model) {

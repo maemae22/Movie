@@ -133,4 +133,46 @@
         WHERE
             userId = #{userId}
     </update>
+
+    <select id="findByUserId" parameterType="String" resultType="com.example.movie.dto.MemberDTO">
+        select
+            userId
+             ,password
+             ,name
+             ,nickname
+             ,address
+             ,phone
+             ,email
+             ,gender
+             ,sns
+             ,birth
+             ,indate
+             ,role
+             ,isMember
+        from
+            member
+        where
+            userId = #{userId}
+    </select>
+
+    <select id="findByMemberNickname" parameterType="String" resultType="com.example.movie.dto.MemberDTO">
+        select
+            userId
+             ,password
+             ,name
+             ,nickname
+             ,address
+             ,phone
+             ,email
+             ,gender
+             ,sns
+             ,birth
+             ,indate
+             ,role
+             ,isMember
+        from
+            member
+        where
+            nickname = #{nickname}
+    </select>
 </mapper>

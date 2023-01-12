@@ -7,23 +7,12 @@ import java.util.List;
 
 @Mapper
 public interface MemberMapper {
-    MemberDTO loginUserIdPassword(MemberDTO memberDTO);
-
-    MemberDTO findByMemberNickname(String memberNickname);
-
     int signupMember(MemberDTO memberDTO);
-
+    MemberDTO loginUserIdPassword(MemberDTO memberDTO);
     MemberDTO selectMemberDetail(String nickname);
-
     int updateMemberPassword(MemberDTO memberDTO);
-
     int updateMemberName(MemberDTO memberDTO);
-
     int updateIsMemberStatus(MemberDTO memberDTO);
-
     List<MemberDTO> selectAllCustomers();
-
     int memberStatus(MemberDTO memberDTO);
-
-    MemberDTO findByUserId(String userId);
 }

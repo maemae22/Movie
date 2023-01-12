@@ -14,7 +14,7 @@ public class CommentService {
     @Autowired
     CommentRepository cr;
 
-    public String deleteComment(Long id) {
+    public String deleteCommentR(Long id) {
         int result = cr.deleteComment(id);
         if (result == 1) {
             return "success";
@@ -30,8 +30,15 @@ public class CommentService {
     public List<CommentDTO> selectCommentByUserId(long memberId) {
         return cr.selectCommentByMemberId(memberId);
     }
-    public List<CommentDTO> selectCommentByCommentId(long id) {
+    public CommentDTO selectCommentByCommentId(long id) {
         return cr.selectCommentByCommentId(id);
+    }
+
+    public int updateGoodNumOneUpByCommentId(long id) {
+        return cr.updateGoodNumOneUpByCommentId(id);
+    }
+    public int updateBadNumOneUpByCommentId(long id) {
+        return cr.updateBadNumOneUpByCommentId(id);
     }
 
     public ArrayList<CommentDTO> selectComment(Long member_id) {
@@ -40,6 +47,18 @@ public class CommentService {
         } else {
             return cr.selectComment(member_id);
         }
+    }
+
+    public int insertComment(CommentDTO commentDTO) {
+        return cr.insertComment(commentDTO);
+    }
+
+    public int updateComment(CommentDTO commentDTO) {
+        return cr.updateComment(commentDTO);
+    }
+
+    public int deleteComment(long id) {
+        return cr.deleteComment(id);
     }
 
 }

@@ -16,7 +16,8 @@ public class BoardService {
     BoardRepository br;
 
     public List<BoardDTO> selectBoard() {
-        return br.selectBoard();
+        List<BoardDTO> list = br.selectBoard();
+        return list;
     }
 
     public BoardDTO selectBoardDetail(String id) {
@@ -47,8 +48,12 @@ public class BoardService {
         }
     }
 
-    public List<ReplyDTO> selectReply() {
-        return br.selectReply();
+    public List<ReplyDTO> selectReply(int board_id) {
+        return br.selectReply(board_id);
+    }
+
+    public ReplyDTO selectReplyById(int id) {
+        return br.selectReplyById(id);
     }
 
     public int insertReply(ReplyDTO replyDTO) {

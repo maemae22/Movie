@@ -3,19 +3,20 @@ package com.example.movie.repository;
 import com.example.movie.dto.BoardDTO;
 import com.example.movie.dto.ReplyDTO;
 import com.example.movie.mapper.BoardMapper;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-@RequiredArgsConstructor
 public class BoardRepository {
 
-    private final BoardMapper bm;
+    @Autowired
+    BoardMapper bm;
 
     public List<BoardDTO> selectBoard() {
-        return bm.selectBoard();
+        List<BoardDTO> list = bm.selectBoard();
+        return list;
     }
 
     public BoardDTO selectBoardDetail(String id) {
@@ -34,8 +35,12 @@ public class BoardRepository {
         return bm.deleteBoard(boardDTO);
     }
 
-    public List<ReplyDTO> selectReply() {
-        return bm.selectReply();
+    public List<ReplyDTO> selectReply(int board_id) {
+        return bm.selectReply(board_id);
+    }
+
+    public ReplyDTO selectReplyById(int id) {
+        return bm.selectReplyById(id);
     }
 
     public int insertReply(ReplyDTO replyDTO) {

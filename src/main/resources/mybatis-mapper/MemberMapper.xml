@@ -47,6 +47,14 @@
             isMember = 'Y'
     </select>
 
+    <select id="selectMemberIdByNickname" parameterType="String" resultType="Long">
+        select
+            id
+        from
+            member
+        where nickname = #{nickname}
+    </select>
+
     <select id="selectMemberDetail" parameterType="String" resultType="com.example.movie.dto.MemberDTO">
         SELECT
             id

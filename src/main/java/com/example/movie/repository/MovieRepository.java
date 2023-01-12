@@ -51,4 +51,7 @@ public class MovieRepository {
     public DailyMovieDTO selectMovieNameComment(Long movie_id) {
         return mm.selectMovieNameComment(movie_id);
     }
+    public DailyMovieDTO selectMovieNameByCode(Integer movie_id) {
+        return mm.selectMovieNameByCode(movie_id);
+    }
 }

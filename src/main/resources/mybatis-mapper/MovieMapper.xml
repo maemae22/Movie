@@ -95,4 +95,13 @@
         WHERE
             id = #{movie_id}
     </select>
+
+    <select id="selectMovieNameByCode" resultType="com.example.movie.dto.DailyMovieDTO" parameterType="Integer">
+        SELECT DISTINCT
+            movie_nm
+        FROM
+            DAILY_BOXOFFICE
+        WHERE
+            movie_cd = #{movie_id}
+    </select>
 </mapper>

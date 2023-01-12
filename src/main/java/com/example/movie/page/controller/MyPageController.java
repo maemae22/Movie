@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -84,7 +85,7 @@ public class MyPageController {
     public String userComment(HttpSession session, Model model) {
         MemberDTO memberDTO = ms.selectMemberDetail((String)session.getAttribute("nickname"));
         ArrayList<CommentDTO> commentList = cs.selectComment(memberDTO.getId());
-        ArrayList<DailyMovieDTO> movieList = movieService.selectMovieIdByComment(memberDTO.getId());
+        List<DailyMovieDTO> movieList = movieService.selectMovieNameByCode(memberDTO.getId());
 
         model.addAttribute("memberDTO", memberDTO);
         model.addAttribute("commentList", commentList);

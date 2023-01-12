@@ -22,4 +22,5 @@ public interface MovieMapper {
     ArrayList<HashMap<String,String>> selectDailyRank();
     DailyMovieDTO selectMovieName(Long movie_id);
     DailyMovieDTO selectMovieNameComment(Long movie_id);
+    DailyMovieDTO selectMovieNameByCode(Integer movie_id);
 }

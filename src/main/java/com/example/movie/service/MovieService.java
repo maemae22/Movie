@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -93,5 +94,17 @@ public class MovieService {
     }
     public ArrayList<HashMap<String, String>> selectDailyRank(){
         return mr.selectDailyRank();
+    }
+    public List<DailyMovieDTO> selectMovieNameByCode(Long member_id) {
+        ArrayList<Long> ids = cr.selectMovieId(member_id);
+        List<Integer> params = new ArrayList<>();
+        List<DailyMovieDTO> movie = new ArrayList<>();
+
+        for (int i = 0; i < ids.size(); i++) {
+            params.add(ids.get(i).intValue());
+            movie.add(mr.selectMovieNameByCode(params.get(i)));
+        }
+
+        return movie;
     }
 }

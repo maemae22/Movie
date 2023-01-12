@@ -38,10 +38,7 @@ public class MemberController {
     }
 
     @GetMapping("/goLogin")
-    public String loginPage(Authentication authentication) {
-        if (authentication.getName() != null) {
-            return "redirect:/";
-        }
+    public String loginPage() {
         return "/login";
     }
 

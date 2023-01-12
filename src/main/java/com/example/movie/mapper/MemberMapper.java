@@ -8,6 +8,8 @@ import java.util.List;
 @Mapper
 public interface MemberMapper {
     int signupMember(MemberDTO memberDTO);
+    MemberDTO findByMemberNickname(String memberNickname);
+
     MemberDTO loginUserIdPassword(MemberDTO memberDTO);
     MemberDTO selectMemberDetail(String nickname);
     int updateMemberPassword(MemberDTO memberDTO);
@@ -15,4 +17,5 @@ public interface MemberMapper {
     int updateIsMemberStatus(MemberDTO memberDTO);
     List<MemberDTO> selectAllCustomers();
     int memberStatus(MemberDTO memberDTO);
+    MemberDTO findByUserId(String userId);
 }

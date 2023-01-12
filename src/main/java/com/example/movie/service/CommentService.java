@@ -14,7 +14,7 @@ public class CommentService {
     @Autowired
     CommentRepository cr;
 
-    public String deleteComment(Long id) {
+    public String deleteCommentR(Long id) {
         int result = cr.deleteComment(id);
         if (result == 1) {
             return "success";
@@ -47,6 +47,18 @@ public class CommentService {
         } else {
             return cr.selectComment(member_id);
         }
+    }
+
+    public int insertComment(CommentDTO commentDTO) {
+        return cr.insertComment(commentDTO);
+    }
+
+    public int updateComment(CommentDTO commentDTO) {
+        return cr.updateComment(commentDTO);
+    }
+
+    public int deleteComment(long id) {
+        return cr.deleteComment(id);
     }
 
 }

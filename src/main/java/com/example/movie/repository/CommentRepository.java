@@ -43,4 +43,12 @@ public class CommentRepository {
     public int deleteComment(Long id) {
         return cm.deleteComment(id);
     }
+
+    public int insertComment(CommentDTO commentDTO) {
+        return cm.insertComment(commentDTO);
+    }
+
+    public int updateComment(CommentDTO commentDTO) {
+        return cm.updateComment(commentDTO);
+    }
 }

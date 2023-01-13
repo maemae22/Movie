@@ -46,7 +46,10 @@ public class MovieService {
             return null;
         } else {
             Integer id = or.selectMovieIdOne(member_id).intValue();
-            return mr.selectMovieImg(id);
+            String str = mr.selectMovieImg(id).getMovieImg().split("\\|")[0];
+            MovieDTO movie = mr.selectMovieImg(id);
+            movie.setMovieImg(str);
+            return movie;
         }
     }
 
@@ -69,7 +72,10 @@ public class MovieService {
 
         for (int i = 0; i < ids.size(); i++) {
             params.add(ids.get(i).intValue());
-            movie.add(mr.selectMovieImg(params.get(i)));
+            String str = mr.selectMovieImg(params.get(i)).getMovieImg().split("\\|")[0];
+            MovieDTO movieDTO = mr.selectMovieImg(params.get(i));
+            movieDTO.setMovieImg(str);
+            movie.add(movieDTO);
         }
         return movie;
     }

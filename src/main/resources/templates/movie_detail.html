@@ -297,24 +297,26 @@
                 let con='';
 
                 con+='<div class="box-contents">';
-                con+='<div class="title">';
+                con+='<div class="title" style="margin-top: 10px;">';
                 con+='<strong>'+data.movieNm+'</strong>';
                 con+='<p>'+data.movieNmEn+'</p>';
                 con+='</div>';
-                con+='<div class="score">';
+                con+='<div class="score" style="margin-top: 10px;">';
                 con+='</div>';
                 con+='<div class="spec">';
                 con+='<dl>';
                 con+='<dt>감독 :&nbsp;</dt>';
                 con+='<dd class="on">'+data.directorNm+' ('+data.directorNmEn+')</dd>';
                 con+='<dt>배우 :&nbsp;</dt>';
-                con+='<dd class="on">'+data.actorNm+'</dd>';
+                con+='<dd class="on">'+data.actorNm.substring(0, data.actorNm.length - 1).replace(/\|/g,", ")+'</dd>';
                 con+='<dt>장르 :&nbsp;</dt>';
-                con+='<dd class="on">'+data.genreNm+'</dd>';
+                con+='<dd class="on">'+data.genreNm.substring(0, data.genreNm.length - 1)+'</dd>';
                 con+='<dt>기본정보 :&nbsp;</dt>';
                 con+='<dd class="on">'+data.watchGradeNm+',&nbsp;'+data.showtime+'분,&nbsp;'+data.nationNm+', '+data.typeNm+'</dd>';
                 con+='<dt>개봉 :&nbsp;</dt>';
                 con+='<dd class="on">'+data.openDt+'</dd>';
+                con+='<dt>제작연도 :&nbsp;</dt>';
+                con+='<dd class="on">'+data.prdtYear+'</dd>';
                 con+='<dt>배급사 :&nbsp;</dt>';
                 con+='<dd class="on">'+data.companyNm+'</dd>';
                 con+='</dl>';
@@ -351,18 +353,26 @@
             // contentType : "application/json",
             dataType: "json",
             success: function (data) {
+                // console.log("댓글 개수는?" + data.length);
                 let con='';
-                for(let i=0;i<data.length;i++){
-                    con+='<tr id="comment'+data[i].id+'">';
-                    con+='<td>'+data[i].memberId+'</td>';
-                    con+='<td id="commentContent'+data[i].id+'">'+data[i].content+'</td>';
-                    con+='<td>'+data[i].indate+'</td>';
-                    con+='<td><button type="button" onclick="goodup('+data[i].id+')" style="border: 1px solid gray; padding: 5px; margin: 3px">좋아요</button>'+data[i].good+'</td>';
-                    con+='<td><button type="button" onclick="badup('+data[i].id+')" style="border: 1px solid gray; padding: 5px; margin: 3px">신고요</button>'+data[i].bad+'</td>';
-                    con+='<td><span id="commentUpdate'+data[i].id+'"><button type="button" onclick="updateShowComment('+data[i].id+')" style="border: 1px solid gray; padding: 5px; margin: 3px">수정</button></span>';
-                    con+='<button type="button" id="commentDelete'+data[i].id+'" onclick="deleteCommentByCommentId('+data[i].id+')" style="border: 1px solid gray; padding: 5px; margin: 3px">삭제</button></td>';
-                    con+='</tr>';
 
+                if (data.length == 0) {
+                    con += '<tr>';
+                    con += '<td colspan="6" style="margin:40px; padding: 40px; font-size: 17px;">아직 등록된 한줄평이 없습니다.<br> 영화 한줄평을 등록해주세요 ! ^^</td>';
+                    con += '</tr>';
+                } else {
+                    for (let i = 0; i < data.length; i++) {
+                        con += '<tr id="comment' + data[i].id + '">';
+                        con += '<td>' + data[i].memberId + '</td>';
+                        con += '<td id="commentContent' + data[i].id + '">' + data[i].content + '</td>';
+                        con += '<td>' + data[i].indate + '</td>';
+                        con += '<td><button type="button" onclick="goodup(' + data[i].id + ')" style="border: 1px solid gray; padding: 5px; margin: 3px">좋아요</button>' + data[i].good + '</td>';
+                        con += '<td><button type="button" onclick="badup(' + data[i].id + ')" style="border: 1px solid gray; padding: 5px; margin: 3px">신고요</button>' + data[i].bad + '</td>';
+                        con += '<td><span id="commentUpdate' + data[i].id + '"><button type="button" onclick="updateShowComment(' + data[i].id + ')" style="border: 1px solid gray; padding: 5px; margin: 3px">수정</button></span>';
+                        con += '<button type="button" id="commentDelete' + data[i].id + '" onclick="deleteCommentByCommentId(' + data[i].id + ')" style="border: 1px solid gray; padding: 5px; margin: 3px">삭제</button></td>';
+                        con += '</tr>';
+
+                    }
                 }
                 // $('#initAllComment').html(con);
                 $('#tbody').html(con);

@@ -46,18 +46,18 @@
     </select>
 
     <select id="selectAllMovies" resultType="com.example.movie.dto.MovieDTO">
-        select movie_cd, movie_nm, movie_nm_en, showtime,
-               open_dt, type_nm, nation_nm, genre_nm,
-               director_nm, director_nm_en, company_nm, watch_grade_nm, movie_img,
-               actor_nm, actor_nm_en
+        select movie_cd, movie_nm, movie_nm_en, cmp_movie_nm,
+               prdt_year, showtime, open_dt, type_nm,
+               nation_nm, genre_nm, director_nm, director_nm_en,
+               company_nm, watch_grade_nm, movie_img, actor_nm, actor_nm_en, summary
         FROM MOVIE_DETAIL
     </select>
 
     <select id="selectMovieDetailByMovieCode" parameterType="Integer" resultType="com.example.movie.dto.MovieDTO">
-        select movie_nm, movie_nm_en, showtime,
-               open_dt, type_nm, nation_nm, genre_nm,
-               director_nm, director_nm_en, company_nm, watch_grade_nm, movie_img,
-               actor_nm, actor_nm_en
+        select movie_nm, movie_nm_en, cmp_movie_nm,
+               prdt_year, showtime, open_dt, type_nm,
+               nation_nm, genre_nm, director_nm, director_nm_en,
+               company_nm, watch_grade_nm, movie_img, actor_nm, actor_nm_en, summary
         FROM MOVIE_DETAIL
         WHERE movie_cd = #{movieCd}
     </select>

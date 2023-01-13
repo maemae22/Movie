@@ -4,6 +4,7 @@ import com.example.movie.dto.*;
 import com.example.movie.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +25,8 @@ public class MyPageController {
     private final CommentService cs;
 
     @GetMapping
-    public String myPage(HttpSession session, Model model) {
-        MemberDTO memberDTO = ms.selectMemberDetail((String) session.getAttribute("nickname"));
+    public String myPage(Model model, Authentication authentication) {
+        MemberDTO memberDTO = ms.selectMemberDetail(authentication.getName());
 
         ArrayList<OrderDTO> orderList = os.selectOrderByMember(memberDTO.getId());
 
@@ -35,8 +36,6 @@ public class MyPageController {
         TheaterDTO theaterDTO = ts.selectTheaterName(memberDTO.getId());
 
         ArrayList<CommentDTO> commentList = cs.selectComment(memberDTO.getId());
-
-        log.info("movie {}", movie);
 
         model.addAttribute("memberDTO", memberDTO);
         model.addAttribute("orderList", orderList);
@@ -50,44 +49,44 @@ public class MyPageController {
     }
 
     @GetMapping("/user-detail")
-    public String userDetail(HttpSession session, Model model) {
-        MemberDTO memberDTO = ms.selectMemberDetail((String)session.getAttribute("nickname"));
+    public String userDetail(Authentication authentication, Model model) {
+        MemberDTO memberDTO = ms.selectMemberDetail(authentication.getName());
         model.addAttribute("memberDTO", memberDTO);
         return "/mypage/user-detail";
     }
 
     @GetMapping("/user-edit/name")
-    public String userEditName(HttpSession session, Model model) {
-        MemberDTO memberDTO = ms.selectMemberDetail((String)session.getAttribute("nickname"));
+    public String userEditName(Authentication authentication, Model model) {
+        MemberDTO memberDTO = ms.selectMemberDetail(authentication.getName());
         model.addAttribute("memberDTO", memberDTO);
         return "/mypage/user-edit-name";
     }
     @ResponseBody
     @PostMapping("/user-edit/name")
-    public String updateName(MemberDTO memberDTO, HttpSession session) {
-        MemberDTO member = ms.selectMemberDetail((String)session.getAttribute("nickname"));
+    public String updateName(MemberDTO memberDTO, Authentication authentication) {
+        MemberDTO member = ms.selectMemberDetail(authentication.getName());
         member.setName(memberDTO.getName());
         return ms.updateMemberName(member);
     }
 
     @GetMapping("/user-edit/password")
-    public String userEditPassword(HttpSession session, Model model) {
-        MemberDTO memberDTO = ms.selectMemberDetail((String)session.getAttribute("nickname"));
+    public String userEditPassword(Authentication authentication, Model model) {
+        MemberDTO memberDTO = ms.selectMemberDetail(authentication.getName());
         model.addAttribute("memberDTO", memberDTO);
         return "/mypage/user-edit-password";
     }
 
     @ResponseBody
     @PostMapping("/user-edit/password")
-    public String updatePassword(MemberDTO memberDTO, HttpSession session) {
-        MemberDTO member = ms.selectMemberDetail((String)session.getAttribute("nickname"));
+    public String updatePassword(MemberDTO memberDTO, Authentication authentication) {
+        MemberDTO member = ms.selectMemberDetail(authentication.getName());
         member.setPassword(memberDTO.getPassword());
         return ms.updateMemberPassword(member);
     }
 
     @GetMapping("/user-comment")
-    public String userComment(HttpSession session, Model model) {
-        MemberDTO memberDTO = ms.selectMemberDetail((String)session.getAttribute("nickname"));
+    public String userComment(Authentication authentication, Model model) {
+        MemberDTO memberDTO = ms.selectMemberDetail(authentication.getName());
         ArrayList<CommentDTO> commentList = cs.selectComment(memberDTO.getId());
         List<DailyMovieDTO> movieList = movieService.selectMovieNameByCode(memberDTO.getId());
 
@@ -98,8 +97,8 @@ public class MyPageController {
     }
 
     @GetMapping("/user-order")
-    public String userOrder(HttpSession session, Model model) {
-        MemberDTO memberDTO = ms.selectMemberDetail((String)session.getAttribute("nickname"));
+    public String userOrder(Authentication authentication, Model model) {
+        MemberDTO memberDTO = ms.selectMemberDetail(authentication.getName());
 
         ArrayList<OrderDTO> orderList = os.selectOrderByMember(memberDTO.getId());
         ArrayList<OrderDTO> cancelList = os.selectCancelOrder(memberDTO.getId());

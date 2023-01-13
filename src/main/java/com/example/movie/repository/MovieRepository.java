@@ -45,22 +45,12 @@ public class MovieRepository {
         return mm.selectDailyRank();
     }
 
-//    public DailyMovieDTO selectMovieName(Long movie_id) {
-//        return mm.selectMovieName(movie_id);
-//    }
-
     public DailyMovieDTO selectMovieName(Integer movie_id) {
         return mm.selectMovieName(movie_id);
     }
 
     public MovieDTO selectMovieImg(Integer movie_id) {
         return mm.selectMovieImg(movie_id);
-    }
-//    public DailyMovieDTO selectMovieNameComment(Long movie_id) {
-//        return mm.selectMovieNameComment(movie_id);
-//    }
-    public DailyMovieDTO selectMovieNameByCode(Integer movie_id) {
-        return mm.selectMovieNameByCode(movie_id);
     }
     public DailyMovieDTO selectMovieNameByCode(Integer movie_id) {
         return mm.selectMovieNameByCode(movie_id);

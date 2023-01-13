@@ -9,15 +9,6 @@
             (#{movieCd},#{movieNm},#{openDt},#{movieRank},#{audiAcc})
     </insert>
 
-<!--    <select id="selectMovieName" resultType="com.example.movie.dto.DailyMovieDTO" parameterType="Long">-->
-<!--        SELECT DISTINCT-->
-<!--            movie_nm-->
-<!--        FROM-->
-<!--            DAILY_BOXOFFICE-->
-<!--        WHERE-->
-<!--            id = #{movie_id}-->
-<!--    </select>-->
-
     <select id="selectMovieName" resultType="com.example.movie.dto.DailyMovieDTO" parameterType="Integer">
         SELECT DISTINCT
             movie_nm
@@ -106,15 +97,6 @@
         WHERE b.indate = current_date;
     </select>
 
-<!--    <select id="selectMovieNameComment" resultType="com.example.movie.dto.DailyMovieDTO" parameterType="Long">-->
-<!--        SELECT-->
-<!--            movie_nm-->
-<!--        FROM-->
-<!--            DAILY_BOXOFFICE-->
-<!--        WHERE-->
-<!--            id = #{movie_id}-->
-<!--    </select>-->
-
     <select id="selectMovieNameByCode" resultType="com.example.movie.dto.DailyMovieDTO" parameterType="Integer">
         SELECT DISTINCT
             movie_nm
@@ -124,12 +106,4 @@
             movie_cd = #{movie_id}
     </select>
 
-    <select id="selectMovieNameByCode" resultType="com.example.movie.dto.DailyMovieDTO" parameterType="Integer">
-        SELECT DISTINCT
-            movie_nm
-        FROM
-            DAILY_BOXOFFICE
-        WHERE
-            movie_cd = #{movie_id}
-    </select>
 </mapper>

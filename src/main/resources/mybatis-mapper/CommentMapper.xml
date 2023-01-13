@@ -15,6 +15,9 @@
             comment
         WHERE
             member_id = #{member_id}
+        ORDER BY
+            indate
+        DESC
     </select>
 
     <select id="selectMovieId" parameterType="Long" resultType="Long">

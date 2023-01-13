@@ -62,19 +62,6 @@ public class MovieService {
         return movieList;
     }
 
-    public List<DailyMovieDTO> selectMovieNameByCode(Long member_id) {
-        ArrayList<Long> ids = cr.selectMovieId(member_id);
-        List<Integer> params = new ArrayList<>();
-        List<DailyMovieDTO> movie = new ArrayList<>();
-
-        for (int i = 0; i < ids.size(); i++) {
-            params.add(ids.get(i).intValue());
-            movie.add(mr.selectMovieNameByCode(params.get(i)));
-        }
-
-        return movie;
-    }
-
     public ArrayList<MovieDTO> selectMovieImgs(Long member_id) {
         ArrayList<Long> ids = or.selectMovieIds(member_id);
         ArrayList<Integer> params = new ArrayList<>();
@@ -99,16 +86,6 @@ public class MovieService {
 
         return movieList;
     }
-
-//    public ArrayList<DailyMovieDTO> selectMovieIdByComment(Long member_id) {
-//        ArrayList<Long> ids = cr.selectMovieId(member_id);
-//        ArrayList<DailyMovieDTO> movieList = new ArrayList<>();
-//
-//        for (int i = 0; i < ids.size(); i++) {
-//            movieList.add(mr.selectMovieNameComment(ids.get(i)));
-//        }
-//        return movieList;
-//    }
 
     public int insertDailyMovie(DailyMovieDTO dailyMovieDTO) {
         return mr.insertDailyMovie(dailyMovieDTO);

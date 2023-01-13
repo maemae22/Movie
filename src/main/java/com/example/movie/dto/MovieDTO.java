@@ -11,9 +11,11 @@ import java.time.LocalDate;
 @ToString
 public class MovieDTO {
 
-    private int movieCd;          // 영화코드
+    private int movieCd;             // 영화코드 (DB와 같이 int 로 수정함)
     private String movieNm;          // 영화제목(국문)
     private String movieNmEn;        // 영화제목(영문)
+    private String cmpMovieNm;       // 영화제목(영문) 공백, 특수문자 제거. api 가져올 시에 비교 위함.
+    private String prdtYear;         // 제작연도
     private int showtime;            // 상영시간(러닝타임)
     private LocalDate openDt;        // 개봉일
     private String typeNm;           // 영화 유형명
@@ -23,7 +25,9 @@ public class MovieDTO {
     private String directorNmEn;     // 감독명(영문)
     private String companyNm;        // 배급사
     private String watchGradeNm;     // 관람등급
+    private String movieImg;         // 영화 포스터 url
     private String actorNm;          // 배우(국문)
     private String actorNmEn;        // 배우(영문)
+    private String summary;          // 영화 줄거리
 
 }

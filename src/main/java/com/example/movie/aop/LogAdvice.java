@@ -13,22 +13,25 @@ import java.util.Arrays;
 @Aspect
 public class LogAdvice {
 
-    private static final Logger log = LoggerFactory.getLogger(LogAdvice.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Around("execution(* com.example.movie.controller..*Controller.*(..))"
-            +" || execution(* com.example.movie.service..*Service*.*(..))"
-            +" || execution(* com.example.movie.repository..*Repository.*(..))")
-    public Object logPrint(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    @Around("execution(* com.example.movie.controller..*Controller.*(..))" +
+            "|| execution(* com.example.movie.service..*Service.*(..))" +
+            "|| execution(* com.example.movie.repository..*Repository.*(..))" +
+            "|| execution(* com.example.movie.login.controller..*Controller.*(..))" +
+            "|| execution(* com.example.movie.login.service..*Service.*(..))" +
+            "|| execution(* com.example.movie.login.repository..*Repository.*(..))" +
+            "|| execution(* com.example.movie.page.controller..*Controller.*(..))")
+    public Object logAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        String className = proceedingJoinPoint.getSignature().getDeclaringTypeName(); // 클래스명
+        String methodName = proceedingJoinPoint.getSignature().getName();             // 메서드명
+        String parameter = Arrays.toString(proceedingJoinPoint.getArgs());            // 파라미터
 
-        //객체명
-        String type = proceedingJoinPoint.getSignature().getDeclaringTypeName();
-
-        //proceedingJoinPoint.getSignature().getName() <- 실행 메서드명
-        log.info("[[START]]"+type+"."+proceedingJoinPoint.getSignature().getName()+"() <=================");
-        log.info("Argument/Parameter : "+ Arrays.toString(proceedingJoinPoint.getArgs()));//<-파라미터
-        log.info("================[[END : "+proceedingJoinPoint.getSignature().getName()+"()]]==================");
+        logger.info("===========================[[START]]===========================");
+        logger.info("" + className + "." + methodName + "() CALLED");
+        logger.info("PARAMETERS : " + parameter);
+        logger.info("============================[[END]]============================");
 
         return proceedingJoinPoint.proceed();
     }
-
 }

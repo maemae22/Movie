@@ -10,8 +10,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -35,6 +44,21 @@ public class BoxOfficeApi {
     @Autowired
     public BoxOfficeApi(MovieService ms) {
         this.ms = ms;
+    }
+
+    @PostConstruct
+    public void init() {
+        try {
+            // 해당 날짜 기준으로 insert 되었는지 확인함. check 시 null 이면 DAILY_BOXOFFICE, MOVIE_DETAIL 테이블에 today-1 날짜 기준으로 insert 된다.
+            if (ms.selectDateInsertChk() == null) {
+                dailyBoxOffice();  // DAILY_BOXOFFICE 테이블 update
+                movieDetail();     // MOVIE_DETAIL 테이블 update
+                movieImgSummaryFromWEB();   // MOVIE_DETAIL 테이블에 movie_img, summary update
+            }
+        } catch (Exception e) {
+            log.info(e.getMessage());
+        }
+
     }
 
     public void dailyBoxOffice() {
@@ -72,7 +96,7 @@ public class BoxOfficeApi {
 
                 // DTO 로 맞춰주기. (추후 Map -> DTO 로 변환 가능하도록 DTO 내에서 작업 필요할 것으로 보임.)
                 DailyMovieDTO dailyMovieDTO = new DailyMovieDTO();
-                dailyMovieDTO.setMovieCd(String.valueOf(dailyResult.get("movieCd")));
+                dailyMovieDTO.setMovieCd(Integer.parseInt(String.valueOf(dailyResult.get("movieCd"))));
                 dailyMovieDTO.setMovieNm(String.valueOf(dailyResult.get("movieNm")));
                 dailyMovieDTO.setOpenDt(LocalDate.parse(dailyResult.get("openDt").toString()));
                 dailyMovieDTO.setMovieRank(Integer.parseInt(String.valueOf(dailyResult.get("rank"))));
@@ -112,11 +136,14 @@ public class BoxOfficeApi {
                 HashMap<String, Object> detailResult = objectMapper.readValue(parse_movieInfoResultList.toString(), HashMap.class);
 
                 MovieDTO movieDTO = new MovieDTO();
-                movieDTO.setMovieCd(String.valueOf(detailResult.get("movieCd")));
+                movieDTO.setMovieCd(Integer.parseInt(String.valueOf(detailResult.get("movieCd"))));
                 movieDTO.setMovieNm(String.valueOf(detailResult.get("movieNm")));
                 movieDTO.setMovieNmEn(String.valueOf(detailResult.get("movieNmEn")));
+                //cmpMovieNm 추가
+                movieDTO.setCmpMovieNm(String.valueOf(detailResult.get("movieNmEn")).replaceAll("[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9]", ""));
+                movieDTO.setPrdtYear(String.valueOf(detailResult.get("prdtYear")));
                 movieDTO.setShowtime(Integer.parseInt(String.valueOf(detailResult.get("showTm"))));
-                movieDTO.setOpenDt(LocalDate.of(Integer.parseInt(detailResult.get("openDt").toString().substring(0,4)), Integer.parseInt(detailResult.get("openDt").toString().substring(4,6)), Integer.parseInt(detailResult.get("openDt").toString().substring(6,8))));
+                movieDTO.setOpenDt(LocalDate.of(Integer.parseInt(detailResult.get("openDt").toString().substring(0, 4)), Integer.parseInt(detailResult.get("openDt").toString().substring(4, 6)), Integer.parseInt(detailResult.get("openDt").toString().substring(6, 8))));
                 movieDTO.setTypeNm(String.valueOf(detailResult.get("typeNm")));
 
                 ArrayList<HashMap<String, Object>> nations = (ArrayList<HashMap<String, Object>>) detailResult.get("nations");
@@ -124,15 +151,22 @@ public class BoxOfficeApi {
 
                 ArrayList<HashMap<String, Object>> genres = (ArrayList<HashMap<String, Object>>) detailResult.get("genres");
                 String genreNm = "";
-                for(int j = 0; j <genres.size(); j++) {
-                    genreNm += genres.get(j).get("genreNm")+"/";
+                for (int j = 0; j < genres.size(); j++) {
+                    genreNm += genres.get(j).get("genreNm") + "/";
                 }
                 movieDTO.setGenreNm(genreNm);
 
                 ArrayList<HashMap<String, Object>> directors = (ArrayList<HashMap<String, Object>>) detailResult.get("directors");
 
-                movieDTO.setDirectorNm(String.valueOf(directors.get(0).get("peopleNm")));
-                movieDTO.setDirectorNmEn(String.valueOf(directors.get(0).get("peopleNmEn")));
+                // 감독 정보가 null 인 경우도 있어서 추가함.
+                if (directors.size() == 0) {
+                    movieDTO.setDirectorNm("");
+                    movieDTO.setDirectorNmEn("");
+                } else {
+                    movieDTO.setDirectorNm(String.valueOf(directors.get(0).get("peopleNm")));
+                    movieDTO.setDirectorNmEn(String.valueOf(directors.get(0).get("peopleNmEn")));
+                }
+
 
                 ArrayList<HashMap<String, Object>> company = (ArrayList<HashMap<String, Object>>) detailResult.get("companys");
                 movieDTO.setCompanyNm(String.valueOf(company.get(0).get("companyNm")));
@@ -156,6 +190,112 @@ public class BoxOfficeApi {
         } catch (Exception e) {
             log.info(e.getMessage());
         }
+    }
+
+    public void movieImgSummaryFromWEB() throws IOException, ParseException {
+        String serviceKey = "K15BMNT8V3D591V3VW76";
+        String HOST_URL = "";
+        String strListCnt = "1";
+
+        log.info(this.getClass().getName() + ".movieImgSummaryFromWEB start.");
+
+        ArrayList<MovieDTO> arrMovieDto = ms.selectMovieDtMovieNmDirNm(); // 저장되어야하는 영화제목 목록.
+        ArrayList<MovieDTO> rmvMovieDto = removeSymbols(arrMovieDto); // 특수기호 제거된 영화제목.
+
+        for (int i = 0; i < rmvMovieDto.size(); i++) {
+            StringBuilder urlBuilder = new StringBuilder("http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2"); /*URL*/
+            urlBuilder.append("&" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + URLEncoder.encode(serviceKey, "UTF-8")); /*Service Key*/
+            urlBuilder.append("&" + URLEncoder.encode("detail", "UTF-8") + "=" + URLEncoder.encode("Y", "UTF-8")); /*상세보기*/
+            urlBuilder.append("&" + URLEncoder.encode("query", "UTF-8") + "=" + URLEncoder.encode(rmvMovieDto.get(i).getMovieNm(), "UTF-8")); /*통합검색*/
+            if(!rmvMovieDto.get(i).getDirectorNm().equals("")) {
+                if(rmvMovieDto.get(i).getDirectorNm().length() > 6) {
+                    urlBuilder.append("&" + URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(rmvMovieDto.get(i).getMovieNmEn(), "UTF-8")); /*영화 타이틀*/
+                } else {
+                    urlBuilder.append("&" + URLEncoder.encode("director", "UTF-8") + "=" + URLEncoder.encode(rmvMovieDto.get(i).getDirectorNm(), "UTF-8")); /*감독명*/
+                }
+            }
+            urlBuilder.append("&" + URLEncoder.encode("listCount", "UTF-8") + "=" + URLEncoder.encode(strListCnt, "UTF-8")); /*검색 결과 count*/
+            URL url = new URL(urlBuilder.toString());
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-type", "application/json");
+            log.info("Response code: {}",conn.getResponseCode());
+            BufferedReader rd;
+            if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+                rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            } else {
+                rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+            }
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = rd.readLine()) != null) {
+                sb.append(line);
+            }
+            rd.close();
+            conn.disconnect();
+
+            JSONParser parser = new JSONParser();
+            JSONObject obj = (JSONObject) parser.parse(sb.toString());
+            JSONArray data = (JSONArray) obj.get("Data");
+            JSONObject objData = (JSONObject) data.get(0);
+            JSONArray result = (JSONArray) objData.get("Result");
+            JSONObject objResult = (JSONObject) result.get(0);
+
+            // 영화제목(영문)
+            String strMovieNmEn = String.valueOf(objResult.get("titleEng")).replaceAll("[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9]", "");
+
+            // 제작연도
+            String strProdYear = String.valueOf(objResult.get("prodYear"));
+
+            // 감독명
+            JSONObject objStaffs = (JSONObject) objResult.get("staffs");
+            JSONArray arrStaffs = (JSONArray) objStaffs.get("staff");
+            JSONObject objStaff = (JSONObject) arrStaffs.get(0);
+            String strStaffNm = String.valueOf(objStaff.get("staffNm"));
+
+            //줄거리
+            JSONObject objPlots = (JSONObject) objResult.get("plots");
+            JSONArray arrPlots = (JSONArray) objPlots.get("plot");
+            JSONObject objPlot = (JSONObject) arrPlots.get(0);
+            String strPlotText = String.valueOf(objPlot.get("plotText"));
+
+            //개봉일
+            String strRelDate = String.valueOf(objResult.get("repRlsDate"));
+
+            //포스터 url
+            String strPosterUrl = String.valueOf(objResult.get("posters"));
+
+            MovieDTO movieDTO = new MovieDTO();
+
+            movieDTO.setMovieImg(strPosterUrl);
+            movieDTO.setSummary(strPlotText);
+            movieDTO.setOpenDt(LocalDate.of(Integer.parseInt(strRelDate.substring(0, 4)), Integer.parseInt(strRelDate.substring(4, 6)), Integer.parseInt(strRelDate.substring(6, 8))));
+
+            if(rmvMovieDto.get(i).getDirectorNm().equals("")){
+                movieDTO.setDirectorNm("");
+            } else {
+                movieDTO.setDirectorNm(strStaffNm);
+            }
+            if(!strMovieNmEn.equals("")){
+                movieDTO.setCmpMovieNm(strMovieNmEn);
+            } else {
+                movieDTO.setCmpMovieNm("");
+            }
+            if(!rmvMovieDto.get(i).getPrdtYear().equals("")){
+                movieDTO.setPrdtYear(strProdYear);
+            } else {
+                movieDTO.setGenreNm("");
+            }
+            ms.updateMvDtImgAndSummary(movieDTO);
+        }
+    }
+
+
+    public ArrayList<MovieDTO> removeSymbols(ArrayList<MovieDTO> arrMovieDto) {
+        for (int i = 0; i < arrMovieDto.size(); i++) {
+            arrMovieDto.get(i).setMovieNm(arrMovieDto.get(i).getMovieNm().replaceAll("[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9]", ""));
+        }
+        return arrMovieDto;
     }
 
 }

@@ -2,12 +2,18 @@ package com.example.movie.controller;
 
 import com.example.movie.dto.CommentDTO;
 import com.example.movie.dto.MovieDTO;
-import com.example.movie.login.service.LoginService;
 import com.example.movie.service.CommentService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -15,17 +21,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+@Slf4j
 @RestController
 public class CommentController {
 
     @Autowired
     CommentService cs;
-    @Autowired
-    LoginService ls;
+//    @Autowired
+//    LoginService ls;
+
+//    @GetMapping("movie/{movieId}")
+//    public String movieDetail(@PathVariable long movieId, Model model) {
+//        return "movie_detail";
+//    }
 
     @PostMapping("/api/comment/add")
     public int insertComment(@RequestBody CommentDTO commentDTO) {
         return cs.insertComment(commentDTO);
+    }
+    @DeleteMapping("/member/user-comment/{id}")
+    public String deleteComment(@PathVariable Long id) {
+        return cs.deleteCommentR(id);
     }
 
     @GetMapping("/api/comments/{movieCd}")
@@ -46,7 +62,7 @@ public class CommentController {
     }
 
     @DeleteMapping("/api/comment/delete/{commentId}")
-    public int deleteComment(@PathVariable int commentId) {
+    public int deleteComment(@PathVariable long commentId) {
         return cs.deleteComment(commentId);
     }
 

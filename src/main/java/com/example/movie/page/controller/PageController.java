@@ -1,9 +1,8 @@
 package com.example.movie.page.controller;
 
-import com.example.movie.api.BoxOfficeApi;
 import com.example.movie.service.MovieService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,28 +13,20 @@ import java.util.HashMap;
 
 @Controller
 @Slf4j
+@RequiredArgsConstructor
 public class PageController {
-
-    private final BoxOfficeApi boxOfficeApi;
     private final MovieService ms;
-    @Autowired
-    public PageController(BoxOfficeApi boxOfficeApi, MovieService ms) {
-        this.boxOfficeApi = boxOfficeApi;
-        this.ms = ms;
-    }
 
     @GetMapping("/")
-    public String index() {
-        try{
-            // 해당 날짜 기준으로 insert 되었는지 확인함. check 시 null 이면 DAILY_BOXOFFICE, MOVIE_DETAIL 테이블에 today-1 날짜 기준으로 insert 된다.
-            if(ms.selectDateInsertChk() == null ){
-            boxOfficeApi.dailyBoxOffice();  // DAILY_BOXOFFICE 테이블 update
-            boxOfficeApi.movieDetail();     // MOVIE_DETAIL 테이블 update
-            }
-        } catch(Exception e){
-            log.info(e.getMessage());
+    public String index(Model model) {
+        ArrayList<HashMap<String, String>> rankLists = ms.selectDailyRank();
+        for (HashMap<String, String> rankList : rankLists) {
+            String str = rankList.get("movie_img");
+            String[] splitArray = str.split("\\|");
+            rankList.put("movie_img", splitArray[0]);
         }
 
+        model.addAttribute("rankLists", rankLists);
         return "index";
     }
 

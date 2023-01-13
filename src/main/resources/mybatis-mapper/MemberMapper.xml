@@ -74,7 +74,7 @@
         FROM
             member
         WHERE
-            nickname = #{nickname}
+            userId = #{userId}
     </select>
 
     <update id="updateMemberName" parameterType="com.example.movie.dto.MemberDTO">

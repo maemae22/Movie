@@ -33,7 +33,8 @@
           <div class="box-image">
             <a href="/movies/detail-view/?midx=86072">
               <span class="thumb-image">
-                <img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86072/86072_126.jpg" alt="아바타-물의 길(3D) 포스터" onerror="errorImage(this)">
+                <img th:if="${movie != null}" th:src="${movie[i.index].movieImg}" alt="아바타-물의 길(3D) 포스터" onerror="errorImage(this)">
+                <img th:unless="${movie != null}" th:src="${null}">
                 <!-- 영상물 등급 노출 변경 2022.08.24 -->
                 <i class="cgvIcon etc age12">12</i>
               </span>

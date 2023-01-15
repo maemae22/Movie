@@ -35,7 +35,9 @@ public class BoardController {
 
     @GetMapping("/board/{id}")
     @ApiOperation(value = "특정 게시글 조회", notes = "특정 게시글을 id 기준으로 조회한다.")
-    public String selectBoardDetail(@PathVariable String id, Model model) {
+    public String selectBoardDetail(@PathVariable String id, Model model, Authentication authentication) {
+        MemberDTO memberDTO = ms.selectMemberDetail(authentication.getName());
+        model.addAttribute("memberDTO", memberDTO);
         model.addAttribute("boardList", bs.selectBoardDetail(id));
         model.addAttribute("id", id);
         return "boardDetail";

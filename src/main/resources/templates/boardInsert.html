@@ -588,6 +588,8 @@
                         <form method="post" id="insertBoardForm">
                             <div class="board_view_area">
                                 <ul class="top_title_faq">
+                                    <input id="memberId_insert" th:value="${memberDTO.getId()}" hidden>
+                                    <input id="nickname_insert" th:value="${memberDTO.getName()}" hidden>
                                     <li class="title">
                                         <input id="title_insert" placeholder="제목" autofocus>
                                     </li>
@@ -627,6 +629,8 @@
                     $(function () {
                         $('#insertBoardForm').submit(function (e) {
                             e.preventDefault();
+                            let memberId_data = $("#memberId_insert").val();
+                            let nickname_data = $("#nickname_insert").val();
                             let title_data = $("#title_insert").val();
                             let content_data = $("#content_insert").val();
                             if(title_data.length == 0) {
@@ -646,8 +650,8 @@
                                 type: "Post",
                                 contentType: "application/json",
                                 data: JSON.stringify({
-                                    "member_id" : 1,
-                                    "nickname" : "돼지띠",
+                                    "member_id" : memberId_data,
+                                    "nickname" : nickname_data,
                                     "title" : title_data,
                                     "content" : content_data
                                 }),

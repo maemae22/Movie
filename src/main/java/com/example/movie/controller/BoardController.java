@@ -1,11 +1,14 @@
 package com.example.movie.controller;
 
 import com.example.movie.dto.BoardDTO;
+import com.example.movie.dto.MemberDTO;
 import com.example.movie.dto.ReplyDTO;
 import com.example.movie.service.BoardService;
+import com.example.movie.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +21,9 @@ public class BoardController {
 
     @Autowired
     BoardService bs;
+
+    @Autowired
+    MemberService ms;
 
     @GetMapping("/board")
     @ApiOperation(value = "전체 게시글 조회", notes = "전체 게시글을 조회한다.")
@@ -32,12 +38,14 @@ public class BoardController {
     public String selectBoardDetail(@PathVariable String id, Model model) {
         model.addAttribute("boardList", bs.selectBoardDetail(id));
         model.addAttribute("id", id);
-        System.out.println("board id : " + id);
         return "boardDetail";
     }
 
     @GetMapping("/board/insert")
-    public String insertBoard() {
+    @ApiOperation(value = "게시글 작성 페이지", notes = "게시글 작성 페이지로 이동한다.")
+    public String insertBoard(Model model, Authentication authentication) {
+        MemberDTO memberDTO = ms.selectMemberDetail(authentication.getName());
+        model.addAttribute("memberDTO", memberDTO);
         return "boardInsert";
     }
 

@@ -604,6 +604,8 @@
                                         <legend class="screen_out">댓글 쓰기 폼</legend>
                                         <div class="real-rating">
                                             <div class="reply_write ">
+                                                <input id="memberId_insertReply" th:value="${memberDTO.getId()}" hidden>
+                                                <input id="nickname_insertReply" th:value="${memberDTO.getNickname()}" hidden>
                                                 <label for="insert_content" class="lab_write screen_out">댓글</label>
                                                 <span class="textCount" style="color:orange;">0자</span> <span class="textTotal" style="color:orange;">/250자</span>
                                                 <textarea id="insert_content" name="insert_content" class="tf_reply" placeholder="댓글을 입력해주세요" maxlength="250" style="width: 70%; margin-left:10px"></textarea>
@@ -699,8 +701,10 @@
                 // 댓글 작성
                 $("#insertForm").submit(function(e) {
                     e.preventDefault();
-                    let data = $("#insert_content").val();
+                    let memberId_reply = $("#memberId_insertReply").val();
                     let id = [[ ${id} ]];
+                    let nickname_reply = $("#nickname_insertReply").val();
+                    let data = $("#insert_content").val();
                     if(data.length == 0) {
                         alert("댓글을 입력해주세요.");
                         return false;
@@ -714,9 +718,9 @@
                         type: "Post",
                         contentType: "application/json",
                         data: JSON.stringify({
-                            "member_id" : 1,
+                            "member_id" : memberId_reply,
                             "board_id" : id,
-                            "nickname" : "돼지띠",
+                            "nickname" : nickname_reply,
                             "content" : data
                         }),
                         success: function(data) {

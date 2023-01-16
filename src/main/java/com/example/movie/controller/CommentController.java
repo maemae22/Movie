@@ -3,6 +3,7 @@ package com.example.movie.controller;
 import com.example.movie.dto.CommentDTO;
 import com.example.movie.dto.MovieDTO;
 import com.example.movie.service.CommentService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,7 @@ public class CommentController {
     public int insertComment(@RequestBody CommentDTO commentDTO) {
         return cs.insertComment(commentDTO);
     }
+    @ApiOperation(value = "마이 페이지에서 평점 삭제", notes = "마이 페이지 내에서 내 평점을 삭제한다.")
     @DeleteMapping("/member/user-comment/{id}")
     public String deleteComment(@PathVariable Long id) {
         return cs.deleteCommentR(id);

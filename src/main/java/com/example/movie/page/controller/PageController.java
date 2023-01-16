@@ -32,7 +32,7 @@ public class PageController {
 
     @GetMapping("/movie")
     public String movieList() {
-        return "movie";
+        return "movies";
     }
 
     @GetMapping("/movie/{movieCode}")

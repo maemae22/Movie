@@ -2,6 +2,7 @@ package com.example.movie.controller;
 
 import com.example.movie.dto.MemberDTO;
 import com.example.movie.service.MemberService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -54,6 +55,7 @@ public class MemberController {
     }
 
 
+    @ApiOperation(value = "회원 탈퇴", notes = "회원 탈퇴를 수행한다.(활성화 or 비활성화)")
     @ResponseBody
     @PostMapping("/withdrawal")
     public String withdrawal(HttpSession session) {

@@ -3,6 +3,8 @@ package com.example.movie.map.controller;
 import com.example.movie.dto.OrderDTO;
 import com.example.movie.service.MemberService;
 import com.example.movie.service.OrderService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
+@Api(tags = {"알람 서비스"}, description = "예매 정보를 slack으로 전달합니다.")
 @Controller
 @Slf4j
 public class MapController {
@@ -24,6 +27,7 @@ public class MapController {
     @Autowired
     MemberService memberService;
 
+    @ApiOperation(value = "예매 내역 전달", notes = "slack으로 내 예매 내역을 전달합니다.")
     @ResponseBody
     @GetMapping("/send")
     public void send(OrderDTO orderDTO, String movieNm, String selectedTheater) {

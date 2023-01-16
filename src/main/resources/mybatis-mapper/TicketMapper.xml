@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.movie.mapper.TicketMapper">
+
+	<insert id="insertTicket" parameterType="com.example.movie.dto.TicketDTO">
+
+		INSERT INTO ticket
+			(userId,
+			 movieTitle,
+			 movieDate,
+			 movieStartTime,
+			 selectedTheater,
+			 theaterDetail,
+			 ticketNumber,
+			 selectedSeat,
+			 payMoney
+			 )
+
+		VALUES
+		    (#{userId},
+		     #{movieTitle},
+		     #{movieDate},
+		     #{movieStartTime},
+			 #{selectedTheater},
+			 #{theaterDetail},
+		     #{ticketNumber},
+		     #{selectedSeat},
+		     #{payMoney}
+		     )
+
+	</insert>
+
+	<select id="getTicket" resultType="com.example.movie.dto.TicketDTO">
+		select *
+		from ticket
+		where id = (select max(id) from ticket);
+
+	</select>
+
+	<select id="getTicketList" parameterType="String" resultType="com.example.movie.dto.TicketDTO">
+		SELECT
+			(id,
+			 userId,
+			 movieTitle,
+			 movieDate,
+			 movieStartTime,
+			 selectedTheater,
+			 theaterDetail,
+			 ticketNumber,
+			 selectedSeat,
+			 payMoney,
+			 payDate
+				)
+		FROM ticket
+		WHERE userId = #{userId}
+	</select>
+
+</mapper>

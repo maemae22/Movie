@@ -41,4 +41,10 @@ public class PageController {
         return "movie_detail";
     }
 
+    @GetMapping("/ticket")
+    public String ticketPage() {
+        return "ticket";
+    }
+
+
 }

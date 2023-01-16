@@ -91,7 +91,9 @@
 
 
 <script src="js/seat.js"></script>
-
+<div class = "me-image">
+    <img src="./images/me.png">
+</div>
 
 </body>
 

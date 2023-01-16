@@ -114,9 +114,9 @@
         </div>
 
     </div>
-
-    <script src="js/ticket.js"></script>
-
-
+<div class = "twojo-image">
+    <img src="./images/twojo.png">
+</div>
+<script src="js/ticket.js"></script>
 </body>
 </html>

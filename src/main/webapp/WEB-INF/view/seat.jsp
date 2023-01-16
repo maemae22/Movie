@@ -144,7 +144,9 @@
 </body>
 <script src="js/seat.js"></script>
 
-
+<div class = "facam-image">
+	<img src="./images/facam.png">
+</div>
 <script>
 
 	function seatConfirm(){

@@ -36,7 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/js/**")
                 .antMatchers("/se2/**")
                 .antMatchers("/vendor/**")
-                .antMatchers("/favicon.**");
+                .antMatchers("/favicon.**")
+                .antMatchers("/error")
+                ;
     }
 
     private HttpFirewall defaultHttpFirewall() {

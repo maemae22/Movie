@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -58,10 +59,10 @@ public class MemberController {
     @ApiOperation(value = "회원 탈퇴", notes = "회원 탈퇴를 수행한다.(활성화 or 비활성화)")
     @ResponseBody
     @PostMapping("/withdrawal")
-    public String withdrawal(HttpSession session) {
-        MemberDTO member = ms.selectMemberDetail((String) session.getAttribute("nickname"));
+    public String withdrawal(@ApiIgnore Authentication authentication) {
+        MemberDTO memberDTO = ms.selectMemberDetail(authentication.getName());
 
-        return ms.updateIsMemberStatus(member);
+        return ms.updateIsMemberStatus(memberDTO);
     }
 
 }

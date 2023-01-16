@@ -191,10 +191,7 @@
                     let randomNum = Math.floor(Math.random() * movieImgUrlArr.length);
                     let movieImgUrl = movieImgUrlArr[randomNum];
 
-                    if (i%4 == 0) {
-                        con+='<ol>';
-                    }
-                    con+='<li>';
+                    con+='<div style="display: inline-block; width: 25%; margin-bottom: 40px;">';
                     con+='<div class="box-image">';
                     con+='<strong class="rank">No.'+(i+1)+'</strong>';
                     con+='<a href="/movie/'+data[i].movieCd+'">';
@@ -212,11 +209,7 @@
                     con+='<span class="txt-info"><strong>'+data[i].openDt+'<span>&nbsp;개봉</span></strong></span>';
                     con+='<span class="like"><a class="link-reservation" href="/ticket">예매</a></span>';
                     con+='</div>';
-                    con+='</li>';
-                    if (i%4 == 3) {
-                        con+='</ol>';
-                    }
-
+                    con+='</div>';
 
                 }
                 $('#movieList').html(con);

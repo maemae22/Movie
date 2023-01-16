@@ -30,8 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .ignoring()
                 .antMatchers("/css/**")
                 .antMatchers("/fonts/**")
-                .antMatchers("/icons/**")
-                .antMatchers("/image/**")
                 .antMatchers("/images/**")
                 .antMatchers("/image/**")
                 .antMatchers("/icons/**")
@@ -39,10 +37,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/se2/**")
                 .antMatchers("/vendor/**")
                 .antMatchers("/favicon.**");
-    }
-    @Bean
-    public HttpFirewall defaultHttpFirewall() {
-        return new DefaultHttpFirewall();
     }
 
     private HttpFirewall defaultHttpFirewall() {

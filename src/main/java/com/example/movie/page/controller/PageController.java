@@ -3,6 +3,7 @@ package com.example.movie.page.controller;
 import com.example.movie.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,7 @@ public class PageController {
     private final MovieService ms;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, Authentication authentication) {
         ArrayList<HashMap<String, String>> rankLists = ms.selectDailyRank();
         for (HashMap<String, String> rankList : rankLists) {
             String str = rankList.get("movie_img");
@@ -27,6 +28,8 @@ public class PageController {
         }
 
         model.addAttribute("rankLists", rankLists);
+        if(authentication != null) model.addAttribute("loginUser",authentication.getName());   // 로그인 유저 확인 하기 위해 추가됨.
+
         return "index";
     }
 

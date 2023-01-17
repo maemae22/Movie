@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.firewall.DefaultHttpFirewall;
+import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.stereotype.Controller;
 
 @Configuration
@@ -24,15 +26,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web
+        web.httpFirewall(defaultHttpFirewall())
                 .ignoring()
                 .antMatchers("/css/**")
                 .antMatchers("/fonts/**")
                 .antMatchers("/images/**")
+                .antMatchers("/image/**")
+                .antMatchers("/icons/**")
                 .antMatchers("/js/**")
                 .antMatchers("/se2/**")
                 .antMatchers("/vendor/**")
                 .antMatchers("/favicon.**");
+    }
+
+    private HttpFirewall defaultHttpFirewall() {
+        return new DefaultHttpFirewall();
     }
 
     @Override
@@ -40,11 +48,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .cors().disable()
                 .authorizeRequests()
-                .antMatchers("/member/goLogin","/member/signup").permitAll()
+                .antMatchers("/member/goLogin","/member/signup","/movie", "/", "/api/movies", "/api/movie/**")
+                .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/member/goLogin")
+                .defaultSuccessUrl("/")
+                .successForwardUrl("/")
                 .failureUrl("/member/signup")
                 .permitAll()
                 .and()

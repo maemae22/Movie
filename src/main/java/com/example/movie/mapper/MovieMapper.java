@@ -20,7 +20,10 @@ public interface MovieMapper {
     ArrayList<MovieDTO> selectMovieDtMovieNmDirNm();
     Integer updateMvDtImgAndSummary(MovieDTO movieDTO);
     ArrayList<HashMap<String,String>> selectDailyRank();
-    DailyMovieDTO selectMovieName(Long movie_id);
-    DailyMovieDTO selectMovieNameComment(Long movie_id);
+//    DailyMovieDTO selectMovieName(Long movie_id);
+    DailyMovieDTO selectMovieName(Integer movie_id);
+
+    MovieDTO selectMovieImg(Integer movie_id);
+//    DailyMovieDTO selectMovieNameComment(Long movie_id);
     DailyMovieDTO selectMovieNameByCode(Integer movie_id);
 }

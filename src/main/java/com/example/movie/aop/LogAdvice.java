@@ -18,9 +18,6 @@ public class LogAdvice {
     @Around("execution(* com.example.movie.controller..*Controller.*(..))" +
             "|| execution(* com.example.movie.service..*Service.*(..))" +
             "|| execution(* com.example.movie.repository..*Repository.*(..))" +
-            "|| execution(* com.example.movie.login.controller..*Controller.*(..))" +
-            "|| execution(* com.example.movie.login.service..*Service.*(..))" +
-            "|| execution(* com.example.movie.login.repository..*Repository.*(..))" +
             "|| execution(* com.example.movie.page.controller..*Controller.*(..))")
     public Object logAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         String className = proceedingJoinPoint.getSignature().getDeclaringTypeName(); // 클래스명

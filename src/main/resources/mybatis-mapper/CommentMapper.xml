@@ -8,6 +8,7 @@
             ,member_id
             ,movie_id
             ,content
+            ,nickname
             ,indate
             ,good
             ,bad
@@ -15,6 +16,9 @@
             comment
         WHERE
             member_id = #{member_id}
+        ORDER BY
+            indate
+        DESC
     </select>
 
     <select id="selectMovieId" parameterType="Long" resultType="Long">
@@ -35,9 +39,9 @@
 
     <insert id="insertComment" parameterType="com.example.movie.dto.CommentDTO">
         insert into comment
-            (member_id, movie_id, content)
+            (member_id, movie_id, content, nickname)
         values
-            (#{memberId}, #{movieId}, #{content})
+            (#{memberId}, #{movieId}, #{content}, #{nickname})
     </insert>
 
     <update id="updateComment" parameterType="com.example.movie.dto.CommentDTO">
@@ -47,20 +51,20 @@
     </update>
 
     <select id="selectAllCommentByMovieId" parameterType="long" resultType="com.example.movie.dto.CommentDTO">
-        select id, member_id, movie_id, content, indate, good, bad
+        select id, member_id, movie_id, content, indate, good, bad, nickname
         from comment
         where movie_id=#{movieId}
         order by indate desc
     </select>
 
     <select id="selectCommentByMemberId" parameterType="long" resultType="com.example.movie.dto.CommentDTO">
-        select id, member_id, movie_id, content, indate, good, bad
+        select id, member_id, movie_id, content, indate, good, bad, nickname
         from comment
         where member_id=#{memberId}
     </select>
 
     <select id="selectCommentByCommentId" parameterType="long" resultType="com.example.movie.dto.CommentDTO">
-        select id, member_id, movie_id, content, indate, good, bad
+        select id, member_id, movie_id, content, indate, good, bad, nickname
         from comment
         where id=#{id}
     </select>

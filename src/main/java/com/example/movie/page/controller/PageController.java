@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,13 +44,16 @@ public class PageController {
         return "index";
     }
 
+    @ApiOperation(value = "영화 메인(list) 페이지 (/movie)", notes = "/movie 접속 시 movies.html로 이동시켜주는 PageController 메서드입니다.")
     @GetMapping("/movie")
     public String movieList() {
         return "movies";
     }
 
+    @ApiOperation(value = "영화 상세페이지 (/movie/{movieCode})",
+                    notes = "영화 상세페이지로 이동시켜주는 PageController 메서드입니다. model에 movieCode 및 사용자 정보를 넣어주며, movie_detail.html을 반환합니다.(페이지 이동)")
     @GetMapping("/movie/{movieCode}")
-    public String movieDetail(@PathVariable int movieCode, Model model, Authentication authentication) {
+    public String movieDetail(@PathVariable int movieCode, Model model, @ApiIgnore Authentication authentication) {
         model.addAttribute("movieCode", movieCode);
 
         MemberDTO memberDTO = memberService.selectMemberDetail(authentication.getName());

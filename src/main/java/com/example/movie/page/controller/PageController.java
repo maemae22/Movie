@@ -24,6 +24,9 @@ import java.util.HashMap;
 public class PageController {
     private final MovieService ms;
 
+    @Autowired
+    MemberService memberService;
+
     @ApiOperation(value = "메인 페이지", notes = "영화 api 를 사용하여 가져온 일별 박스 오피스 순위를 보여줍니다.")
     @GetMapping("/")
     public String index(Model model, Authentication authentication) {

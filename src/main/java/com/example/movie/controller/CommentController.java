@@ -1,11 +1,14 @@
 package com.example.movie.controller;
 
 import com.example.movie.dto.CommentDTO;
+import com.example.movie.dto.MemberDTO;
 import com.example.movie.dto.MovieDTO;
 import com.example.movie.service.CommentService;
+import com.example.movie.service.MemberService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,18 +31,12 @@ public class CommentController {
 
     @Autowired
     CommentService cs;
-//    @Autowired
-//    LoginService ls;
-
-//    @GetMapping("movie/{movieId}")
-//    public String movieDetail(@PathVariable long movieId, Model model) {
-//        return "movie_detail";
-//    }
 
     @PostMapping("/api/comment/add")
     public int insertComment(@RequestBody CommentDTO commentDTO) {
         return cs.insertComment(commentDTO);
     }
+
     @ApiOperation(value = "마이 페이지에서 평점 삭제", notes = "마이 페이지 내에서 내 평점을 삭제한다.")
     @DeleteMapping("/member/user-comment/{id}")
     public String deleteComment(@PathVariable Long id) {
@@ -53,13 +50,11 @@ public class CommentController {
 
     @PutMapping("/api/comment/GoodUp/{commentId}")
     public int updateGoodNumOneUpByCommentId(@PathVariable int commentId) {
-//        System.out.println("updateGoodNumOneUpByCommentId");
         return cs.updateGoodNumOneUpByCommentId(commentId);
     }
 
     @PutMapping("/api/comment/BadUp/{commentId}")
     public int updateBadNumOneUpByCommentId(@PathVariable int commentId) {
-//        System.out.println("updateBadNumOneUpByCommentId");
         return cs.updateBadNumOneUpByCommentId(commentId);
     }
 

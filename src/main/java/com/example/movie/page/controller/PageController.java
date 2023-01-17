@@ -1,10 +1,13 @@
 package com.example.movie.page.controller;
 
+import com.example.movie.dto.MemberDTO;
+import com.example.movie.service.MemberService;
 import com.example.movie.service.MovieService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,8 +46,14 @@ public class PageController {
     }
 
     @GetMapping("/movie/{movieCode}")
-    public String movieDetail(@PathVariable int movieCode, Model model) {
+    public String movieDetail(@PathVariable int movieCode, Model model, Authentication authentication) {
         model.addAttribute("movieCode", movieCode);
+
+        MemberDTO memberDTO = memberService.selectMemberDetail(authentication.getName());
+        model.addAttribute("memberDTO", memberDTO);
+        model.addAttribute("memberId", memberDTO.getId());
+        model.addAttribute("nickname", memberDTO.getNickname());
+
         return "movie_detail";
     }
 

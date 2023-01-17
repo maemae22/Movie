@@ -580,8 +580,8 @@
                             </div>
                             <div class="customer_btn">
                                 <button type="button" style="width:80px; float:left;" class="round inred" id="btn_list"><span>목록으로</span></button>
-                                <button type="button" class="round inblack" id="btn_editBoard"><span>수정</span></button>
-                                <button type="button" class="round inblack" id="btn_deleteBoard"><span>삭제</span></button>
+                                <button th:if="${boardList.nickname} == ${memberDTO.getNickname()}" type="button" class="round inblack" id="btn_editBoard"><span>수정</span></button>
+                                <button th:if="${boardList.nickname} == ${memberDTO.getNickname()}" type="button" class="round inblack" id="btn_deleteBoard"><span>삭제</span></button>
                             </div>
                             <!-- 이전글,다음글 (s) -->
                             <div class="btm_sup_list">
@@ -647,7 +647,7 @@
                 <!-- //Contents End -->
             </div>
             <!-- //Contents Area -->
-            <script type="text/javascript">
+            <script th:inline="javascript">
 
                 $(document).ready(function () {
                     SelectReply();
@@ -817,6 +817,7 @@
                 // 댓글 조회
                 function SelectReply() {
                     let id = [[ ${id} ]];
+                    let nickname = [[ ${memberNickname} ]];
                     console.log("select reply id : " + id);
                     $.ajax({
                         url: "/api/selectReply/" + id,
@@ -829,7 +830,9 @@
                                 con += '<td>' + data[i].nickname + '</td>';
                                 con += '<td id="contentReply'+data[i].id+'">' + data[i].content + '</td>';
                                 con += '<td>' + data[i].indate + '</td>';
-                                con += '<td class="num" id="btn_reply'+data[i].id+'"><button onclick="editReply(\'' + data[i].id + '\',\'Y\')">수정</button> | <button onclick="deleteReply(\'' + data[i].id + '\',\'Y\')">삭제</button></td>';
+                                if (nickname != null && nickname == data[i].nickname) {
+                                    con += '<td class="num" id="btn_reply' + data[i].id + '"><button onclick="editReply(\'' + data[i].id + '\',\'Y\')">수정</button> | <button onclick="deleteReply(\'' + data[i].id + '\',\'Y\')">삭제</button></td>';
+                                }
                                 con += '</tr>';
                             }
                             $('#reply_tbody').html(con);

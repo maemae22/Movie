@@ -38,6 +38,7 @@ public class BoardController {
     public String selectBoardDetail(@PathVariable String id, Model model, Authentication authentication) {
         MemberDTO memberDTO = ms.selectMemberDetail(authentication.getName());
         model.addAttribute("memberDTO", memberDTO);
+        model.addAttribute("memberNickname", memberDTO.getNickname());
         model.addAttribute("boardList", bs.selectBoardDetail(id));
         model.addAttribute("id", id);
         return "boardDetail";

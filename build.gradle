@@ -36,6 +36,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
 	// localhost:8080/swagger-ui.html
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'

@@ -25,7 +25,7 @@ public class PageController {
     MemberService memberService;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, Authentication authentication) {
         ArrayList<HashMap<String, String>> rankLists = ms.selectDailyRank();
         for (HashMap<String, String> rankList : rankLists) {
             String str = rankList.get("movie_img");
@@ -34,6 +34,8 @@ public class PageController {
         }
 
         model.addAttribute("rankLists", rankLists);
+        if(authentication != null) model.addAttribute("loginUser",authentication.getName());   // 로그인 유저 확인 하기 위해 추가됨.
+
         return "index";
     }
 

@@ -3,6 +3,8 @@ package com.example.movie.page.controller;
 import com.example.movie.dto.MemberDTO;
 import com.example.movie.service.MemberService;
 import com.example.movie.service.MovieService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +20,11 @@ import java.util.HashMap;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
+@Api(tags = {"Page Controller"}, description = "메인 페이지 | 영화 페이지 | 영화 상세 페이지")
 public class PageController {
     private final MovieService ms;
 
-    @Autowired
-    MemberService memberService;
-
+    @ApiOperation(value = "메인 페이지", notes = "영화 api 를 사용하여 가져온 일별 박스 오피스 순위를 보여줍니다.")
     @GetMapping("/")
     public String index(Model model, Authentication authentication) {
         ArrayList<HashMap<String, String>> rankLists = ms.selectDailyRank();

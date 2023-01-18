@@ -2,9 +2,11 @@ package com.example.movie.page.controller;
 
 import com.example.movie.dto.MemberDTO;
 import com.example.movie.service.MemberService;
+import com.example.movie.dto.MovieDTO;
 import com.example.movie.service.MovieService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import com.example.movie.service.TicketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -63,5 +66,7 @@ public class PageController {
 
         return "movie_detail";
     }
+
+
 
 }

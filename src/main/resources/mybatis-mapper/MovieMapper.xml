@@ -21,6 +21,7 @@
     <select id="selectMovieImg" resultType="com.example.movie.dto.MovieDTO" parameterType="Integer">
         SELECT DISTINCT
             movie_img
+            ,movie_cd
         FROM
             movie_detail
         WHERE

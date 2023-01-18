@@ -50,10 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .cors().disable()
                 .authorizeRequests()
-                .antMatchers("/member/goLogin","/member/signup","/movie"
-                        ,"/movie/**","/","/api/movie/**","/api/comments/**","/api/comment/**")
-//                        ,"/api/comment/BadUp/**"
-//                ,"/api/comment/add/**","/api/comment/","/api/comment/update/**","/api/comment/delete/**")
+                .antMatchers("/member/goLogin","/member/signup","/movie", "/", "/api/movies", "/api/movie/**")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()

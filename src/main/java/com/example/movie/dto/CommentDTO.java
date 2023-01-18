@@ -15,6 +15,7 @@ public class CommentDTO {
     private Long memberId;
     private Long movieId;
     private String content;
+    private String nickname;
     private LocalDateTime indate;
     private int good;
     private int bad;

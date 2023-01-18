@@ -17,7 +17,7 @@
                     <input class="btn btn-primary" type="submit" value="로그아웃">
                 </form>
 
-                <td th:if="${memberDTO.role.toString().equals('ADMIN')}">
+                <td th:if="${memberDTO.role.toString().equals('ROLE_ADMIN')}">
                     <p class="text-center mt-4"><a href="/admin" class="link-secondary">회원 정보 보러가기</a></p>
                 </td>
             </div>

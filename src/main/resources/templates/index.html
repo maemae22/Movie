@@ -49,9 +49,10 @@
                         <li><a href="/">영화관</a></li>
                         <li><a href="/">특별관</a></li>
                         <li><a href="/">스토어</a></li>
-                        <li><a href="/member/signup">회원가입</a></li>
-                        <li><a href="/member/login" th:if="${session.nickname == null}">로그인</a></li>
-                        <li><a href="/member" th:if="${session.nickname != null}" style="font-size: 15px">마이페이지</a></li>
+                        <li><a href="/member/signup" th:if="${loginUser == null}">회원가입</a></li>
+                        <li><a href="/member/goLogin" th:if="${loginUser == null}">로그인</a></li>
+                        <li><a href="/member" th:if="${loginUser != null}" style="font-size: 15px">마이페이지</a></li>
+                        <li><a href="/logout" th:if="${loginUser != null}">로그아웃</a></li>
                     </ul>
                 </nav>
             </div>
@@ -448,7 +449,7 @@
 
                 <!-- card -->
                 <article class="help_box2">
-                    <h3>메가박스 할인카드</h3>
+                    <h3>무비 할인카드</h3>
                     <div class="card">
                         <ul>
                             <li>
@@ -944,7 +945,7 @@
                     </ul>
                     <address>
                         <p>서울특별시 강남구 역삼동 826-21(미왕빌딩)<br><span class="bar2">대표자명 중꺾마</span> 개인정보보호 <br><span class="bar2">사업자등록번호 123-45-67890</span> 통신판매업신고번호 제 833호</p>
-                        <p>Copyright 2021 by The 중꺾마 Inc. All right reserved</p>
+                        <p>Copyright 2023 by The 중꺾마 Inc. All right reserved</p>
                     </address>
                 </div>
             </div>

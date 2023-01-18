@@ -72,4 +72,75 @@
 		    *
 		FROM movie_detail
 	</select>
+
+	<select id="selectOrderById" parameterType="Long" resultType="com.example.movie.dto.TicketDTO">
+		SELECT
+			id
+			 ,ticketNumber
+			 ,movieDate
+			 ,selectedSeat
+			 ,payMoney
+			 ,movieTitle
+			 ,selectedTheater
+		FROM
+			ticket
+		WHERE
+			member_id = #{member_id}
+		  AND
+			orderStatus = 'Y'
+		ORDER BY
+			id
+				DESC
+			LIMIT 1
+	</select>
+
+	<select id="selectOrderByMember" parameterType="Long" resultType="com.example.movie.dto.TicketDTO">
+		SELECT
+			id
+			 ,ticketNumber
+			 ,movieDate
+			 ,selectedSeat
+			 ,payMoney
+			 ,movieTitle
+			 ,selectedTheater
+		FROM
+			ticket
+		WHERE
+			member_id = #{member_id}
+		  AND
+			orderStatus = 'Y'
+		ORDER BY
+			id
+				DESC
+	</select>
+
+	<select id="selectCancelOrder" parameterType="Long" resultType="com.example.movie.dto.TicketDTO">
+		SELECT
+			id
+			 ,ticketNumber
+			 ,movieDate
+			 ,selectedSeat
+			 ,payMoney
+			 ,movieTitle
+			 ,selectedTheater
+			 ,payDate
+		FROM
+			ticket
+		WHERE
+			member_id = #{member_id}
+		  AND
+			orderStatus = 'N'
+		ORDER BY
+			id
+				DESC
+	</select>
+
+	<update id="updateOrderStatus" parameterType="Long">
+		UPDATE
+			ticket
+		SET
+			orderStatus = 'N'
+		WHERE
+			id = #{id}
+	</update>
 </mapper>

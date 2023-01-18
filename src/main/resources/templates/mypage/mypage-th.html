@@ -32,7 +32,7 @@
                             <em>예매번호</em>
                             <strong th:if="${recentOrder != null}" th:text="${recentOrder.id}">0056-0102-4966-250</strong>
                             <strong th:unless="${recentOrder != null}" ></strong>
-                            <span th:if="${recentOrder != null}" th:text="${recentOrder.indate}">(2023.01.02)</span>
+                            <span th:if="${recentOrder != null}" th:text="${recentOrder.movieDate}">(2023.01.02)</span>
                             <span th:unless="${recentOrder != null}" ></span>
                         </div>
                         <div class="box-image">
@@ -46,22 +46,22 @@
                         <div class="box-contents has_not_storeitem">
                             <dl>
                                 <dt>
-                                    <em th:if="${recentMovie != null}" th:text="${recentMovie.movieNm}">아바타-물의 길(3D)</em>
-                                    <em th:unless="${recentMovie != null}"></em>
+                                    <em th:if="${recentOrder != null}" th:text="${recentOrder.movieTitle}">아바타-물의 길(3D)</em>
+                                    <em th:unless="${recentOrder != null}"></em>
                                 </dt>
                                 <dd>
                                     <em>관람극장</em>
-                                    <strong th:if="${recentTheater != null}" th:text="${recentTheater.selectedTheater}">CGV 강남</strong>
-                                    <strong th:unless="${recentTheater != null}" th:text="${recentTheater}"></strong>
+                                    <strong th:if="${recentOrder != null}" th:text="${recentOrder.selectedTheater}">CGV 강남</strong>
+                                    <strong th:unless="${recentOrder != null}" th:text="${recentOrder}"></strong>
                                 </dd>
                                 <dd>
                                     <em>관람일시</em>
-                                    <strong th:if="${recentOrder != null}" th:text="${recentOrder.getScreenDate()}">2023.01.08(일) 20:00</strong>
+                                    <strong th:if="${recentOrder != null}" th:text="${recentOrder.movieDate}">2023.01.08(일) 20:00</strong>
                                     <strong th:unless="${recentOrder != null}" ></strong>
                                 </dd>
                                 <dd>
                                     <em>관람좌석</em>
-                                    <strong th:if="${recentOrder != null}" th:text="${recentOrder.getSeat()}">H 14</strong>
+                                    <strong th:if="${recentOrder != null}" th:text="${recentOrder.selectedSeat}">H 14</strong>
                                     <strong th:unless="${recentOrder != null}"></strong>
                                 </dd>
                             </dl>
@@ -71,7 +71,7 @@
                                 <dl>
                                     <dt>총 결제금액</dt>
                                     <dd>
-                                        <strong class="txt-lightblue" th:if="${recentOrder != null}" th:text="${recentOrder.getTotalPrice()} + '원'">17,000원</strong>
+                                        <strong class="txt-lightblue" th:if="${recentOrder != null}" th:text="${recentOrder.payMoney} + '원'">17,000원</strong>
                                         <strong class="txt-lightblue" th:unless="${recentOrder != null}"></strong>
                                     </dd>
                                 </dl>
@@ -103,8 +103,6 @@
 <script th:inline="javascript">
     function submitMail() {
         let mail = [[ ${recentOrder} ]];
-        let movie = [[ ${recentMovie} ]];
-        let theater = [[ ${recentTheater} ]];
 
         if(confirm("예매내역 전달함?"));
 
@@ -113,12 +111,12 @@
             type:'GET',
             data: {
                 'id': mail.id,
-                'screenDate': mail.screenDate,
-                'seat': mail.seat,
-                'ticketCount': mail.ticketCount,
-                'totalPrice': mail.totalPrice,
-                'movieNm': movie.movieNm,
-                'selectedTheater': theater.selectedTheater
+                'screenDate': mail.movieDate,
+                'seat': mail.selectedSeat,
+                'ticketCount': mail.ticketNumber,
+                'totalPrice': mail.payMoney,
+                'movieTitle': mail.movieTitle,
+                'selectedTheater': mail.selectedTheater
             },
             success: function (data) {
                 console.log(data);
@@ -130,21 +128,25 @@
     function noshowYN() {
         let mail = [[ ${recentOrder} ]];
 
-        if (confirm("예매 취소함?"));
-
-        $.ajax({
-            url: '/ticket',
-            type: 'PUT',
-            data: {'id':mail.id},
-            success: function (data) {
-                if (data == 'success') {
-                    alert("예매를 취소했습니다.")
-                    location.reload();
-                }else{
-                    alert("예매 취소를 실패 하였습니다.");
+        if (confirm("예매 취소함?")) {
+            $.ajax({
+                url: '/ticket',
+                type: 'PUT',
+                data: {'id':mail.id},
+                success: function (data) {
+                    if (data === 'success') {
+                        alert("예매를 취소했습니다.")
+                        location.reload();
+                    }else{
+                        alert("예매 취소를 실패 하였습니다.");
+                    }
                 }
-            }
-        })
+            });
+        } else {
+            location.href="/member"
+        }
+
+
     }
 </script>
 </body>

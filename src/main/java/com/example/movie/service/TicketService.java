@@ -59,4 +59,37 @@ public class TicketService {
 		list = repo.getTicketList(userId);
 		return list;
 	}
+
+	public TicketDTO selectOrderById(Long member_id) {
+		if (repo.selectOrderById(member_id) == null) {
+			return null;
+		} else {
+			return repo.selectOrderById(member_id);
+		}
+	}
+
+	public ArrayList<TicketDTO> selectOrderByMember(Long member_id) {
+
+		if (repo.selectOrderByMember(member_id) == null) {
+			return null;
+		} else {
+			return repo.selectOrderByMember(member_id);
+		}
+	}
+
+
+	public ArrayList<TicketDTO> selectCancelOrder(Long member_id) {
+		return repo.selectCancelOrder(member_id);
+	}
+
+
+	public String updateOrderStatus(Long id) {
+		int result = repo.updateOrderStatus(id);
+
+		if (result == 1) {
+			return "success";
+		} else {
+			return "failed";
+		}
+	}
 }

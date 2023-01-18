@@ -1,0 +1,37 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="headerFragment">
+    <!-- header -->
+    <header id="header">
+        <div class="container">
+            <div class="row">
+                <div class="header clearfix">
+                    <h1>
+                        <a href="/">
+                            <em><img src="https://img.cgv.co.kr/R2014/images/common/logo/logoRed.png" alt=""></em>
+                            <span>CULTUREPLEX</span>
+                        </a>
+                    </h1>
+                    <div id="mNav">
+                        <h2 class="ir_so">전체메뉴</h2>
+                        <a href="/" class="ham"><span></span></a>
+                    </div>
+                    <nav class="nav">
+                        <ul class="clearfix">
+                            <li><a href="/movie">영화</a></li>
+                            <li><a href="/">큐레이션</a></li>
+                            <li><a href="/">영화관</a></li>
+                            <li><a href="/">특별관</a></li>
+                            <li><a href="/">스토어</a></li>
+                            <li><a href="/member/signup" th:if="${loginUser == null}">회원가입</a></li>
+                            <li><a href="/member/goLogin" th:if="${loginUser == null}">로그인</a></li>
+                            <li><a href="/member" th:if="${loginUser != null}" style="font-size: 15px">마이페이지</a></li>
+                            <li><a href="/logout" th:if="${loginUser != null}">로그아웃</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- //header -->
+</th:block>
+</html>

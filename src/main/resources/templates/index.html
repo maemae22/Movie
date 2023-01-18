@@ -1,23 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="author" content="중꺾마">
-    <meta name="description" content="영화 예매 사이트 클론 코딩.">
-    <meta name="keywords" content="CGV, 메가박스, 롯데시네마">
-    <title>영화 예매사이트 클론 코딩</title>
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/swiper.css">
-
-    <!-- 웹 폰트 -->
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&subset=korean" rel="stylesheet">
-</head>
+<!--<head>-->
+<th:block th:replace="fragments/head :: headFragment"></th:block>
+<!--</head>-->
 
 <body>
 <!-- 스킵 메뉴 -->
@@ -28,37 +14,8 @@
 </div>
 <!-- //스킵 메뉴 -->
 
-<header id="header">
-    <div class="container">
-        <div class="row">
-            <div class="header clearfix">
-                <h1>
-                    <a href="/">
-                        <em><img src="https://img.cgv.co.kr/R2014/images/common/logo/logoRed.png" alt=""></em>
-                        <span>CULTUREPLEX</span>
-                    </a>
-                </h1>
-                <div id="mNav">
-                    <h2 class="ir_so">전체메뉴</h2>
-                    <a href="/" class="ham"><span></span></a>
-                </div>
-                <nav class="nav">
-                    <ul class="clearfix">
-                        <li><a href="/movie">영화</a></li>
-                        <li><a href="/">큐레이션</a></li>
-                        <li><a href="/">영화관</a></li>
-                        <li><a href="/">특별관</a></li>
-                        <li><a href="/">스토어</a></li>
-                        <li><a href="/member/signup" th:if="${loginUser == null}">회원가입</a></li>
-                        <li><a href="/member/goLogin" th:if="${loginUser == null}">로그인</a></li>
-                        <li><a href="/member" th:if="${loginUser != null}" style="font-size: 15px">마이페이지</a></li>
-                        <li><a href="/logout" th:if="${loginUser != null}">로그아웃</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
+<!--<header>-->
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
 <!-- //header -->
 
 <section id="banner">
@@ -912,46 +869,8 @@
 <!-- //help -->
 
 <!-- footer -->
-<footer id="footer">
-    <div id="footer_sns">
-        <div class="container">
-            <div class="footer_sns">
-                <ul>
-                    <li class="icon s1"><a href="#"><span class="ir_pm">트위터</span></a></li>
-                    <li class="icon s2"><a href="#"><span class="ir_pm">페이스북</span></a></li>
-                    <li class="icon s3"><a href="#"><span class="ir_pm">인스타그램</span></a></li>
-                    <li class="icon s4"><a href="#"><span class="ir_pm">구글플레이</span></a></li>
-                    <li class="icon s5"><a href="#"><span class="ir_pm">아이폰 앱스토어</span></a></li>
-                </ul>
-                <div class="tel">
-                    <a href="#">ARS <em>1544-0070</em></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="footer_info">
-        <div class="container">
-            <div class="row">
-                <div class="footer_info">
-                    <h2><img src="" alt=""></h2>
-                    <ul>
-                        <li><a href="">회사소개</a></li>
-                        <li><a href="">채용정보</a></li>
-                        <li><a href="">제휴/광고/부대사업 문의</a></li>
-                        <li><a href="">이용약관</a></li>
-                        <li><a href="">개인정보처리방침</a></li>
-                        <li><a href="">고객센터</a></li>
-                        <li><a href="">윤리경영</a></li>
-                    </ul>
-                    <address>
-                        <p>서울특별시 강남구 역삼동 826-21(미왕빌딩)<br><span class="bar2">대표자명 중꺾마</span> 개인정보보호 <br><span class="bar2">사업자등록번호 123-45-67890</span> 통신판매업신고번호 제 833호</p>
-                        <p>Copyright 2023 by The 중꺾마 Inc. All right reserved</p>
-                    </address>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+<!--</footer>-->
 
 <!-- 트레일러 -->
 <aside id="blackout" class="overlay">

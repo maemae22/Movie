@@ -119,6 +119,12 @@ public class TicketController {
             return "결제가 실패했습니다.";
         }
 }
+    @ApiOperation(value = "예매 취소", notes = "선택한 예매 내역을 취소한다.")
+    @ResponseBody
+    @PutMapping("/ticket")
+    public String updateOrderStatus(Long id) {
+        return ts.updateOrderStatus(id);
+    }
 }
 
 

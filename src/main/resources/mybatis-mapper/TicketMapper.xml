@@ -6,7 +6,7 @@
 	<insert id="insertTicket" parameterType="com.example.movie.dto.TicketDTO">
 
 		INSERT INTO ticket
-			(userId,
+			(member_id,
 			 movieTitle,
 			 movieDate,
 			 movieStartTime,
@@ -18,7 +18,7 @@
 			 )
 
 		VALUES
-		    (#{userId},
+		    (#{memberId},
 		     #{movieTitle},
 		     #{movieDate},
 		     #{movieStartTime},
@@ -31,29 +31,45 @@
 
 	</insert>
 
+	<update id="updateTicket" parameterType="Long">
+		UPDATE ticket
+		SET payDate = NOW(), orderStatus = 'Y'
+		where id = #{id}
+	</update>
+
 	<select id="getTicket" resultType="com.example.movie.dto.TicketDTO">
 		select *
 		from ticket
-		where id = (select max(id) from ticket);
+		where id = (select max(id) from ticket)
 
 	</select>
 
-	<select id="getTicketList" parameterType="String" resultType="com.example.movie.dto.TicketDTO">
+<!--	<select id="getTicketList" parameterType="String" resultType="com.example.movie.dto.TicketDTO">-->
+<!--		SELECT-->
+<!--			(id,-->
+<!--			 member_id,-->
+<!--			 movieTitle,-->
+<!--			 movieDate,-->
+<!--			 movieStartTime,-->
+<!--			 selectedTheater,-->
+<!--			 theaterDetail,-->
+<!--			 ticketNumber,-->
+<!--			 selectedSeat,-->
+<!--			 payMoney,-->
+<!--				)-->
+<!--		FROM ticket-->
+<!--		WHERE member_id = #{memberId}-->
+<!--	</select>-->
+
+	<select id="getMovieDTO" parameterType="String" resultType="com.example.movie.dto.MovieDTO">
+		select *
+		from movie_detail
+		where movie_nm = #{movieTitle}
+	</select>
+
+	<select id="getMovieList" resultType="com.example.movie.dto.MovieDTO">
 		SELECT
-			(id,
-			 userId,
-			 movieTitle,
-			 movieDate,
-			 movieStartTime,
-			 selectedTheater,
-			 theaterDetail,
-			 ticketNumber,
-			 selectedSeat,
-			 payMoney,
-			 payDate
-				)
-		FROM ticket
-		WHERE userId = #{userId}
+		    *
+		FROM movie_detail
 	</select>
-
 </mapper>

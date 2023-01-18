@@ -10,9 +10,8 @@ import lombok.*;
 public class InfoDTO {
 
 	int index;
-	String rank;
-	String img;
-	String movieTitle;
+	String movieImg;
+	String movieNm;
 
 }
 	

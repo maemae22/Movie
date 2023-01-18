@@ -23,7 +23,7 @@
 }
 
 .movie-reserve-list {
-    padding: 15px;
+    padding: 32px;
     display: flex;
     flex-wrap: wrap;
     height:400px;
@@ -32,24 +32,22 @@
 }
 
 .movie-reserve {
-    margin-top:25px;
+    margin-top:31px;
     width: 400px;
     height: 380px;
     padding: 13px 10px;
 
 }
 .poster{
-    width: 100px;
-    height: 140px;
     margin-left:60px;
-    margin-top:75px;
+    margin-top:72px;
     float:left;
 }
 
 .complete-message{
     font-size: 25px;
     text-align: center;
-    margin-top:40px;
+    margin-top:45px;
     font-weight: bold;
     padding-bottom: 5px;
 }
@@ -196,28 +194,15 @@
     font-weight:bold;
     padding:15px;
     margin-left:10px;
-    margin-right:30px;
 
 }
 
 .main_btn:hover {
-    background-color: #730f0f;
+    background-color: #c01b1b;
     transition: 0.7s;
 }
 
-.mypage_btn {
-    margin-left:30px;
-    font-size:18px;
-    color:white;
-    background-color:darkred;
-    border:none;
-    border-radius:10px;
-    font-weight:bold;
-    padding:15px;
-
-}
-
-.mypage_btn:hover {
-    background-color: #730f0f;
-    transition: 0.7s;
+.me-image{
+    text-align: center;
+    margin-top: 70px;
 }

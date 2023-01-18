@@ -1,6 +1,6 @@
 package com.example.movie.service;
 
-
+import com.example.movie.dto.MovieDTO;
 import com.example.movie.dto.TicketDTO;
 import com.example.movie.repository.TicketRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -22,17 +22,32 @@ public class TicketService {
 	}
 
 	public int insertTicket(TicketDTO dto) {
-		log.info("dto = {}", dto);
 		int result = 0;
 		try {
 			result = repo.insertTicket(dto);
-			System.out.println(result);
 		} catch (Exception e){
 			result = -1;
 		}
 		return result;
 
 	}
+
+	public int updateTicket(Long id){
+		int result = 0;
+		try {
+			result = repo.updateTicket(id);
+
+		} catch (Exception e){
+			result = -1;
+		}
+		return result;
+	}
+
+	public List<MovieDTO> getMovieList(){
+		return repo.getMovieList();
+	}
+
+	public MovieDTO getMovieDTO(String movieNm) {return repo.getMovieDTO(movieNm);}
 
 	public TicketDTO getTicket() {
 		TicketDTO ticket = repo.getTicket();

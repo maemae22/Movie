@@ -1,6 +1,8 @@
 package com.example.movie.page.controller;
 
+import com.example.movie.dto.MovieDTO;
 import com.example.movie.service.MovieService;
+import com.example.movie.service.TicketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -41,10 +44,6 @@ public class PageController {
         return "movie_detail";
     }
 
-    @GetMapping("/ticket")
-    public String ticketPage() {
-        return "ticket";
-    }
 
 
 }

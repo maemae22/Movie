@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function add() {
     $.ajax({
         url: 'crawling.do',
-        type: 'get',
+        type: 'POST',
         success: function(data) {
             crawlingData = setData(data);
             console.log(crawlingData);
@@ -75,7 +75,7 @@ function getMovieList(item) {
     console.log(item);
     return `<div class="movie-list">
 
-    <button class="movie-list-title">${item.movieTitle}</button>
+    <button class="movie-list-title">${item.movieNm}</button>
 </div>`;
 }
 

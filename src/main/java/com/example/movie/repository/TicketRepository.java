@@ -1,5 +1,6 @@
 package com.example.movie.repository;
 
+import com.example.movie.dto.MovieDTO;
 import com.example.movie.dto.TicketDTO;
 import com.example.movie.mapper.TicketMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +21,18 @@ public class TicketRepository {
 		return mapper.insertTicket(dto);
 	}
 
-	public TicketDTO getTicket() {
-
-		return mapper.getTicket();
+	public int updateTicket(Long id){
+		return mapper.updateTicket(id);
 	}
 
-	public List<TicketDTO> getTicketList(String userId) {
-
-		return mapper.getTicketList(userId);
+	public List<MovieDTO> getMovieList(){
+		return mapper.getMovieList();
 	}
-	
-	
+
+	public MovieDTO getMovieDTO(String movieTitle){return mapper.getMovieDTO(movieTitle);}
+
+	public TicketDTO getTicket() { return mapper.getTicket();}
+
+	public List<TicketDTO> getTicketList(String userId) { return mapper.getTicketList(userId);}
 
 }

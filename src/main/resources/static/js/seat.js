@@ -1,7 +1,6 @@
-let test = [];
 let flag = 0;
+let test = [];
 let selectedSeatsArray = new Array();
-let theaterDetail = '관6층';
 const seatWrapper = document.querySelector('.seat-wrapper');
 let clicked = '';
 let div = '';
@@ -13,7 +12,6 @@ const reserveNumber = document.querySelector('.reserve-number');
 const selectSeatListNormal = document.querySelectorAll(
     '.select-seat-ul-normal li'
 );
-
 const selectSeatListTeen = document.querySelectorAll('.select-seat-ul-teen li');
 const selectSeatListOld = document.querySelectorAll('.select-seat-ul-old li');
 let selectSeatListUlActive = '';
@@ -36,8 +34,6 @@ const selectedMovie = document.querySelector('.selected-movie');
 const selectedTheaterPlaceInfo = document.querySelectorAll(
     '.selected-theater-place-info'
 );
-const selectedTheaterPlace = document.querySelectorAll(
-    '.selected-theater-place');
 const theaterTime = document.querySelector('.theater-time');
 const theaterDate = document.querySelector('.theater-date');
 const ticketPrice = document.querySelector('.ticket-price');
@@ -282,14 +278,11 @@ function mapping(input, i, j) {
     }
 }
 
-//form 제출시 hidden설정하기
-
 
 function reserve() {
     title.value = selectedMovie.innerHTML;
     selectedTheater.value =
-        selectedTheaterPlaceInfo[0].innerHTML +
-        ' ' + selectedTheaterPlaceInfo[1].innerHTML;
+        selectedTheaterPlaceInfo[0].innerHTML + ''+ selectedTheaterPlaceInfo[1].innerHTML;
     reserveDate.value = theaterDate.innerHTML;
     runningTime.value = theaterTime.innerHTML;
     ticketNumber.value = reserveNumber.innerHTML;

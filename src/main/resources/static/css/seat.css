@@ -9,7 +9,7 @@
 
 .select-wrapper {
     width: 900px;
-    height:980px;
+    height:950px;
     background-color: #F2F0E5;
     margin: 0 auto;
     border-left: 1px solid #dddddd;
@@ -419,4 +419,8 @@ body {
     border:0px;
     width:110px;
     border-radius:10px;
+}
+.facam-image{
+    text-align: center;
+    margin-top: 70px;
 }

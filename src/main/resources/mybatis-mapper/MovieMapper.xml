@@ -23,7 +23,7 @@
             movie_img
             ,movie_cd
         FROM
-            movie_detail
+            MOVIE_DETAIL
         WHERE
             movie_cd = #{movie_id}
     </select>
@@ -77,11 +77,11 @@
                movie_nm_en,
                director_nm,
                prdt_year
-        FROM movie_detail;
+        FROM MOVIE_DETAIL;
     </select>
 
     <update id="updateMvDtImgAndSummary" parameterType="HashMap">
-        UPDATE movie_detail
+        UPDATE MOVIE_DETAIL
         SET movie_img = #{movieImg},
             summary = #{summary}
         WHERE open_dt = #{openDt}
@@ -94,7 +94,7 @@
                a.watch_grade_nm,
                a.movie_nm,
                b.movie_cd
-        FROM movie_detail a INNER JOIN daily_boxoffice b ON a.movie_cd = b.movie_cd
+        FROM MOVIE_DETAIL a INNER JOIN DAILY_BOXOFFICE b ON a.movie_cd = b.movie_cd
         WHERE b.indate = current_date;
     </select>
 

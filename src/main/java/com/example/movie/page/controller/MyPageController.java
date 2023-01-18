@@ -22,31 +22,36 @@ import java.util.List;
 @Controller
 public class MyPageController {
     private final MemberService ms;
-    private final OrderService os;
     private final MovieService movieService;
     private final TheaterService ts;
     private final CommentService cs;
+    private final TicketService ticketService;
 
     @GetMapping
     @ApiOperation(value = "마이페이지 홈 페이지 조회", notes = "최근 예매내역, 댓글 수, 내 정보를 조회한다.")
     public String myPage(Model model, @ApiIgnore Authentication authentication) {
         MemberDTO memberDTO = ms.selectMemberDetail(authentication.getName());
 
-        ArrayList<OrderDTO> orderList = os.selectOrderByMember(memberDTO.getId());
+        ArrayList<TicketDTO> orderList = ticketService.selectOrderByMember(memberDTO.getId());
 
-        OrderDTO order = os.selectOrderById(memberDTO.getId());
-        MovieDTO movie = movieService.selectMovieImg(memberDTO.getId());
-        DailyMovieDTO movieDTO = movieService.selectMovieName(memberDTO.getId());
-        TheaterDTO theaterDTO = ts.selectTheaterName(memberDTO.getId());
+        TicketDTO ticket = ticketService.selectOrderById(memberDTO.getId());
+
+        if (ticket == null) {
+            MovieDTO movie = ticketService.getMovieDTO(null);
+            model.addAttribute("recentMovieImg", movie);
+        } else {
+            MovieDTO movie = ticketService.getMovieDTO(ticket.getMovieTitle());
+            String movieUrl = movie.getMovieImg().split("\\|")[0];
+            movie.setMovieImg(movieUrl);
+            model.addAttribute("recentMovieImg", movie);
+        }
 
         ArrayList<CommentDTO> commentList = cs.selectComment(memberDTO.getId());
 
         model.addAttribute("memberDTO", memberDTO);
         model.addAttribute("orderList", orderList);
-        model.addAttribute("recentOrder", order);
-        model.addAttribute("recentMovieImg", movie);
-        model.addAttribute("recentMovie", movieDTO);
-        model.addAttribute("recentTheater", theaterDTO);
+        model.addAttribute("recentOrder", ticket);
+
         model.addAttribute("commentList", commentList);
 
         return "/mypage/mypage";
@@ -112,26 +117,25 @@ public class MyPageController {
     public String userOrder(@ApiIgnore Authentication authentication, Model model) {
         MemberDTO memberDTO = ms.selectMemberDetail(authentication.getName());
 
-        ArrayList<OrderDTO> orderList = os.selectOrderByMember(memberDTO.getId());
-        ArrayList<OrderDTO> cancelList = os.selectCancelOrder(memberDTO.getId());
+        ArrayList<TicketDTO> orderList = ticketService.selectOrderByMember(memberDTO.getId());
+        ArrayList<TicketDTO> cancelList = ticketService.selectCancelOrder(memberDTO.getId());
 
-        ArrayList<DailyMovieDTO> movieList = movieService.selectMovieNames(memberDTO.getId());
-        ArrayList<MovieDTO> movie = movieService.selectMovieImgs(memberDTO.getId());
-        ArrayList<TheaterDTO> theaterList = ts.selectTheaterNames(memberDTO.getId());
+        TicketDTO ticket = ticketService.selectOrderById(memberDTO.getId());
 
-        ArrayList<DailyMovieDTO> movieCancelList = movieService.selectCancelMovieNames(memberDTO.getId());
-        ArrayList<TheaterDTO> theaterCancelList = ts.selectCancelTheaterName(memberDTO.getId());
+        if (ticket == null) {
+            MovieDTO movie = ticketService.getMovieDTO(null);
+            model.addAttribute("movie", movie);
+        } else {
+            MovieDTO movie = ticketService.getMovieDTO(ticket.getMovieTitle());
+            String movieUrl = movie.getMovieImg().split("\\|")[0];
+            movie.setMovieImg(movieUrl);
+
+            model.addAttribute("movie", movie);
+        }
 
         model.addAttribute("memberDTO", memberDTO);
         model.addAttribute("orderList", orderList);
         model.addAttribute("cancelList", cancelList);
-
-        model.addAttribute("movieList", movieList);
-        model.addAttribute("movie", movie);
-        model.addAttribute("theaterList", theaterList);
-
-        model.addAttribute("movieCancelList", movieCancelList);
-        model.addAttribute("theaterCancelList", theaterCancelList);
         return "/mypage/user-order";
     }
 
@@ -143,8 +147,8 @@ public class MyPageController {
 
     @ApiOperation(value = "영화관 정보 조회", notes = "극장의 정보를 조회한다.")
     @GetMapping("/theater/detail/{id}")
-    public String theaterDetail(@PathVariable Long id, Model model) {
-        TheaterDTO theater = ts.selectTheaterData(id);
+    public String theaterDetail(@PathVariable String selectedTheater, Model model) {
+        TheaterDTO theater = ts.selectTheaterData(selectedTheater);
         model.addAttribute("theater", theater);
         return "mypage/map";
     }

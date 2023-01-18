@@ -1,8 +1,7 @@
 package com.example.movie.map.controller;
 
-import com.example.movie.dto.OrderDTO;
+import com.example.movie.dto.TicketDTO;
 import com.example.movie.service.MemberService;
-import com.example.movie.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -22,27 +21,24 @@ import java.util.Map;
 public class MapController {
 
     @Autowired
-    OrderService or;
-
-    @Autowired
     MemberService memberService;
 
     @ApiOperation(value = "예매 내역 전달", notes = "slack으로 내 예매 내역을 전달합니다.")
     @ResponseBody
     @GetMapping("/send")
-    public void send(OrderDTO orderDTO, String movieNm, String selectedTheater) {
+    public void send(TicketDTO ticketDTO) {
         RestTemplate restTemplate = new RestTemplate();
 
         Map<String, Object> request = new HashMap<>();
         request.put("username", "예매내역확인"); //slack bot name
         request.put("text",
-                "예매 번호 : " + orderDTO.getId() + "\n"
-                + "영화 제목 : " + movieNm + "\n"
-                + "관람 극장 : " + selectedTheater + "\n"
-                + "관람 일시 : " + orderDTO.getScreenDate() + "\n"
-                + "관람 좌석 : " + orderDTO.getSeat() + "\n"
-                + "티켓 수 : " + orderDTO.getTicketCount() + "\n"
-                + "총 결제 금액 : " + orderDTO.getTotalPrice()); //전송할 메세지
+                "예매 번호 : " + ticketDTO.getId() + "\n"
+                + "영화 제목 : " + ticketDTO.getMovieTitle() + "\n"
+                + "관람 극장 : " + ticketDTO.getSelectedTheater() + "\n"
+                + "관람 일시 : " + ticketDTO.getMovieDate() + "\n"
+                + "관람 좌석 : " + ticketDTO.getSelectedSeat() + "\n"
+                + "티켓 수 : " + ticketDTO.getTicketNumber() + "\n"
+                + "총 결제 금액 : " + ticketDTO.getPayMoney()); //전송할 메세지
 
         request.put("icon_emoji", "https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86072/86072_126.jpg"); //slack bot image
 

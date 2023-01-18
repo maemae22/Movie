@@ -31,9 +31,9 @@
         </div>
         <div class="box-info">
           <div class="box-image">
-            <a th:if="${movie != null}" th:href="'/movie/' + ${movie[i.index].movieCd}">
+            <a th:if="${movie != null}" th:href="'/movie/' + ${movie.movieCd}">
               <span class="thumb-image">
-                <img th:if="${movie != null}" th:src="${movie[i.index].movieImg}" alt="아바타-물의 길(3D) 포스터" onerror="errorImage(this)">
+                <img th:if="${movie != null}" th:src="${movie.movieImg}" alt="아바타-물의 길(3D) 포스터" onerror="errorImage(this)">
                 <img th:unless="${movie != null}" th:src="${null}">
                 <!-- 영상물 등급 노출 변경 2022.08.24 -->
                 <i class="cgvIcon etc age12">12</i>
@@ -44,44 +44,44 @@
           <div class="detail-area">
             <div class="reservation-info-wrap">
               <h2 class="box-contents artHouse">
-                <strong th:if="${movieList != null}" th:text="${movieList[i.index].movieNm}">영화 이름</strong>
-                <span class="res-price" th:text="${orderDTO.totalPrice} + '원'">가 격</span>
+                <strong th:text="${orderDTO.movieTitle}">영화 이름</strong>
+                <span class="res-price" th:text="${orderDTO.payMoney} + '원'">가 격</span>
               </h2>
               <ul class="reservation-mv-info">
                 <li>
                   <dl>
                     <dt>관람극장</dt>
-                    <dd th:if="${theaterList != null}" th:text="${theaterList[i.index].selectedTheater}">극장 이름</dd>
+                    <dd th:text="${orderDTO.selectedTheater}">극장 이름</dd>
                   </dl>
                 </li>
                 <li>
                   <dl>
                     <dt>관람인원</dt>
-                    <dd th:text="${orderDTO.ticketCount} + '명'"></dd>
+                    <dd th:text="${orderDTO.ticketNumber} + '명'"></dd>
                   </dl>
                 </li>
                 <li>
                   <dl>
                     <dt>관람일시</dt>
-                    <dd class="txt-red" th:text="${orderDTO.screenDate}">기간</dd>
+                    <dd class="txt-red" th:text="${orderDTO.movieDate}">기간</dd>
                   </dl>
                 </li>
                 <li>
                   <dl>
                     <dt>관람좌석</dt>
-                    <dd th:text="${orderDTO.seat}">좌석</dd>
+                    <dd th:text="${orderDTO.selectedSeat}">좌석</dd>
                   </dl>
                 </li>
                 <li>
                   <dl>
                     <dt>극장정보</dt>
-                    <dd><button th:if="${theaterList != null}" th:myName="${theaterList[i.index].id}" th:onclick="theaterData(this.getAttribute('myName'))">[극장정보]</button></dd>
+                    <dd><button th:text="${orderDTO.selectedTheater}"> <!-- th:onclick="theaterData(this.getAttribute('myName'))"-->[극장정보]</button></dd>
                   </dl>
                 </li>
                 <li>
                   <dl>
                     <dt>매수</dt>
-                    <dd th:text="${orderDTO.ticketCount} + '매'">1매</dd>
+                    <dd th:text="${orderDTO.ticketNumber} + '매'">1매</dd>
                   </dl>
                 </li>
               </ul>
@@ -121,11 +121,11 @@
         <tbody>
 
         <tr th:if="${cancelList != null}" th:each="cancel, i:${cancelList}">
-          <td th:if="${movieCancelList != null}" th:text="${movieCancelList[i.index].movieNm}">아바타-물의 길(3D)</td>
-          <td th:if="${theaterCancelList != null}" th:text="${theaterCancelList[i.index].selectedTheater}">CGV 강남</td>
-          <td th:text="${cancel.screenDate}">2023.01.08(일) 20:00</td>
-          <td th:text="${cancel.indate}">2023.01.02(월)</td>
-          <td th:text="${cancel.totalPrice} + '원'"></td>
+          <td th:text="${cancel.movieTitle}">아바타-물의 길(3D)</td>
+          <td th:text="${cancel.selectedTheater}">CGV 강남</td>
+          <td th:text="${cancel.movieDate}">2023.01.08(일) 20:00</td>
+          <td th:text="${cancel.payDate}">2023.01.02(월)</td>
+          <td th:text="${cancel.payMoney} + '원'"></td>
         </tr>
 
         </tbody>

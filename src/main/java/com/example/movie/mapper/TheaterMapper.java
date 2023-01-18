@@ -7,9 +7,8 @@ import java.util.List;
 
 @Mapper
 public interface TheaterMapper {
-    TheaterDTO selectTheaterName(Long theater_id);
     List<TheaterDTO> selectTheaters();
-    TheaterDTO selectTheaterData(Long theater_id);
+    TheaterDTO selectTheaterData(String selectedTheater);
 
     int deleteTheater(TheaterDTO theaterDTO);
 

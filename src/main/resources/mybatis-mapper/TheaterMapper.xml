@@ -39,7 +39,7 @@
         FROM
             theater
         WHERE
-            id = #{theater_id}
+            selectedTheater = #{selectedTheater}
     </select>
 
     <delete id="deleteTheater" parameterType="com.example.movie.dto.TheaterDTO">

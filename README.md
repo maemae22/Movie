@@ -4,4 +4,3 @@
 - MySQL, Thymeleaf, Lombok, MyBatis
 - IntelliJ, DBeaver, GitHub, Git, GitKraken, Notion, Slack, Postman, Swagger
 - **회원, 게시판, 예매, 결제** 기능 개발
-- 

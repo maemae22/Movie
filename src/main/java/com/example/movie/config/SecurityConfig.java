@@ -36,7 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/js/**")
                 .antMatchers("/se2/**")
                 .antMatchers("/vendor/**")
-                .antMatchers("/favicon.**");
+                .antMatchers("/favicon.**")
+                .antMatchers("/error")
+                ;
     }
 
     private HttpFirewall defaultHttpFirewall() {
@@ -48,7 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .cors().disable()
                 .authorizeRequests()
-                .antMatchers("/member/goLogin","/member/signup","/movie", "/", "/api/movies", "/api/movie/**")
+                .antMatchers("/member/goLogin","/member/signup","/movie", "/", "/api/movies", "/api/movie/**"
+                ,"/swagger-ui.html","/swagger/**","/swagger-resources/**","/webjars/**","/v2/api-docs`")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()

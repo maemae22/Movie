@@ -34,6 +34,7 @@ const selectedMovie = document.querySelector('.selected-movie');
 const selectedTheaterPlaceInfo = document.querySelectorAll(
     '.selected-theater-place-info'
 );
+const theaterDetailInfo = document.querySelectorAll('.theater-detail');
 const theaterTime = document.querySelector('.theater-time');
 const theaterDate = document.querySelector('.theater-date');
 const ticketPrice = document.querySelector('.ticket-price');
@@ -44,6 +45,7 @@ const reserveButton = document.querySelector('.reserve-button');
 const title = document.querySelector('.title');
 const selectedTheater = document.querySelector('.selectedTheater');
 const reserveDate = document.querySelector('.reserveDate');
+const theaterDetail = document.querySelector('.theaterDetail');
 const runningTime = document.querySelector('.runningTime');
 const ticketNumber = document.querySelector('.ticketNumber');
 const selectedSeat = document.querySelector('.selectedSeat');
@@ -133,9 +135,6 @@ function selectListUiFunction(selectSeatListUlActive) {
             }
         }
 
-        // allNumber = normalNumber + teenNumber + oldNumber;
-        // allMoney = normalMoney + teenMoney + oldMoney;
-        console.log(allNumber + '뭥미');
         ticketPrice.innerHTML = allMoney + '원';
 
         if (allNumber > 16) {
@@ -181,9 +180,6 @@ for (let i = 0; i < 10; i++) {
 }
 
 seat.forEach(data => {
-    //console.log(data.value.substring(1, data.value.length));
-    // console.log(data.value.substring(0, data.value.length - 1));
-    //좌석이 2나 9로 끝나는얘들은 왼쪽이나 오른쪽으로 띄워주기위한 class추가
     if (data.value.substring(1, data.value.length) === '2') {
         data.classList.add('left-margin');
     } else if (data.value.substring(1, data.value.length) === '9') {
@@ -197,8 +193,6 @@ seat.forEach(data => {
         data.classList.add('top-margin');
     }
 });
-
-//TODO 좌석 2개씩은 커플석으로 분리하기위해서 해당 class를 추가해줘야하는데 value가 2로끝나는얘들이랑 7로끝나는 얘들은 class를 추가해주기
 
 function inputClickEvent(input) {
     input.addEventListener('click', function(e) {
@@ -242,6 +236,10 @@ function inputClickEvent(input) {
 
         console.log(selectedSeatsArray.length);
         console.log(selectedSeatsArray);
+
+
+
+
         //좌석번호의 innerHTML 설정
         selectedSeats.innerHTML = selectedSeatsArray;
         reserveNumber.innerHTML = selectedSeatsArray.length;
@@ -278,15 +276,17 @@ function mapping(input, i, j) {
     }
 }
 
-
 function reserve() {
     title.value = selectedMovie.innerHTML;
     selectedTheater.value =
-        selectedTheaterPlaceInfo[0].innerHTML + ''+ selectedTheaterPlaceInfo[1].innerHTML;
+        selectedTheaterPlaceInfo[0].innerHTML;
     reserveDate.value = theaterDate.innerHTML;
+
     runningTime.value = theaterTime.innerHTML;
     ticketNumber.value = reserveNumber.innerHTML;
     selectedSeat.value = selectedSeats.innerHTML;
+    theaterDetail.value = theaterDetailInfo[0].innerHTML;
+
     console.log(allNumber + '임');
     console.log(ticketNumber.value);
     console.log(allNumber === ticketNumber.value);

@@ -13,13 +13,16 @@ public class TheaterRepository {
     @Autowired
     TheaterMapper tm;
 
+    public TheaterDTO selectTheaterName(Long theater_id) {
+        return tm.selectTheaterName(theater_id);
+    }
 
     public List<TheaterDTO> selectTheaters() {
         return tm.selectTheaters();
     }
 
-    public TheaterDTO selectTheaterData(String selectedTheater) {
-        return tm.selectTheaterData(selectedTheater);
+    public TheaterDTO selectTheaterData(Long theater_id) {
+        return tm.selectTheaterData(theater_id);
     }
 
 

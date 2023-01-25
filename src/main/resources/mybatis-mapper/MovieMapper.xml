@@ -85,7 +85,7 @@
         SET movie_img = #{movieImg},
             summary = #{summary}
         WHERE open_dt = #{openDt}
-        AND (director_nm = #{directorNm} or cmp_movie_nm = #{cmpMovieNm});
+        AND (director_nm = #{directorNm} or cmp_movie_nm = #{cmpMovieNm} or company_nm = #{companyNm});
     </update>
 
     <select id="selectDailyRank" resultType="HashMap">

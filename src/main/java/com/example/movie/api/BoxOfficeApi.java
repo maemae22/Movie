@@ -265,6 +265,9 @@ public class BoxOfficeApi {
             //포스터 url
             String strPosterUrl = String.valueOf(objResult.get("posters"));
 
+            //제작사
+            String strCompany = String.valueOf(objResult.get("company"));
+
             MovieDTO movieDTO = new MovieDTO();
 
             movieDTO.setMovieImg(strPosterUrl);
@@ -286,6 +289,12 @@ public class BoxOfficeApi {
             } else {
                 movieDTO.setGenreNm("");
             }
+            if(!strCompany.equals("")){
+                movieDTO.setCompanyNm(strCompany);
+            } else {
+                movieDTO.setCompanyNm("");
+            }
+
             ms.updateMvDtImgAndSummary(movieDTO);
         }
     }

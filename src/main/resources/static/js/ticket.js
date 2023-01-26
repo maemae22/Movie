@@ -6,14 +6,10 @@ const theaterPlace = document.querySelectorAll('.theater-place');
 const reserveTimeWant = document.querySelectorAll('.reserve-time-want');
 const inputTitle = document.querySelector('.title');
 const inputSelectedTheater = document.querySelector('.selectedTheater');
-const inputTheaterDetail = document.querySelector('.theaterDetail');
 const inputReserveDate = document.querySelector('.reserveDate');
 const inputRunningTime = document.querySelector('.runningTime');
 const moveSeatForm = document.querySelector('.moveSeatForm');
 const moveSeatButton = document.querySelector('.moveSeatButton');
-
-
-
 
 
 let year = 0;
@@ -161,20 +157,17 @@ theaterPlace.forEach(list => {
     });
 });
 
-
-$(document).on('click', '.reserve-time-want', function() {
-    $(this).each(function(){
+reserveTimeWant.forEach(list => {
+    list.addEventListener('click', function() {
         const reserveTimeActive = document.querySelectorAll('.reserve-time-active');
         reserveTimeActive.forEach(li => {
             li.classList.remove('reserve-time-active');
         });
-        this.classList.add('reserve-time-active');
-        console.log(this.innerHTML);
-        inputRunningTime.value = this.innerHTML;
-        const detail = $(this).parents().children(".reserve-where").text();
-        inputTheaterDetail.value = detail;
-        });
+        list.classList.add('reserve-time-active');
+        console.log(list.innerHTML);
+        inputRunningTime.value = list.innerHTML;
     });
+});
 
 moveSeatButton.addEventListener('click', function() {
     if (!!inputTitle.value &&
@@ -196,27 +189,4 @@ moveSeatButton.addEventListener('click', function() {
             }
         );
     }
-});
-
-
-reserveDate.addEventListener('click', function() {
-    if (!!inputTitle.value &&
-        !!inputSelectedTheater.value &&
-        !!inputReserveDate.value){
-
-        $.ajax({
-            url:"findTheaters",
-            type:"POST",
-            contentType: "application/json",
-            data: JSON.stringify({
-                "movieName" : inputTitle.value,
-                "selectedTheater" : inputSelectedTheater.value,
-                "movieDate" : inputReserveDate.value
-            }),
-            cache: false
-        }).done(function (fragment) {
-            $(".reserve-time").replaceWith(fragment);
-        })
-    }
-
 });

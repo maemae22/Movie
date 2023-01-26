@@ -41,17 +41,4 @@ public class TheaterService {
             return "failed";
         }
     }
-
-    public String insertSeat(TheaterDTO theaterDTO){
-        int result = tr.insertSeat(theaterDTO);
-        if (result > 0){
-            return "success";
-        } else{
-            return "failed";
-        }
-    }
-
-    public List<TheaterDTO> findTheaters(String selectedTheater, String movieName, String movieDate){
-        return tr.findTheaters(selectedTheater, movieName, movieDate);
-    }
 }

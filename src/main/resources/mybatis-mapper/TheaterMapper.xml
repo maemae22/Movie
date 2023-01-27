@@ -56,4 +56,10 @@
         VALUES
         (#{selectedTheater}, #{latitude}, #{longitude}, #{seats}, #{movieName}, #{movieDate}, #{movieTime})
     </insert>
+
+    <select id="findTheaters" parameterType="String" resultType="com.example.movie.dto.TheaterDTO">
+        SELECT *
+        FROM theater
+        WHERE selectedTheater = #{selectedTheater} AND movieName = #{movieName} AND movieDate = #{movieDate}
+    </select>
 </mapper>

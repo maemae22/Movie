@@ -13,4 +13,6 @@ public interface TheaterMapper {
     int deleteTheater(TheaterDTO theaterDTO);
 
     int insertTheater(TheaterDTO theaterDTO);
+
+    List<TheaterDTO> findTheaters(String selectedTheater, String movieName, String movieDate);
 }

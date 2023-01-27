@@ -1,10 +1,8 @@
 package com.example.movie.controller;
 
-import com.example.movie.dto.InfoDTO;
-import com.example.movie.dto.MemberDTO;
-import com.example.movie.dto.MovieDTO;
-import com.example.movie.dto.TicketDTO;
+import com.example.movie.dto.*;
 import com.example.movie.service.MemberService;
+import com.example.movie.service.TheaterService;
 import com.example.movie.service.TicketService;
 import com.google.gson.Gson;
 import io.swagger.annotations.Api;
@@ -20,7 +18,9 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = {"예매 서비스"}, description = "예매 기능을 담당합니다.")
 @Controller
@@ -28,11 +28,13 @@ public class TicketController {
 
     private final TicketService ts;
     private final MemberService ms;
+    private final TheaterService ths;
 
     @Autowired
-    public TicketController(TicketService ts, MemberService ms) {
+    public TicketController(TicketService ts, MemberService ms,TheaterService ths) {
         this.ts = ts;
         this.ms = ms;
+        this.ths = ths;
     }
 
     private static Logger logger = LoggerFactory.getLogger(TicketController.class);
@@ -67,22 +69,20 @@ public class TicketController {
 
         model.addAttribute("ticket", dto);
 
+        logger.info("티켓 정보= {}", dto.toString());
+
         return "seat";
     }
 
     @ApiOperation(value = "티켓 정보 저장", notes = "티켓의 정보를 DB에 저장 & 결제 페이지를 담당합니다")
     @RequestMapping (value = "payticket.do", method = {RequestMethod.GET, RequestMethod.POST})
     public String payTicket(Model model, TicketDTO dto, @ApiIgnore Authentication authentication){
-        String temp = dto.getSelectedTheater().replaceAll("\\s+", " "); //영화관 정보 세분화후 저장
-        String[] tempList = temp.split(" ");
-        dto.setSelectedTheater(tempList[0]);
-        dto.setTheaterDetail(tempList[1]);
 
         MemberDTO memberDTO = ms.selectMemberDetail(authentication.getName());
         dto.setMemberId(memberDTO.getId());
 
         int result = ts.insertTicket(dto);
-
+        logger.info("좌석 페이지 = {}", dto.toString());
         String money = dto.getPayMoney();
         model.addAttribute("payMoney",  money); // 결제 금액을 결제 페이지로 전달
 
@@ -104,7 +104,6 @@ public class TicketController {
         model.addAttribute("ticket", dto);
         model.addAttribute("movie", movie);
 
-
         return "payComplete";
     }
 
@@ -115,21 +114,30 @@ public class TicketController {
 
         if (amount != "0" || amount !=null){
             return "결제가 성공되었습니다.";
-    } else {
+        } else {
             return "결제가 실패했습니다.";
         }
-}
+    }
     @ApiOperation(value = "예매 취소", notes = "선택한 예매 내역을 취소한다.")
     @ResponseBody
     @PutMapping("/ticket")
     public String updateOrderStatus(Long id) {
         return ts.updateOrderStatus(id);
     }
+
+
+    @ApiOperation(value = "영화관 ajax", notes = "ajax를 이용하여 페이지에 영화관 목록을 갱신합니다.")
+    @PostMapping("findTheaters")
+    public String findTheaters(@RequestBody Map<String, Object> param, Model model){
+        String selectedTheater = (String)param.get("selectedTheater");
+        String movieName = (String)param.get("movieName");
+        String movieDate = (String)param.get("movieDate");
+        List<TheaterDTO> theaters = ths.findTheaters(selectedTheater, movieName, movieDate);
+        theaters.stream().forEach(n-> logger.info("ajax 결과값 = " + n.getMovieTime() +" " + n.getSeats() +" " + n.getTheaterDetail()));
+
+        model.addAttribute("theaters", theaters);
+
+        return "/ticket :: .reserve-time";
+    }
+
 }
-
-
-
-
-
-
-

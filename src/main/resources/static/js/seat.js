@@ -34,6 +34,7 @@ const selectedMovie = document.querySelector('.selected-movie');
 const selectedTheaterPlaceInfo = document.querySelectorAll(
     '.selected-theater-place-info'
 );
+const theaterDetailInfo = document.querySelectorAll('.theater-detail');
 const theaterTime = document.querySelector('.theater-time');
 const theaterDate = document.querySelector('.theater-date');
 const ticketPrice = document.querySelector('.ticket-price');
@@ -44,6 +45,7 @@ const reserveButton = document.querySelector('.reserve-button');
 const title = document.querySelector('.title');
 const selectedTheater = document.querySelector('.selectedTheater');
 const reserveDate = document.querySelector('.reserveDate');
+const theaterDetail = document.querySelector('.theaterDetail');
 const runningTime = document.querySelector('.runningTime');
 const ticketNumber = document.querySelector('.ticketNumber');
 const selectedSeat = document.querySelector('.selectedSeat');
@@ -242,6 +244,10 @@ function inputClickEvent(input) {
 
         console.log(selectedSeatsArray.length);
         console.log(selectedSeatsArray);
+
+
+
+
         //좌석번호의 innerHTML 설정
         selectedSeats.innerHTML = selectedSeatsArray;
         reserveNumber.innerHTML = selectedSeatsArray.length;
@@ -278,15 +284,17 @@ function mapping(input, i, j) {
     }
 }
 
-
 function reserve() {
     title.value = selectedMovie.innerHTML;
     selectedTheater.value =
-        selectedTheaterPlaceInfo[0].innerHTML + ''+ selectedTheaterPlaceInfo[1].innerHTML;
+        selectedTheaterPlaceInfo[0].innerHTML;
     reserveDate.value = theaterDate.innerHTML;
+
     runningTime.value = theaterTime.innerHTML;
     ticketNumber.value = reserveNumber.innerHTML;
     selectedSeat.value = selectedSeats.innerHTML;
+    theaterDetail.value = theaterDetailInfo[0].innerHTML;
+
     console.log(allNumber + '임');
     console.log(ticketNumber.value);
     console.log(allNumber === ticketNumber.value);
@@ -306,7 +314,3 @@ function reserve() {
     }
 };
 ;
-
-
-
-

@@ -47,4 +47,7 @@ public class MovieRepository {
     public DailyMovieDTO selectMovieNameByCode(Integer movie_id) {
         return mm.selectMovieNameByCode(movie_id);
     }
+    public String selectOpenDt(String cmpMovieNm){
+        return mm.selectOpenDt(cmpMovieNm);
+    }
 }

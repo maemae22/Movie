@@ -64,4 +64,7 @@ public class MovieService {
 
         return movie;
     }
+    public String selectOpenDt(String cmpMovieNm){
+        return mr.selectOpenDt(cmpMovieNm);
+    }
 }

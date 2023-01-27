@@ -107,4 +107,10 @@
             movie_cd = #{movie_id}
     </select>
 
+    <select id="selectOpenDt" resultType="String">
+        SELECT open_dt
+        FROM MOVIE_DETAIL
+        WHERE cmp_movie_nm = #{cmpMovieNm}
+    </select>
+
 </mapper>

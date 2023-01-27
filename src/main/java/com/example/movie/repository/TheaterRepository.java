@@ -30,4 +30,7 @@ public class TheaterRepository {
     public int insertTheater(TheaterDTO theaterDTO) {
         return tm.insertTheater(theaterDTO);
     }
+
+    public List<TheaterDTO> findTheaters(String selectedTheater, String movieName, String movieDate){return tm.findTheaters(selectedTheater, movieName, movieDate);}
+
 }

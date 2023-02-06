@@ -265,12 +265,24 @@ public class BoxOfficeApi {
             //포스터 url
             String strPosterUrl = String.valueOf(objResult.get("posters"));
 
+            //제작사
+            String strCompany = String.valueOf(objResult.get("company"));
+
             MovieDTO movieDTO = new MovieDTO();
 
             movieDTO.setMovieImg(strPosterUrl);
             movieDTO.setSummary(strPlotText);
-            movieDTO.setOpenDt(LocalDate.of(Integer.parseInt(strRelDate.substring(0, 4)), Integer.parseInt(strRelDate.substring(4, 6)), Integer.parseInt(strRelDate.substring(6, 8))));
-
+            if(!strRelDate.equals("")) {
+                if(ms.selectOpenDt(strMovieNmEn) != null) {
+                    if (strRelDate.compareTo(ms.selectOpenDt(strMovieNmEn)) != 0) {
+                        movieDTO.setOpenDt(LocalDate.parse(ms.selectOpenDt(strMovieNmEn)));
+                    }
+                } else {
+                    movieDTO.setOpenDt(LocalDate.of(Integer.parseInt(strRelDate.substring(0, 4)), Integer.parseInt(strRelDate.substring(4, 6)), Integer.parseInt(strRelDate.substring(6, 8))));
+                }
+            } else {
+                movieDTO.setOpenDt(LocalDate.parse(ms.selectOpenDt(strMovieNmEn)));
+            }
             if(rmvMovieDto.get(i).getDirectorNm().equals("")){
                 movieDTO.setDirectorNm("");
             } else {
@@ -285,6 +297,16 @@ public class BoxOfficeApi {
                 movieDTO.setPrdtYear(strProdYear);
             } else {
                 movieDTO.setGenreNm("");
+            }
+            if(!strCompany.equals("")){
+                movieDTO.setCompanyNm(strCompany);
+            } else {
+                movieDTO.setCompanyNm("");
+            }
+            if(!strPosterUrl.equals("")){
+                movieDTO.setMovieImg(strPosterUrl);
+            } else {
+                movieDTO.setMovieImg("/image/image_ready.jpeg");
             }
             ms.updateMvDtImgAndSummary(movieDTO);
         }

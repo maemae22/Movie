@@ -41,4 +41,8 @@ public class TheaterService {
             return "failed";
         }
     }
+
+    public List<TheaterDTO> findTheaters(String selectedTheater, String movieName, String movieDate){
+        return tr.findTheaters(selectedTheater, movieName, movieDate);
+    }
 }

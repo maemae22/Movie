@@ -37,7 +37,7 @@ public class PageController {
         ArrayList<HashMap<String, String>> rankLists = ms.selectDailyRank();
         for (HashMap<String, String> rankList : rankLists) {
             String str = rankList.get("movie_img");
-            if(str.equals("")){
+            if(str == null || str.equals("") ){
                 rankList.put("movie_img", "/image/image_ready.jpeg");
             } else {
                 String[] splitArray = str.split("\\|");

@@ -74,8 +74,8 @@
                 <div class="selected-movie" th:text="${ticket.getMovieTitle()}"></div>
                 <div class="select-seat-information-wrapper">
                     <div class="select-theater-place selected-theater-place-info" th:text="${ticket.getSelectedTheater()}"></div>
-                    <div class="select-theater-place selected-theater-place-info">
-                        4관(Laser)6층 </div>
+                    <div class="theater-detail" th:text="${ticket.getTheaterDetail()}">
+                    </div>
                     <div class="select-theater-place">
                         <span>남은좌석</span><span class="remain-seats">152</span>/<span
                             class="all-seats">172</span>
@@ -115,6 +115,7 @@
 <form action="payticket.do" class="seatForm" method="POST">
     <input type="hidden" class="title" name="movieTitle">
     <input type="hidden" class="selectedTheater" name="selectedTheater">
+    <input type="hidden" class="theaterDetail" name="theaterDetail">
     <input type="hidden" class="reserveDate" name="movieDate">
     <input type="hidden" class="runningTime" name="movieStartTime">
     <input type="hidden" class="ticketNumber" name="ticketNumber">

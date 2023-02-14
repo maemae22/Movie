@@ -21,4 +21,5 @@ public interface MovieMapper {
     Integer updateMvDtImgAndSummary(MovieDTO movieDTO);
     ArrayList<HashMap<String,String>> selectDailyRank();
     DailyMovieDTO selectMovieNameByCode(Integer movie_id);
+    String selectOpenDt(String cmpMovieNm);
 }
